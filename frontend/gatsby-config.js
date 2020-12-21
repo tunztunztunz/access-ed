@@ -3,7 +3,7 @@ module.exports = {
     title: 'Access Ed',
     description: 'A website for Access Education Northwest',
     keywords: 'gatsbyjs, gatsby, javascript, sample, something',
-    siteUrl: '',
+    siteUrl: 'https://relaxed-bardeen-92bf66.netlify.app/',
     author: {
       name: 'Dustin Simensen',
       url: 'https://www.dustinsimensen.com',
