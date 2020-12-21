@@ -1,16 +1,25 @@
 module.exports = {
   siteMetadata: {
     title: 'Access Ed',
-    description: 'A starter kit for TypeScript-based Gatsby projects with sensible defaults.',
+    description: 'A website for Access Education Northwest',
     keywords: 'gatsbyjs, gatsby, javascript, sample, something',
-    siteUrl: 'https://gatsby-starter-typescript-plus.netlify.com',
+    siteUrl: '',
     author: {
-      name: 'Resi Respati',
-      url: 'https://twitter.com/resir014',
-      email: 'resir014@gmail.com',
+      name: 'Dustin Simensen',
+      url: 'https://www.dustinsimensen.com',
+      email: 'dustinsimensen@gmail.com',
     },
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-styletron`,
+      options: {
+        // You can pass options to Styletron.
+        prefix: '_',
+        // Disable dev debug mode, enabled by default
+        debug: false,
+      },
+    },
     {
       resolve: 'gatsby-source-sanity',
       options: {
