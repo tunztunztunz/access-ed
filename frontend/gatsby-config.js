@@ -16,8 +16,6 @@ module.exports = {
       options: {
         // You can pass options to Styletron.
         prefix: '_',
-        // Disable dev debug mode, enabled by default
-        debug: false,
       },
     },
     {

@@ -1,7 +1,6 @@
 import React from 'react';
 // import { graphql } from 'gatsby';
 
-import Page from '../components/Page';
 import Container from '../components/Container';
 import IndexLayout from '../layouts';
 
@@ -22,12 +21,10 @@ interface PageTemplateProps {
 
 const PageTemplate = ({ data }: PageTemplateProps) => (
   <IndexLayout>
-    <Page>
-      <Container>
-        <h1>{data.site.siteMetadata.title}</h1>
-        <p>This is another page, hombre!</p>
-      </Container>
-    </Page>
+    <Container>
+      <h1>{data.site.siteMetadata.title}</h1>
+      <p>This is another page, hombre!</p>
+    </Container>
   </IndexLayout>
 );
 

@@ -5,14 +5,10 @@ import { Client as Styletron } from 'styletron-engine-atomic';
 import { Provider as StyletronProvider } from 'styletron-react';
 import { LightTheme, BaseProvider, styled } from 'baseui';
 
-import 'modern-normalize';
-
 import Header from '../components/Header';
 import LayoutMain from '../components/LayoutMain';
 import LayoutRoot from '../components/LayoutRoot';
 import Footer from '../components/Footer';
-
-const engine = new Styletron();
 
 const Centered = styled('div', {
   display: 'flex',
@@ -39,7 +35,7 @@ const IndexLayout = ({ children }: IndexProps) => {
     `
   );
   return (
-    <StyletronProvider value={engine}>
+    <div>
       <BaseProvider theme={LightTheme}>
         <Centered>
           <Helmet
@@ -56,7 +52,7 @@ const IndexLayout = ({ children }: IndexProps) => {
           </LayoutRoot>
         </Centered>
       </BaseProvider>
-    </StyletronProvider>
+    </div>
   );
 };
 
