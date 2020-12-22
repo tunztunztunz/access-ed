@@ -35,24 +35,22 @@ const IndexLayout = ({ children }: IndexProps) => {
     `
   );
   return (
-    <div>
-      <BaseProvider theme={LightTheme}>
-        <Centered>
-          <Helmet
-            title={data.site.siteMetadata.title}
-            meta={[
-              { name: 'description', content: data.site.siteMetadata.description },
-              { name: 'keywords', content: data.site.siteMetadata.keywords },
-            ]}
-          />
-          <LayoutRoot>
-            <Header title={data.site.siteMetadata.title} />
-            <LayoutMain>{children}</LayoutMain>
-            <Footer />
-          </LayoutRoot>
-        </Centered>
-      </BaseProvider>
-    </div>
+    <BaseProvider theme={LightTheme}>
+      <Centered>
+        <Helmet
+          title={data.site.siteMetadata.title}
+          meta={[
+            { name: 'description', content: data.site.siteMetadata.description },
+            { name: 'keywords', content: data.site.siteMetadata.keywords },
+          ]}
+        />
+        <LayoutRoot>
+          <Header title={data.site.siteMetadata.title} />
+          <LayoutMain>{children}</LayoutMain>
+          <Footer />
+        </LayoutRoot>
+      </Centered>
+    </BaseProvider>
   );
 };
 
