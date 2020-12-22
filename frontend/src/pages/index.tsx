@@ -19,9 +19,6 @@ const IndexPage = () => {
             quoteUrl
             quoteCitation
           }
-          helpText
-          contactText
-          skills
         }
       }
     `
@@ -56,7 +53,7 @@ const IndexPage = () => {
           <SectionHeader title={'How We Can Help'} />
         </FlexGridItem>
         <FlexGridItem>
-          <HelpSection text={data.sanityLanding.helpText} skillsList={data.sanityLanding.skills} />
+          <HelpSection />
         </FlexGridItem>
         <FlexGridItem>
           <SectionHeader title={'Get In Touch'} />

@@ -91,6 +91,12 @@ export default {
       type: 'text',
       fieldset: 'contactSection',
     },
+    {
+      name: 'contactImage',
+      title: 'Image for contact section',
+      type: 'image',
+      fieldset: 'contactSection',
+    },
   ],
 
   preview: {

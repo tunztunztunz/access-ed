@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import Books from './svg/Books';
+import Img from 'gatsby-image';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import SvgWrapper from './SvgWrapper';
 import HeroText from './HeroText';
@@ -13,6 +13,13 @@ const Hero = () => {
           hero {
             heroHeader
             heroText
+            heroImage {
+              asset {
+                fluid {
+                  ...GatsbySanityImageFluid
+                }
+              }
+            }
           }
         }
       }
@@ -30,8 +37,8 @@ const Hero = () => {
           text={data.sanityLanding.hero.heroText}
         />
       </FlexGridItem>
-      <FlexGridItem>
-        <SvgWrapper svg={<Books />} />
+      <FlexGridItem paddingTop={['0', '0', '1rem', '0']}>
+        <SvgWrapper svg={<Img fluid={data.sanityLanding.hero.heroImage.asset.fluid} />} />
       </FlexGridItem>
     </FlexGrid>
   );

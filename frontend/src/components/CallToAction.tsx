@@ -1,10 +1,11 @@
 import React from 'react';
+import Img, { FluidObject } from 'gatsby-image';
 import { Paragraph1, Paragraph3 } from 'baseui/typography';
 import { HeroButton } from './HeroButton';
-import ContactUs from './svg/ContactUs';
 import SvgWrapper from './SvgWrapper';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import { styled, useStyletron } from 'baseui';
+import { graphql, useStaticQuery } from 'gatsby';
 
 const CallToActionText = styled('div', () => ({
   textAlign: 'center',
@@ -12,12 +13,30 @@ const CallToActionText = styled('div', () => ({
     textAlign: 'left',
   },
 }));
-interface CallToActionProps {
-  text: string;
-}
 
-const CallToAction = ({ text }: CallToActionProps) => {
+const CallToAction = () => {
   const [css] = useStyletron();
+
+  const data = useStaticQuery(
+    graphql`
+      query {
+        sanityLanding {
+          contactText
+          contactImage {
+            asset {
+              fluid {
+                ...GatsbySanityImageFluid
+              }
+            }
+          }
+        }
+      }
+    `
+  );
+
+  const text: string = data.sanityLanding.contactText;
+  const image: FluidObject[] = data.sanityLanding.contactImage.asset.fluid;
+
   return (
     <FlexGrid
       flexGridColumnCount={[1, 1, 2]}
@@ -27,7 +46,7 @@ const CallToAction = ({ text }: CallToActionProps) => {
       })}
     >
       <FlexGridItem>
-        <SvgWrapper svg={<ContactUs />} />
+        <SvgWrapper svg={<Img fluid={image} />} />
       </FlexGridItem>
       <FlexGridItem>
         <CallToActionText>

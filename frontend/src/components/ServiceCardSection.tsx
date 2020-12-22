@@ -1,10 +1,8 @@
-import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
-import { graphql, useStaticQuery } from 'gatsby';
 import * as React from 'react';
+import { graphql, useStaticQuery } from 'gatsby';
+import Img from 'gatsby-image';
+import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import ServiceCard from './ServiceCard';
-import Idea from './svg/Idea';
-import Support from './svg/Support';
-import Work from './svg/Work';
 
 const ServiceCardSection = () => {
   const data = useStaticQuery(
@@ -14,42 +12,59 @@ const ServiceCardSection = () => {
           serviceCardOne {
             description
             title
+            image {
+              asset {
+                fluid {
+                  ...GatsbySanityImageFluid
+                }
+              }
+            }
           }
           serviceCardThree {
             description
             title
+            image {
+              asset {
+                fluid {
+                  ...GatsbySanityImageFluid
+                }
+              }
+            }
           }
           serviceCardTwo {
             description
             title
+            image {
+              asset {
+                fluid {
+                  ...GatsbySanityImageFluid
+                }
+              }
+            }
           }
         }
       }
     `
   );
+
+  const serviceCards = [
+    data.sanityLanding.serviceCardOne,
+    data.sanityLanding.serviceCardTwo,
+    data.sanityLanding.serviceCardThree,
+  ];
+
+  console.log(serviceCards);
   return (
     <FlexGrid flexGridColumnCount={[1, 1, 3]} flexGridColumnGap={'scale2400'}>
-      <FlexGridItem>
-        <ServiceCard
-          svg={<Idea />}
-          title={data.sanityLanding.serviceCardOne.title}
-          description={data.sanityLanding.serviceCardOne.description}
-        />
-      </FlexGridItem>
-      <FlexGridItem>
-        <ServiceCard
-          svg={<Work />}
-          title={data.sanityLanding.serviceCardTwo.title}
-          description={data.sanityLanding.serviceCardTwo.description}
-        />
-      </FlexGridItem>
-      <FlexGridItem>
-        <ServiceCard
-          svg={<Support />}
-          title={data.sanityLanding.serviceCardThree.title}
-          description={data.sanityLanding.serviceCardThree.description}
-        />
-      </FlexGridItem>
+      {serviceCards.map((card, index) => (
+        <FlexGridItem key={index}>
+          <ServiceCard
+            svg={<Img fluid={card.image.asset.fluid} />}
+            title={card.title}
+            description={card.description}
+          />
+        </FlexGridItem>
+      ))}
     </FlexGrid>
   );
 };

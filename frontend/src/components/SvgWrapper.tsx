@@ -2,7 +2,7 @@ import { Block } from 'baseui/block';
 import React from 'react';
 
 interface SvgWrapperProps {
-  svg: React.ReactNode;
+  svg: React.ReactNode | HTMLImageElement;
   isSmall?: boolean;
 }
 
@@ -13,7 +13,7 @@ const SvgWrapper = ({ svg, isSmall }: SvgWrapperProps) => (
         style: {
           margin: '0 auto',
           minWidth: '200px',
-          maxWidth: isSmall ? '200px' : '525px',
+          maxWidth: isSmall ? '200px' : '800px',
           minHeight: isSmall ? '200px' : '',
           maxHeight: isSmall ? '200px' : '',
         },
