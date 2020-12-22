@@ -4,8 +4,6 @@ import { H5, H6, Paragraph1, Paragraph3 } from 'baseui/typography';
 import React from 'react';
 
 const BlockQuote = styled('div', ({ $theme }) => ({
-  width: '100%',
-  // margin: 'auto',
   fontStyle: 'italic',
   color: $theme.colors.primary,
   padding: '1rem',
