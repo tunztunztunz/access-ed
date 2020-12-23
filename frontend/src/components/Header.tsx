@@ -7,7 +7,7 @@ interface HeaderProps {
 }
 export default function Header({ title }: HeaderProps) {
   const [mainItems, setMainItems] = React.useState<NavItemT[]>([
-    { label: 'FAQ', info: { id: 1 } },
+    { label: 'About', info: { id: 1 } },
     {
       icon: ChevronDown,
       label: 'Services',

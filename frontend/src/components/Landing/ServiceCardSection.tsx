@@ -1,17 +1,23 @@
 import * as React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import Img from 'gatsby-image';
+import Img, { GatsbyImageFluidProps } from 'gatsby-image';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import ServiceCard from './ServiceCard';
+
+interface serviceCardProps {
+  title: string;
+  description: string;
+  image: {
+    asset: GatsbyImageFluidProps;
+  };
+}
 
 const ServiceCardSection = () => {
   const data = useStaticQuery(
     graphql`
       query {
-        sanityLanding {
-          serviceCardOne {
-            description
-            title
+        sanityLandingPage {
+          serviceCards {
             image {
               asset {
                 fluid {
@@ -19,39 +25,17 @@ const ServiceCardSection = () => {
                 }
               }
             }
-          }
-          serviceCardThree {
             description
             title
-            image {
-              asset {
-                fluid {
-                  ...GatsbySanityImageFluid
-                }
-              }
-            }
-          }
-          serviceCardTwo {
-            description
-            title
-            image {
-              asset {
-                fluid {
-                  ...GatsbySanityImageFluid
-                }
-              }
-            }
           }
         }
       }
     `
   );
 
-  const serviceCards = [
-    data.sanityLanding.serviceCardOne,
-    data.sanityLanding.serviceCardTwo,
-    data.sanityLanding.serviceCardThree,
-  ];
+  const serviceCards: serviceCardProps[] = data.sanityLandingPage.serviceCards;
+
+  console.log(serviceCards);
 
   console.log(serviceCards);
   return (

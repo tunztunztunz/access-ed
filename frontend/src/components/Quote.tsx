@@ -1,6 +1,6 @@
 import { styled, useStyletron } from 'baseui';
 import { Block } from 'baseui/block';
-import { H5, H6, Paragraph1, Paragraph3 } from 'baseui/typography';
+import { H6, Paragraph1, Paragraph3 } from 'baseui/typography';
 import React from 'react';
 
 const BlockQuote = styled('div', ({ $theme }) => ({
@@ -41,7 +41,7 @@ const Quote = ({ quote, quoteAuthor, quoteLink }: QuoteProps) => {
         </Block>
         {/* Large Screens */}
         <Block display={['none', 'none', 'block']}>
-          <H6
+          <Paragraph1
             className={css({
               color: theme.colors.contentSecondary,
               fontStyle: 'italic',
@@ -50,8 +50,8 @@ const Quote = ({ quote, quoteAuthor, quoteLink }: QuoteProps) => {
             })}
           >
             {quote}
-          </H6>
-          <H5>- {quoteAuthor}</H5>
+          </Paragraph1>
+          <H6>- {quoteAuthor}</H6>
         </Block>
       </BlockQuote>
     </a>

@@ -3,7 +3,7 @@ import { H5, Paragraph1, Paragraph3 } from 'baseui/typography';
 import { Block } from 'baseui/block';
 import { css } from '@emotion/core';
 import { useStyletron } from 'baseui';
-import SvgWrapper from './SvgWrapper';
+import SvgWrapper from '../SvgWrapper';
 
 const styledTextArea = css`
   text-align: center;

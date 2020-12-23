@@ -1,44 +1,27 @@
 import React from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
-import Img from 'gatsby-image';
+import Img, { FluidObject } from 'gatsby-image';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import SvgWrapper from './SvgWrapper';
 import HeroText from './HeroText';
 
-const Hero = () => {
-  const data = useStaticQuery(
-    graphql`
-      query {
-        sanityLanding {
-          hero {
-            heroHeader
-            heroText
-            heroImage {
-              asset {
-                fluid {
-                  ...GatsbySanityImageFluid
-                }
-              }
-            }
-          }
-        }
-      }
-    `
-  );
+interface HeroProps {
+  header: string;
+  image: FluidObject[];
+  text?: string;
+}
+
+const Hero = ({ header, text, image }: HeroProps) => {
   return (
     <FlexGrid
       flexGridColumnCount={[1, 1, 1, 2]}
-      minHeight={['95vh', '95vh', '75vh', '35vh']}
+      minHeight={['95vh', '95vh', '75vh', '40vh']}
       marginTop={['0', '0', 'scale1600']}
     >
       <FlexGridItem>
-        <HeroText
-          header={data.sanityLanding.hero.heroHeader}
-          text={data.sanityLanding.hero.heroText}
-        />
+        <HeroText header={header} text={text} />
       </FlexGridItem>
       <FlexGridItem paddingTop={['0', '0', '1rem', '0']}>
-        <SvgWrapper svg={<Img fluid={data.sanityLanding.hero.heroImage.asset.fluid} />} />
+        <SvgWrapper svg={<Img fluid={image} />} />
       </FlexGridItem>
     </FlexGrid>
   );

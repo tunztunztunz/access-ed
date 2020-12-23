@@ -9,12 +9,15 @@ import blockContent from './blockContent';
 import category from './category';
 import post from './post';
 import author from './author';
-import landing from './landing';
 import hero from './hero';
 import serviceCard from './serviceCard';
 import quote from './quote';
 import iconWithText from './iconWithText';
+import textAndImageSection from './textAndImageSection';
 
+import landingPage from './landingPage';
+import servicePage from './servicePage';
+import aboutPage from './aboutPage';
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
   // We name our schema
@@ -24,7 +27,9 @@ export default createSchema({
   types: schemaTypes.concat([
     // The following are document types which will appear
     // in the studio.
-    landing,
+    landingPage,
+    aboutPage,
+    servicePage,
     post,
     author,
     category,
@@ -35,5 +40,6 @@ export default createSchema({
     serviceCard,
     quote,
     iconWithText,
+    textAndImageSection,
   ]),
 });

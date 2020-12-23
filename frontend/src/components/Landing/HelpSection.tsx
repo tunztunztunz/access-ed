@@ -2,7 +2,7 @@ import React from 'react';
 import Img, { FluidObject } from 'gatsby-image';
 import { Paragraph1, Paragraph2, Paragraph3 } from 'baseui/typography';
 import { useStyletron } from 'baseui';
-import SvgWrapper from './SvgWrapper';
+import SvgWrapper from '../SvgWrapper';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import { graphql, useStaticQuery } from 'gatsby';
 
@@ -12,9 +12,9 @@ const HelpSection = () => {
   const data = useStaticQuery(
     graphql`
       query {
-        sanityLanding {
+        sanityLandingPage {
           helpText
-          contactImage {
+          helpImage {
             asset {
               fluid {
                 ...GatsbySanityImageFluid
@@ -26,9 +26,9 @@ const HelpSection = () => {
       }
     `
   );
-  const text: string = data.sanityLanding.helpText;
-  const image: FluidObject[] = data.sanityLanding.contactImage.asset.fluid;
-  const skills: string[] = data.sanityLanding.skills;
+  const text: string = data.sanityLandingPage.helpText;
+  const image: FluidObject[] = data.sanityLandingPage.helpImage.asset.fluid;
+  const skills: string[] = data.sanityLandingPage.skills;
 
   return (
     <FlexGrid

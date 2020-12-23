@@ -1,19 +1,39 @@
 import React from 'react';
-import IndexLayout from '../layouts';
-import Hero from '../components/Hero';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
-import SectionHeader from '../components/SectionHeader';
 import { graphql, useStaticQuery } from 'gatsby';
+
+import IndexLayout from '../layouts';
+import SectionHeader from '../components/Landing/SectionHeader';
 import Quote from '../components/Quote';
-import HelpSection from '../components/HelpSection';
-import CallToAction from '../components/CallToAction';
-import ServiceCardSection from '../components/ServiceCardSection';
+import Hero from '../components/Hero';
+import HelpSection from '../components/Landing/HelpSection';
+import ServiceCardSection from '../components/Landing/ServiceCardSection';
+import SimpleSection from '../components/SimpleSection';
 
 const IndexPage = () => {
   const data = useStaticQuery(
     graphql`
       query {
-        sanityLanding {
+        sanityLandingPage {
+          hero {
+            heroHeader
+            heroText
+            heroImage {
+              asset {
+                fluid {
+                  ...GatsbySanityImageFluid
+                }
+              }
+            }
+          }
+          contactText
+          contactImage {
+            asset {
+              fluid {
+                ...GatsbySanityImageFluid
+              }
+            }
+          }
           quote {
             quoteText
             quoteUrl
@@ -23,18 +43,24 @@ const IndexPage = () => {
       }
     `
   );
+  const heroText = data.sanityLandingPage.hero.heroText;
+  const heroHeader = data.sanityLandingPage.hero.heroHeader;
+  const heroImage = data.sanityLandingPage.hero.heroImage.asset.fluid;
+
+  const contactText = data.sanityLandingPage.contactText;
+  const contactImage = data.sanityLandingPage.contactImage.asset.fluid;
 
   return (
     <IndexLayout>
       <FlexGrid
         flexGridColumnCount={[1]}
-        maxWidth="1110px"
+        maxWidth="1200px"
         margin={['0', '0 1rem', '0 2rem', '0 2rem']}
         flexGridRowGap={['scale800', 'scale800', 'scale1600']}
         // marginBottom="scale1600"w
       >
         <FlexGridItem>
-          <Hero />
+          <Hero header={heroHeader} text={heroText} image={heroImage} />
         </FlexGridItem>
         <FlexGridItem>
           <SectionHeader title={'What We Do'} />
@@ -44,9 +70,9 @@ const IndexPage = () => {
         </FlexGridItem>
         <FlexGridItem>
           <Quote
-            quote={data.sanityLanding.quote.quoteText}
-            quoteAuthor={data.sanityLanding.quote.quoteCitation}
-            quoteLink={data.sanityLanding.quote.quoteUrl}
+            quote={data.sanityLandingPage.quote.quoteText}
+            quoteAuthor={data.sanityLandingPage.quote.quoteCitation}
+            quoteLink={data.sanityLandingPage.quote.quoteUrl}
           />
         </FlexGridItem>
         <FlexGridItem>
@@ -59,7 +85,7 @@ const IndexPage = () => {
           <SectionHeader title={'Get In Touch'} />
         </FlexGridItem>
         <FlexGridItem>
-          <CallToAction text={data.sanityLanding.contactText} />
+          <SimpleSection text={contactText} image={contactImage} button={'Contact Us'} isReversed />
         </FlexGridItem>
       </FlexGrid>
     </IndexLayout>

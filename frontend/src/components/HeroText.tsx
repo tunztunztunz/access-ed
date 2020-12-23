@@ -12,7 +12,7 @@ const HeaderText = styled('div', () => ({
 
 interface HeroTextProps {
   header: string;
-  text: string;
+  text?: string;
 }
 
 const HeroText = ({ header, text }: HeroTextProps) => {

@@ -1,6 +1,6 @@
 export default {
-  name: 'landing',
-  title: 'Landing Page',
+  name: 'servicePage',
+  title: 'Service Page',
   type: 'document',
   fieldsets: [
     {
@@ -8,6 +8,12 @@ export default {
       title: 'Cards for services provided',
       options: { collapsible: true, collapsed: true, columns: 1 },
     },
+    {
+      name: 'quote',
+      title: 'Quote',
+      options: { collapsible: true, collapsed: true, columns: 1 },
+    },
+
     {
       name: 'helpSection',
       title: 'How We Can Help',
@@ -41,21 +47,11 @@ export default {
     },
     //Service Cards
     {
-      name: 'serviceCardOne',
-      title: 'Service Card One',
-      type: 'serviceCard',
-      fieldset: 'serviceCards',
-    },
-    {
-      name: 'serviceCardTwo',
-      title: 'Service Card Two',
-      type: 'serviceCard',
-      fieldset: 'serviceCards',
-    },
-    {
-      name: 'serviceCardThree',
-      title: 'Service Card Three',
-      type: 'serviceCard',
+      name: 'serviceCards',
+      title: 'Service Cards',
+      description: 'List the services your business provides',
+      type: 'array',
+      of: [{ type: 'serviceCard' }],
       fieldset: 'serviceCards',
     },
     {
