@@ -13,7 +13,7 @@ const SvgWrapper = ({ svg, isSmall }: SvgWrapperProps) => (
         style: {
           margin: '0 auto',
           minWidth: '200px',
-          maxWidth: isSmall ? '200px' : '800px',
+          maxWidth: isSmall ? '200px' : '400px',
           minHeight: isSmall ? '200px' : '',
           maxHeight: isSmall ? '200px' : '500px',
         },

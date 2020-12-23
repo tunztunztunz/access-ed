@@ -1,13 +1,20 @@
+// @ts-nocheck
 import * as React from 'react';
 import { AppNavBar, setItemActive, NavItemT } from 'baseui/app-nav-bar';
 import { ChevronDown, Delete } from 'baseui/icon';
+import { Link, navigate } from 'gatsby';
+import { useStyletron, withStyle } from 'baseui';
 
 interface HeaderProps {
   title: string;
 }
 export default function Header({ title }: HeaderProps) {
+  const [css, theme] = useStyletron();
   const [mainItems, setMainItems] = React.useState<NavItemT[]>([
-    { label: 'About', info: { id: 1 } },
+    {
+      label: 'About',
+      info: { id: 1 },
+    },
     {
       icon: ChevronDown,
       label: 'Services',
@@ -30,9 +37,11 @@ export default function Header({ title }: HeaderProps) {
     if (item.info) {
       return item.info.id;
     }
+    console.log(item.label);
     return item.label;
   }
   function handleMainItemSelect(item: NavItemT) {
+    navigate(`/${item.label.toLocaleLowerCase()}`);
     setMainItems(prev => setItemActive(prev, item, getUniqueIdentifier));
   }
 

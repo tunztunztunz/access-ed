@@ -2,7 +2,6 @@ import React from 'react';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import { graphql, useStaticQuery } from 'gatsby';
 
-import IndexLayout from '../layouts';
 import SectionHeader from '../components/Landing/SectionHeader';
 import Quote from '../components/Quote';
 import Hero from '../components/Hero';
@@ -51,44 +50,42 @@ const IndexPage = () => {
   const contactImage = data.sanityLandingPage.contactImage.asset.fluid;
 
   return (
-    <IndexLayout>
-      <FlexGrid
-        flexGridColumnCount={[1]}
-        maxWidth="1200px"
-        margin={['0', '0 1rem', '0 2rem', '0 2rem']}
-        flexGridRowGap={['scale800', 'scale800', 'scale1600']}
-        // marginBottom="scale1600"w
-      >
-        <FlexGridItem>
-          <Hero header={heroHeader} text={heroText} image={heroImage} />
-        </FlexGridItem>
-        <FlexGridItem>
-          <SectionHeader title={'What We Do'} />
-        </FlexGridItem>
-        <FlexGridItem>
-          <ServiceCardSection />
-        </FlexGridItem>
-        <FlexGridItem>
-          <Quote
-            quote={data.sanityLandingPage.quote.quoteText}
-            quoteAuthor={data.sanityLandingPage.quote.quoteCitation}
-            quoteLink={data.sanityLandingPage.quote.quoteUrl}
-          />
-        </FlexGridItem>
-        <FlexGridItem>
-          <SectionHeader title={'How We Can Help'} />
-        </FlexGridItem>
-        <FlexGridItem>
-          <HelpSection />
-        </FlexGridItem>
-        <FlexGridItem>
-          <SectionHeader title={'Get In Touch'} />
-        </FlexGridItem>
-        <FlexGridItem>
-          <SimpleSection text={contactText} image={contactImage} button={'Contact Us'} isReversed />
-        </FlexGridItem>
-      </FlexGrid>
-    </IndexLayout>
+    <FlexGrid
+      flexGridColumnCount={[1]}
+      maxWidth="1110px"
+      margin={['0', '0 1rem', '0 2rem', '0 2rem']}
+      flexGridRowGap={['scale800', 'scale800', 'scale1600']}
+      // marginBottom="scale1600"w
+    >
+      <FlexGridItem>
+        <Hero header={heroHeader} text={heroText} image={heroImage} />
+      </FlexGridItem>
+      <FlexGridItem>
+        <SectionHeader title={'What We Do'} />
+      </FlexGridItem>
+      <FlexGridItem>
+        <ServiceCardSection />
+      </FlexGridItem>
+      <FlexGridItem>
+        <Quote
+          quote={data.sanityLandingPage.quote.quoteText}
+          quoteAuthor={data.sanityLandingPage.quote.quoteCitation}
+          quoteLink={data.sanityLandingPage.quote.quoteUrl}
+        />
+      </FlexGridItem>
+      <FlexGridItem>
+        <SectionHeader title={'How We Can Help'} />
+      </FlexGridItem>
+      <FlexGridItem>
+        <HelpSection />
+      </FlexGridItem>
+      <FlexGridItem>
+        <SectionHeader title={'Get In Touch'} />
+      </FlexGridItem>
+      <FlexGridItem>
+        <SimpleSection text={contactText} image={contactImage} button={'Contact Us'} isReversed />
+      </FlexGridItem>
+    </FlexGrid>
   );
 };
 

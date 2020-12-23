@@ -2,7 +2,6 @@ import * as React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 const BlockContent = require('@sanity/block-content-to-react');
 
-import IndexLayout from '../layouts';
 import Hero from '../components/Hero';
 import SectionHeader from '../components/Landing/SectionHeader';
 import SimpleSection from '../components/SimpleSection';
@@ -79,69 +78,64 @@ const PageTwo = () => {
   const coachingSections: SectionProps[] = data.sanityAboutPage.sections;
 
   return (
-    <IndexLayout>
-      <FlexGrid
-        flexGridColumnCount={[1]}
-        maxWidth="1110px"
-        margin={['0', '0 1rem', '0 2rem', '0 2rem']}
-        flexGridRowGap={['scale800', 'scale800', 'scale1600']}
-      >
-        <FlexGridItem>
-          <Hero header={heroHeader} text={heroText} image={heroImage} />
+    <FlexGrid
+      flexGridColumnCount={[1]}
+      maxWidth="1110px"
+      margin={['0', '0 1rem', '0 2rem', '0 2rem']}
+      flexGridRowGap={['scale800', 'scale800', 'scale1600']}
+    >
+      <FlexGridItem>
+        <Hero header={heroHeader} text={heroText} image={heroImage} />
+      </FlexGridItem>
+      <FlexGridItem>
+        <SectionHeader title={'Academic Coaching'} />
+      </FlexGridItem>
+      {coachingSections.map((section, index) => (
+        <FlexGridItem key={index}>
+          <SimpleSection
+            isReversed={index % 2 === 0}
+            header={section.sectionHeader}
+            text={
+              <BlockContent blocks={section._rawSectionText} renderContainerOnSingleChild={true} />
+            }
+            image={section.sectionImage.asset.fluid}
+          />
         </FlexGridItem>
-        <FlexGridItem>
-          <SectionHeader title={'Academic Coaching'} />
-        </FlexGridItem>
-        {coachingSections.map((section, index) => (
-          <FlexGridItem key={index}>
-            <SimpleSection
-              isReversed={index % 2 === 0}
-              header={section.sectionHeader}
-              text={
-                <BlockContent
-                  blocks={section._rawSectionText}
-                  renderContainerOnSingleChild={true}
-                />
-              }
-              image={section.sectionImage.asset.fluid}
+      ))}
+      <FlexGridItem>
+        <SectionHeader title={'About Me'} />
+      </FlexGridItem>
+      <FlexGridItem>
+        <SimpleSection
+          header={data.sanityAboutPage.aboutHeader}
+          text={
+            <BlockContent
+              blocks={data.sanityAboutPage._rawAboutText}
+              renderContainerOnSingleChild={true}
             />
-          </FlexGridItem>
-        ))}
-        <FlexGridItem>
-          <SectionHeader title={'About Me'} />
-        </FlexGridItem>
-        <FlexGridItem>
-          <SimpleSection
-            header={data.sanityAboutPage.aboutHeader}
-            text={
-              <BlockContent
-                blocks={data.sanityAboutPage._rawAboutText}
-                renderContainerOnSingleChild={true}
-              />
-            }
-            image={data.sanityAboutPage.aboutImage.asset.fluid}
-            caption={data.sanityAboutPage.aboutImageCaption}
-          />
-        </FlexGridItem>
-        <FlexGridItem>
-          <SectionHeader title={'Get In Touch'} />
-        </FlexGridItem>
-        <FlexGridItem>
-          <SimpleSection
-            isReversed
-            header={data.sanityAboutPage.callToAction.sectionHeader}
-            text={
-              <BlockContent
-                blocks={data.sanityAboutPage.callToAction._rawSectionText}
-                renderContainerOnSingleChild={true}
-              />
-            }
-            image={data.sanityAboutPage.callToAction.sectionImage.asset.fluid}
-            button={'Contact Us'}
-          />
-        </FlexGridItem>
-      </FlexGrid>
-    </IndexLayout>
+          }
+          image={data.sanityAboutPage.aboutImage.asset.fluid}
+          caption={data.sanityAboutPage.aboutImageCaption}
+        />
+      </FlexGridItem>
+      <FlexGridItem>
+        <SectionHeader title={'Get In Touch'} />
+      </FlexGridItem>
+      <FlexGridItem>
+        <SimpleSection
+          isReversed
+          header={data.sanityAboutPage.callToAction.sectionHeader}
+          text={
+            <BlockContent
+              blocks={data.sanityAboutPage.callToAction._rawSectionText}
+              renderContainerOnSingleChild={true}
+            />
+          }
+          image={data.sanityAboutPage.callToAction.sectionImage.asset.fluid}
+          button={'Contact Us'}
+        />
+      </FlexGridItem>
+    </FlexGrid>
   );
 };
 
