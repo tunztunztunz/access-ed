@@ -20,8 +20,10 @@ export default {
       options: { collapsible: true, collapsed: true, columns: 1 },
     },
     {
-      name: 'contactSection',
-      title: 'Contact Section',
+      name: 'callToAction',
+      title: 'Call To Action',
+      description:
+        "This is the section at the bottom of the page that links to a contact form. They are on every page so you can tie the call to action in with the rest of the page's copy",
       options: { collapsible: true, collapsed: true, columns: 1 },
     },
   ],
@@ -81,17 +83,12 @@ export default {
       fieldset: 'helpSection',
     },
     {
-      name: 'contactText',
-      title: 'Call to action',
-      description: 'This will be the final bit of text on the landing above a contact button',
-      type: 'text',
-      fieldset: 'contactSection',
-    },
-    {
-      name: 'contactImage',
-      title: 'Image for contact section',
-      type: 'image',
-      fieldset: 'contactSection',
+      name: 'callToAction',
+      title: 'Call To Action',
+      description:
+        'This is the call to action at the bottom of the About page. Tie it in to the rest of the copy.  You get a header, body text, and an image',
+      type: 'textAndImageSection',
+      fieldset: 'callToAction',
     },
   ],
 

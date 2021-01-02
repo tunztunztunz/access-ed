@@ -2,7 +2,9 @@ import React from 'react';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import { graphql, useStaticQuery } from 'gatsby';
 
-import SectionHeader from '../components/Landing/SectionHeader';
+const BlockContent = require('@sanity/block-content-to-react');
+
+import SectionHeader from '../components/SectionHeader';
 import Quote from '../components/Quote';
 import Hero from '../components/Hero';
 import HelpSection from '../components/Landing/HelpSection';
@@ -25,11 +27,14 @@ const IndexPage = () => {
               }
             }
           }
-          contactText
-          contactImage {
-            asset {
-              fluid {
-                ...GatsbySanityImageFluid
+          callToAction {
+            sectionHeader
+            _rawSectionText(resolveReferences: { maxDepth: 1 })
+            sectionImage {
+              asset {
+                fluid {
+                  ...GatsbySanityImageFluid
+                }
               }
             }
           }
@@ -45,9 +50,6 @@ const IndexPage = () => {
   const heroText = data.sanityLandingPage.hero.heroText;
   const heroHeader = data.sanityLandingPage.hero.heroHeader;
   const heroImage = data.sanityLandingPage.hero.heroImage.asset.fluid;
-
-  const contactText = data.sanityLandingPage.contactText;
-  const contactImage = data.sanityLandingPage.contactImage.asset.fluid;
 
   return (
     <FlexGrid
@@ -83,7 +85,18 @@ const IndexPage = () => {
         <SectionHeader title={'Get In Touch'} />
       </FlexGridItem>
       <FlexGridItem>
-        <SimpleSection text={contactText} image={contactImage} button={'Contact Us'} isReversed />
+        <SimpleSection
+          isReversed
+          header={data.sanityLandingPage.callToAction.sectionHeader}
+          text={
+            <BlockContent
+              blocks={data.sanityLandingPage.callToAction._rawSectionText}
+              renderContainerOnSingleChild={true}
+            />
+          }
+          image={data.sanityLandingPage.callToAction.sectionImage.asset.fluid}
+          button={'Contact Us'}
+        />
       </FlexGridItem>
     </FlexGrid>
   );

@@ -14,7 +14,7 @@ const Hero = ({ header, text, image }: HeroProps) => {
   return (
     <FlexGrid
       flexGridColumnCount={[1, 1, 1, 2]}
-      minHeight={['95vh', '95vh', '75vh', '40vh']}
+      minHeight={['95vh', '95vh', '50vh', '20vh']}
       marginTop={['0', '0', 'scale1600']}
     >
       <FlexGridItem>

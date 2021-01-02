@@ -4,24 +4,29 @@ export default {
   type: 'document',
   fieldsets: [
     {
-      name: 'serviceCards',
-      title: 'Cards for services provided',
+      name: 'highlights',
+      title: 'Highlights',
+      description:
+        "This information will be used on the SERVICES page to show this service's information. Use this area to highlight the price and some features of the service",
       options: { collapsible: true, collapsed: true, columns: 1 },
     },
     {
-      name: 'quote',
-      title: 'Quote',
-      options: { collapsible: true, collapsed: true, columns: 1 },
-    },
-
-    {
-      name: 'helpSection',
-      title: 'How We Can Help',
+      name: 'services',
+      title: 'Services',
       options: { collapsible: true, collapsed: true, columns: 1 },
     },
     {
-      name: 'contactSection',
-      title: 'Contact Section',
+      name: 'pageSections',
+      title: 'Page Sections',
+      description:
+        'Create sections for your product page. This can include pricing cards, or just text.',
+      options: { collapsible: true, collapsed: true, columns: 1 },
+    },
+    {
+      name: 'disclaimer',
+      title: 'Disclaimer',
+      description:
+        'Optional section. If you want to have a disclaimer at the bottom of the page put it here',
       options: { collapsible: true, collapsed: true, columns: 1 },
     },
   ],
@@ -41,57 +46,49 @@ export default {
       },
     },
     {
+      name: 'price',
+      title: 'Price',
+      description: 'What is the starting price for this service?',
+      type: 'string',
+      fieldset: 'highlights',
+    },
+    {
+      name: 'features',
+      title: 'Features',
+      description:
+        'What are the most important features of this service that you want customers to know about',
+      type: 'array',
+      of: [{ type: 'string' }],
+      fieldset: 'highlights',
+    },
+    {
       name: 'hero',
       title: 'Hero',
       type: 'hero',
     },
-    //Service Cards
     {
-      name: 'serviceCards',
-      title: 'Service Cards',
-      description: 'List the services your business provides',
+      name: 'section',
+      title: 'Page Sections',
       type: 'array',
-      of: [{ type: 'serviceCard' }],
-      fieldset: 'serviceCards',
+      of: [
+        {
+          type: 'servicePageSection',
+        },
+      ],
+      fieldset: 'pageSections',
     },
     {
-      name: 'quote',
-      title: 'Quote',
-      type: 'quote',
+      name: 'disclaimerText',
+      title: 'Disclaimer Text',
+      type: 'blockContent',
+      fieldset: 'disclaimer',
     },
     {
-      name: 'helpImage',
-      title: 'Image for help section',
-      type: 'image',
-      fieldset: 'helpSection',
-    },
-    {
-      name: 'helpText',
-      title: 'Section Text',
-      type: 'text',
-      rows: 3,
-      fieldset: 'helpSection',
-    },
-    {
-      name: 'skills',
-      title: 'Skills',
-      description: 'List the skills Access Ed helps students develop.',
-      type: 'array',
-      of: [{ type: 'string' }],
-      fieldset: 'helpSection',
-    },
-    {
-      name: 'contactText',
-      title: 'Call to action',
-      description: 'This will be the final bit of text on the landing above a contact button',
-      type: 'text',
-      fieldset: 'contactSection',
-    },
-    {
-      name: 'contactImage',
-      title: 'Image for contact section',
-      type: 'image',
-      fieldset: 'contactSection',
+      name: 'callToAction',
+      title: 'Call To Action',
+      description:
+        'This is the call to action at the bottom of the About page. Tie it in to the rest of the copy.  You get a header, body text, and an image',
+      type: 'textAndImageSection',
     },
   ],
 

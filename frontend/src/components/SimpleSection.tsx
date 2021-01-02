@@ -4,7 +4,7 @@ import { H4, Paragraph2, Paragraph3, Paragraph4 } from 'baseui/typography';
 import { HeroButton } from './HeroButton';
 import SvgWrapper from './SvgWrapper';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
-import { styled, useStyletron } from 'baseui';
+import { styled } from 'baseui';
 import { Block } from 'baseui/block';
 
 const SectionText = styled('div', () => ({
@@ -16,12 +16,12 @@ const SectionText = styled('div', () => ({
 
 interface SimpleSectionProps {
   text: string | React.ReactNode;
-  image: FluidObject[];
+  image?: FluidObject[];
   header?: string;
   caption?: string;
-  isReversed?: boolean;
-
   button?: string;
+  isReversed?: boolean;
+  centered?: boolean;
 }
 
 const SimpleSection = ({
@@ -31,24 +31,23 @@ const SimpleSection = ({
   header,
   button,
   caption,
+  centered,
 }: SimpleSectionProps) => {
-  const [css] = useStyletron();
-
   const direction = isReversed ? 'row-reverse' : 'row';
+  const isCentered = centered ? 1 : 2;
 
   return (
     <FlexGrid
-      flexGridColumnCount={[1, 1, 2]}
+      flexGridColumnCount={[1, 1, isCentered]}
       flexGridColumnGap={'scale800'}
       flexDirection={['column', 'column', direction]}
-      className={css({
-        textAlign: 'center',
-      })}
     >
-      <FlexGridItem>
-        <SvgWrapper svg={<Img fluid={image} />} />
-        <Paragraph4>{caption}</Paragraph4>
-      </FlexGridItem>
+      {image && (
+        <FlexGridItem>
+          <SvgWrapper svg={<Img fluid={image} />} />
+          <Paragraph4>{caption}</Paragraph4>
+        </FlexGridItem>
+      )}
       <FlexGridItem>
         <SectionText>
           <H4 marginTop={['2rem', '2rem', '0']} marginBottom={['1rem', '1rem']}>

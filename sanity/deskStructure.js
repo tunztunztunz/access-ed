@@ -36,7 +36,17 @@ export default () =>
                     .schemaType('aboutPage')
                     .documentId('aboutPage')
                 ),
-              // Add a second list item
+              S.listItem()
+                .title('Services Page')
+                // This automatically gives it properties from the project type
+                .schemaType('servicesPage')
+                // When you open this list item, list out the documents
+                // of the type “project"
+                .child(
+                  S.document()
+                    .schemaType('servicesPage')
+                    .documentId('servicesPage')
+                ),
               S.listItem()
                 .title('Service Pages')
                 .schemaType('servicePage')
@@ -44,6 +54,7 @@ export default () =>
             ])
         ),
       ...S.documentTypeListItems().filter(
-        listItem => !['landingPage', 'aboutPage', 'servicePage'].includes(listItem.getId())
+        listItem =>
+          !['landingPage', 'aboutPage', 'servicesPage', 'servicePage'].includes(listItem.getId())
       ),
     ]);

@@ -1,5 +1,5 @@
 import { styled, useStyletron } from 'baseui';
-import { Display3, H4, H6, Paragraph3 } from 'baseui/typography';
+import { Display2, H4, H6, Paragraph3 } from 'baseui/typography';
 import * as React from 'react';
 import { HeroButton } from './HeroButton';
 
@@ -19,7 +19,7 @@ const HeroText = ({ header, text }: HeroTextProps) => {
   const [css, theme] = useStyletron();
   return (
     <HeaderText>
-      <Display3 display={['none', 'none', 'block', 'block']}>{header}</Display3>
+      <Display2 display={['none', 'none', 'block', 'block']}>{header}</Display2>
       <H6 display={['block', 'block', 'none', 'none']} margin="1em 0">
         {header}
       </H6>

@@ -4,10 +4,13 @@ import { Block } from 'baseui/block';
 
 interface ButtonProps {
   buttonText: string;
+  noMargin?: boolean;
+  fullWidth?: boolean;
 }
-export const HeroButton = ({ buttonText }: ButtonProps) => {
+export const HeroButton = ({ buttonText, noMargin, fullWidth }: ButtonProps) => {
+  console.log(fullWidth);
   return (
-    <Block marginTop={'2rem'}>
+    <Block marginTop={noMargin ? '' : '2rem'} width="100%">
       <Button
         onClick={() => alert('click')}
         kind={KIND.primary}
@@ -16,7 +19,7 @@ export const HeroButton = ({ buttonText }: ButtonProps) => {
           BaseButton: {
             style: ({ $theme }) => ({
               backgroundColor: $theme.colors.accent,
-              width: $theme.sizing.scale4800,
+              width: fullWidth ? '100vw' : $theme.sizing.scale4800,
             }),
           },
         }}

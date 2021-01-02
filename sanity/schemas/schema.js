@@ -16,8 +16,12 @@ import iconWithText from './iconWithText';
 import textAndImageSection from './textAndImageSection';
 
 import landingPage from './landingPage';
-import servicePage from './servicePage';
+import servicesPage from './servicesPage';
 import aboutPage from './aboutPage';
+import textSection from './textSection';
+import servicePage from './servicePage';
+import servicePriceCard from './servicePriceCard';
+import servicePageSection from './servicePageSection';
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
   // We name our schema
@@ -29,6 +33,7 @@ export default createSchema({
     // in the studio.
     landingPage,
     aboutPage,
+    servicesPage,
     servicePage,
     post,
     author,
@@ -41,5 +46,8 @@ export default createSchema({
     quote,
     iconWithText,
     textAndImageSection,
+    textSection,
+    servicePriceCard,
+    servicePageSection,
   ]),
 });

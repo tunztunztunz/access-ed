@@ -3,7 +3,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 const BlockContent = require('@sanity/block-content-to-react');
 
 import Hero from '../components/Hero';
-import SectionHeader from '../components/Landing/SectionHeader';
+import SectionHeader from '../components/SectionHeader';
 import SimpleSection from '../components/SimpleSection';
 import { FluidObject } from 'gatsby-image';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
@@ -18,7 +18,7 @@ interface SectionProps {
   };
 }
 
-const PageTwo = () => {
+const About = () => {
   const data = useStaticQuery(
     graphql`
       query AboutPageQuery {
@@ -139,4 +139,4 @@ const PageTwo = () => {
   );
 };
 
-export default PageTwo;
+export default About;
