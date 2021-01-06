@@ -19,7 +19,7 @@ const ServiceCard = ({ svg, title, description }: ServiceCardProps) => {
   const [, theme] = useStyletron();
   return (
     <Block css={styledTextArea}>
-      <SvgWrapper svg={svg} isSmall={true} />
+      <SvgWrapper margin svg={svg} isSmall={true} />
       <H5 marginBottom={theme.sizing.scale600}>{title}</H5>
       <Paragraph3 display={['block', 'block', 'none']}>{description}</Paragraph3>
       <Paragraph1 display={['none', 'none', 'block']}>{description}</Paragraph1>
