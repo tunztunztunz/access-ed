@@ -51,7 +51,7 @@ const About = () => {
           _rawAboutText(resolveReferences: { maxDepth: 1 })
           aboutImage {
             asset {
-              fluid {
+              fluid(maxWidth: 400, maxHeight: 500) {
                 ...GatsbySanityImageFluid
               }
             }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { H3, H5, H6, Paragraph1, Paragraph2, Paragraph3 } from 'baseui/typography';
+import { H5, Paragraph1, Paragraph2 } from 'baseui/typography';
 import { useStyletron } from 'baseui';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import { Block } from 'baseui/block';
@@ -9,17 +9,21 @@ interface ServicePriceCardProps {
   title: string;
   serviceDetails: string[];
   price: string;
-  hours: number;
+  hours: string;
 }
 
 const ServicePriceCard = ({ title, serviceDetails, price, hours }: ServicePriceCardProps) => {
   const [css, theme] = useStyletron();
+  console.log(hours);
 
   const details = (
     <ul
       className={css({
         listStyleType: 'none',
         paddingLeft: theme.sizing.scale600,
+        minHeight: '280px',
+        maxHeight: '280px',
+        lineHeight: theme.sizing.scale900,
       })}
     >
       {serviceDetails.map((detail, index) => (
@@ -41,11 +45,16 @@ const ServicePriceCard = ({ title, serviceDetails, price, hours }: ServicePriceC
       <FlexGrid
         paddingBottom={'scale600'}
         className={css({
-          border: '1px solid black',
+          border: 'none',
+          borderRadius: '4px',
+          boxShadow: '0 1px 4px rgba(0,0,0,0.5)',
+          minHeight: '520px',
+          maxHeight: '520px',
+          maxWidth: '350px',
         })}
       >
         <FlexGridItem>
-          <Paragraph1 marginBottom="0">{hours} hours/month</Paragraph1>
+          <Paragraph1 marginBottom="0">{hours}</Paragraph1>
           <hr
             className={css({
               content: '',
@@ -56,7 +65,7 @@ const ServicePriceCard = ({ title, serviceDetails, price, hours }: ServicePriceC
             })}
           />
           <H5 marginBottom={theme.sizing.scale600} marginTop={theme.sizing.scale600}>
-            ${price}/month
+            ${price}
           </H5>
         </FlexGridItem>
         <FlexGridItem className={css({ textAlign: 'left' })}>
@@ -67,7 +76,13 @@ const ServicePriceCard = ({ title, serviceDetails, price, hours }: ServicePriceC
             {details}
           </Paragraph1>
         </FlexGridItem>
-        <FlexGridItem display="flex" justifyContent="center">
+        <FlexGridItem
+          display="flex"
+          justifyContent="center"
+          className={css({
+            // paddingTop: '20%',
+          })}
+        >
           <HeroButton buttonText={'Enroll Now'} />
         </FlexGridItem>
       </FlexGrid>

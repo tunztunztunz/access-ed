@@ -12,10 +12,12 @@ const HeaderText = styled('div', () => ({
 
 interface HeroTextProps {
   header: string;
+  buttonText?: string;
+  noButton?: boolean;
   text?: string;
 }
 
-const HeroText = ({ header, text }: HeroTextProps) => {
+const HeroText = ({ header, text, buttonText, noButton }: HeroTextProps) => {
   const [css, theme] = useStyletron();
   return (
     <HeaderText>
@@ -39,7 +41,7 @@ const HeroText = ({ header, text }: HeroTextProps) => {
       >
         {text}
       </Paragraph3>
-      <HeroButton buttonText="Learn More" />
+      {!noButton && <HeroButton buttonText={buttonText ? buttonText : 'Learn More'} />}
     </HeaderText>
   );
 };

@@ -22,6 +22,9 @@ interface SectionProps {
       fluid: FluidObject[];
     };
   };
+  slug: {
+    current: string;
+  };
 }
 
 const Services = () => {
@@ -103,6 +106,7 @@ const Services = () => {
             features={service.features}
             header={service.hero.heroHeader}
             price={service.price}
+            link={`/services/${service.slug.current}`}
             button={'See Our Plans'}
           />
         </FlexGridItem>

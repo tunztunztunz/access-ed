@@ -20,7 +20,12 @@ const Hero = ({ header, text, image }: HeroProps) => {
       <FlexGridItem>
         <HeroText header={header} text={text} />
       </FlexGridItem>
-      <FlexGridItem paddingTop={['0', '0', '1rem', '0']}>
+      <FlexGridItem
+        paddingTop={['0', '0', '1rem', '0']}
+        display="flex"
+        flexDirection="column"
+        alignItems={['center', 'center', 'center', 'flex-end']}
+      >
         <SvgWrapper svg={<Img fluid={image} />} />
       </FlexGridItem>
     </FlexGrid>

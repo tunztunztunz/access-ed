@@ -5,9 +5,10 @@ export default {
   fields: [
     {
       name: 'hours',
-      title: 'Hours Per Month',
-      description: 'How many hours a month is the service providing?',
-      type: 'number',
+      title: 'Top Of Card',
+      description:
+        'This is the top of the price card. It is used to display information like "how many hours a month" the service provides.',
+      type: 'string',
     },
     {
       name: 'title',

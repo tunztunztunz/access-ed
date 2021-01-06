@@ -1,10 +1,10 @@
 import React from 'react';
 import Img, { FluidObject } from 'gatsby-image';
-import { H4, Paragraph2, Paragraph3, Paragraph4 } from 'baseui/typography';
+import { H4, Paragraph2, Paragraph3 } from 'baseui/typography';
 import { HeroButton } from './HeroButton';
 import SvgWrapper from './SvgWrapper';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
-import { styled } from 'baseui';
+import { styled, useStyletron } from 'baseui';
 import { Block } from 'baseui/block';
 
 const SectionText = styled('div', () => ({
@@ -22,6 +22,9 @@ interface SimpleSectionProps {
   button?: string;
   isReversed?: boolean;
   centered?: boolean;
+
+  background?: boolean;
+  padded?: boolean;
 }
 
 const SimpleSection = ({
@@ -30,22 +33,31 @@ const SimpleSection = ({
   image,
   header,
   button,
-  caption,
   centered,
+  background,
+  padded,
 }: SimpleSectionProps) => {
+  const [css, theme] = useStyletron();
   const direction = isReversed ? 'row-reverse' : 'row';
   const isCentered = centered ? 1 : 2;
+  console.log(isReversed);
 
   return (
     <FlexGrid
       flexGridColumnCount={[1, 1, isCentered]}
       flexGridColumnGap={'scale800'}
       flexDirection={['column', 'column', direction]}
+      backgroundColor={background ? theme.colors.backgroundTertiary : ''}
+      padding={padded ? 'scale600' : ''}
     >
       {image && (
-        <FlexGridItem>
+        <FlexGridItem
+          className={css({ textAlign: 'center' })}
+          display="flex"
+          flexDirection="column"
+          alignItems={isReversed === true ? 'flex-end' : 'flex-start'}
+        >
           <SvgWrapper svg={<Img fluid={image} />} />
-          <Paragraph4>{caption}</Paragraph4>
         </FlexGridItem>
       )}
       <FlexGridItem>

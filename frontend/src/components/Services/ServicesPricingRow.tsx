@@ -8,12 +8,13 @@ import { Block } from 'baseui/block';
 interface SimpleSectionProps {
   features: string[];
   price: string;
+  link?: string;
   header?: string;
   button?: string;
   isReversed?: boolean;
 }
 
-const ServicesPricingRow = ({ features, header, button, price }: SimpleSectionProps) => {
+const ServicesPricingRow = ({ features, header, button, price, link }: SimpleSectionProps) => {
   const [css, theme] = useStyletron();
 
   const serviceFeatureList = (
@@ -69,7 +70,6 @@ const ServicesPricingRow = ({ features, header, button, price }: SimpleSectionPr
           marginBottom={['1em', '1rem', '1rem', 0]}
           marginTop={['1rem', '1rem', '1rem', 0]}
         >
-          ${price}
           <Paragraph3
             display="inline"
             marginTop={[0]}
@@ -77,8 +77,9 @@ const ServicesPricingRow = ({ features, header, button, price }: SimpleSectionPr
               color: theme.colors.contentTertiary,
             })}
           >
-            /month
+            starting at/
           </Paragraph3>
+          ${price}
         </H2>
       </FlexGridItem>
       <FlexGridItem
@@ -86,7 +87,7 @@ const ServicesPricingRow = ({ features, header, button, price }: SimpleSectionPr
         justifyContent={['flex-start', 'flex-start', 'flex-start', 'flex-end']}
       >
         {/* Flex was not working without wrapping this conditional */}
-        <Block>{button && <HeroButton buttonText={button} noMargin={true} />}</Block>
+        <Block>{button && <HeroButton buttonText={button} noMargin={true} link={link} />}</Block>
       </FlexGridItem>
     </FlexGrid>
   );

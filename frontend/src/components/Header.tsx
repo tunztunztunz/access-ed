@@ -2,31 +2,81 @@
 import * as React from 'react';
 import { AppNavBar, setItemActive, NavItemT } from 'baseui/app-nav-bar';
 import { ChevronDown, Delete } from 'baseui/icon';
-import { Link, navigate } from 'gatsby';
-import { useStyletron, withStyle } from 'baseui';
+import { Link, navigate, useStaticQuery } from 'gatsby';
+import { styled, useStyletron, withStyle } from 'baseui';
+
+const StyledLink = styled(Link, ({ $theme }) => ({
+  color: $theme.colors.contentTertiary,
+  textDecoration: 'none',
+  ':hover': {
+    color: $theme.colors.primaryA,
+  },
+  ':active': {
+    color: $theme.colors.primaryA,
+  },
+}));
 
 interface HeaderProps {
   title: string;
 }
+
+interface DataProps {
+  data: {
+    allSanityServicePage: {
+      edges: [
+        {
+          node: [
+            {
+              title: string;
+              slug: {
+                current: string;
+              };
+            }
+          ];
+        }
+      ];
+    };
+  };
+}
 export default function Header({ title }: HeaderProps) {
   const [css, theme] = useStyletron();
+
+  const data = useStaticQuery(graphql`
+    query headerQuery {
+      allSanityServicePage {
+        edges {
+          node {
+            title
+            slug {
+              current
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  const servicesLinks: DataProps = data.allSanityServicePage.edges;
+  const links = servicesLinks.slice(0, 6).map((link, index) => ({
+    label: <StyledLink to={`/services/${link.node.slug.current}`}>{link.node.title}</StyledLink>,
+  }));
   const [mainItems, setMainItems] = React.useState<NavItemT[]>([
     {
-      label: 'About',
+      label: <StyledLink to={'/about'}>About</StyledLink>,
       info: { id: 1 },
     },
     {
       icon: ChevronDown,
-      label: 'Services',
+      label: <StyledLink to={'/services'}>Services</StyledLink>,
       navExitIcon: Delete,
       children: [
-        { label: 'Tutoring' },
-        { label: 'Enrichment Pods' },
-        { label: 'Micro-School' },
-        { label: 'Academic Coaching' },
-        { label: 'Bootcamp' },
-        { label: 'Summer Refresher' },
-        { label: 'More...' },
+        ...links,
+        // { label: <StyledLink to={'/services/tutoring'}>Tutoring</StyledLink> },
+        // { label: <StyledLink to={'/services/enrichment-pods'}>Enrichment Pods</StyledLink> },
+        // { label: <StyledLink to={'services/micro-school'}>Micro-School</StyledLink> },
+        // { label: <StyledLink to={'/services/academic-coaching'}>Academic Coaching</StyledLink> },
+        // { label: <StyledLink to={'services/bootcamp'}>Bootcamp</StyledLink> },
+        // { label: <StyledLink to={'/services/summer-refresher'}>Summer Refresher</StyledLink> },
       ],
     },
     { label: 'Testimonials', info: { id: 3 } },
@@ -37,15 +87,11 @@ export default function Header({ title }: HeaderProps) {
     if (item.info) {
       return item.info.id;
     }
-    console.log(item.label);
     return item.label;
   }
   function handleMainItemSelect(item: NavItemT) {
-    navigate(`/${item.label.toLocaleLowerCase()}`);
     setMainItems(prev => setItemActive(prev, item, getUniqueIdentifier));
   }
-
-  console.log(title);
   return (
     <AppNavBar
       title={title}
