@@ -51,10 +51,20 @@ export default () =>
                 .title('Service Pages')
                 .schemaType('servicePage')
                 .child(S.documentTypeList('servicePage').title('Service Pages')),
+              S.listItem()
+                .title('Testimonials Page')
+                .schemaType('testimonialsPage')
+                .child(
+                  S.document()
+                    .schemaType('testimonialsPage')
+                    .documentId('testimonialsPage')
+                ),
             ])
         ),
       ...S.documentTypeListItems().filter(
         listItem =>
-          !['landingPage', 'aboutPage', 'servicesPage', 'servicePage'].includes(listItem.getId())
+          !['landingPage', 'aboutPage', 'servicesPage', 'servicePage', 'testimonialsPage'].includes(
+            listItem.getId()
+          )
       ),
     ]);

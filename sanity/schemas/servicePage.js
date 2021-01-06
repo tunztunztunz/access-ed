@@ -26,7 +26,7 @@ export default {
       name: 'disclaimer',
       title: 'Disclaimer',
       description:
-        'Optional section. If you want to have a disclaimer at the bottom of the page put it here',
+        'Optional section. If you want to have a disclaimer at the bottom of the page put it here.',
       options: { collapsible: true, collapsed: true, columns: 1 },
     },
   ],

@@ -21,12 +21,13 @@ export default {
       name: 'price',
       title: 'Price',
       type: 'string',
-      description: 'How much is this service?',
+      description: "How much is this service? You don't need to include $",
     },
     {
       name: 'serviceDetails',
       title: 'Service Details',
-      description: 'List of what is offered in this package. Limited to 5 items',
+      description:
+        'List of what is offered in this package. Limited to 5 items. Please keep these concise. There is only so much space on the cards before the design begins to look funky. ',
       type: 'array',
       of: [{ type: 'string' }],
       validation: Rule => Rule.max(8),
