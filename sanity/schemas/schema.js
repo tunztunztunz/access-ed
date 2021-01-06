@@ -23,6 +23,8 @@ import testimonialsPage from './testimonialsPage';
 import textSection from './textSection';
 import servicePriceCard from './servicePriceCard';
 import servicePageSection from './servicePageSection';
+import partnershipsPage from './partnershipsPage';
+import partnershipSection from './partnershipSection';
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
   // We name our schema
@@ -37,6 +39,7 @@ export default createSchema({
     servicesPage,
     servicePage,
     testimonialsPage,
+    partnershipsPage,
     post,
     author,
     category,
@@ -51,5 +54,6 @@ export default createSchema({
     textSection,
     servicePriceCard,
     servicePageSection,
+    partnershipSection,
   ]),
 });

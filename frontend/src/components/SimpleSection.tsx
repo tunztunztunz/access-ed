@@ -25,6 +25,7 @@ interface SimpleSectionProps {
 
   background?: boolean;
   padded?: boolean;
+  link?: string;
 }
 
 const SimpleSection = ({
@@ -36,6 +37,7 @@ const SimpleSection = ({
   centered,
   background,
   padded,
+  link,
 }: SimpleSectionProps) => {
   const [css, theme] = useStyletron();
   const direction = isReversed ? 'row-reverse' : 'row';
@@ -71,7 +73,14 @@ const SimpleSection = ({
           <Paragraph2 as={Block} display={['none', 'none', 'block']}>
             {text}
           </Paragraph2>
-          {button && <HeroButton buttonText={button} />}
+          {button && (
+            <a
+              href={link ? link : ''}
+              className={css({ textDecoration: 'inherit', color: 'inherit' })}
+            >
+              <HeroButton buttonText={button} />
+            </a>
+          )}
         </SectionText>
       </FlexGridItem>
     </FlexGrid>

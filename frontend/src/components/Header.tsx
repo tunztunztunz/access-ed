@@ -57,9 +57,11 @@ export default function Header({ title }: HeaderProps) {
   `);
 
   const servicesLinks: DataProps = data.allSanityServicePage.edges;
+
   const links = servicesLinks.slice(0, 6).map((link, index) => ({
     label: <StyledLink to={`/services/${link.node.slug.current}`}>{link.node.title}</StyledLink>,
   }));
+
   const [mainItems, setMainItems] = React.useState<NavItemT[]>([
     {
       label: <StyledLink to={'/about'}>About</StyledLink>,
@@ -69,18 +71,10 @@ export default function Header({ title }: HeaderProps) {
       icon: ChevronDown,
       label: <StyledLink to={'/services'}>Services</StyledLink>,
       navExitIcon: Delete,
-      children: [
-        ...links,
-        // { label: <StyledLink to={'/services/tutoring'}>Tutoring</StyledLink> },
-        // { label: <StyledLink to={'/services/enrichment-pods'}>Enrichment Pods</StyledLink> },
-        // { label: <StyledLink to={'services/micro-school'}>Micro-School</StyledLink> },
-        // { label: <StyledLink to={'/services/academic-coaching'}>Academic Coaching</StyledLink> },
-        // { label: <StyledLink to={'services/bootcamp'}>Bootcamp</StyledLink> },
-        // { label: <StyledLink to={'/services/summer-refresher'}>Summer Refresher</StyledLink> },
-      ],
+      children: [...links],
     },
-    { label: 'Testimonials', info: { id: 3 } },
-    { label: 'Partnerships', info: { id: 4 } },
+    { label: <StyledLink to={'/testimonials'}>Testimonials</StyledLink>, info: { id: 3 } },
+    { label: <StyledLink to={'/partnerships'}>Partnerships</StyledLink>, info: { id: 4 } },
     { label: 'Book Now!', info: { id: 5 } },
   ]);
   function getUniqueIdentifier(item: NavItemT) {

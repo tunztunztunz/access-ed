@@ -59,12 +59,25 @@ export default () =>
                     .schemaType('testimonialsPage')
                     .documentId('testimonialsPage')
                 ),
+              S.listItem()
+                .title('Partnerships Page')
+                .schemaType('partnershipsPage')
+                .child(
+                  S.document()
+                    .schemaType('partnershipsPage')
+                    .documentId('partnershipsPage')
+                ),
             ])
         ),
       ...S.documentTypeListItems().filter(
         listItem =>
-          !['landingPage', 'aboutPage', 'servicesPage', 'servicePage', 'testimonialsPage'].includes(
-            listItem.getId()
-          )
+          ![
+            'landingPage',
+            'aboutPage',
+            'servicesPage',
+            'servicePage',
+            'testimonialsPage',
+            'partnershipsPage',
+          ].includes(listItem.getId())
       ),
     ]);
