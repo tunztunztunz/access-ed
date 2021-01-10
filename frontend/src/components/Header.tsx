@@ -75,7 +75,7 @@ export default function Header({ title }: HeaderProps) {
     },
     { label: <StyledLink to={'/testimonials'}>Testimonials</StyledLink>, info: { id: 3 } },
     { label: <StyledLink to={'/partnerships'}>Partnerships</StyledLink>, info: { id: 4 } },
-    { label: 'Book Now!', info: { id: 5 } },
+    { label: <StyledLink to={'/contact'}>Book Now!</StyledLink>, info: { id: 5 } },
   ]);
   function getUniqueIdentifier(item: NavItemT) {
     if (item.info) {

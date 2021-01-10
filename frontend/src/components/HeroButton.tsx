@@ -24,6 +24,9 @@ export const HeroButton = ({ buttonText, noMargin, fullWidth, link }: ButtonProp
             style: ({ $theme }) => ({
               backgroundColor: $theme.colors.accent,
               width: fullWidth ? '100vw' : $theme.sizing.scale4800,
+              ':hover': {
+                backgroundColor: $theme.colors.accent500,
+              },
             }),
           },
         }}

@@ -3,6 +3,12 @@ import { Block } from 'baseui/block';
 import { Paragraph3 } from 'baseui/typography';
 import { FiPhoneIncoming as Phone, FiMail as Mail } from 'react-icons/fi';
 import { MdLocationCity as Location } from 'react-icons/md';
+import { styled } from 'baseui';
+
+export const StyledLink = styled('a', ({ $theme }) => ({
+  textDecoration: 'none',
+  color: $theme.colors.primary,
+}));
 
 const FooterContactInfo = () => {
   return (
@@ -18,10 +24,10 @@ const FooterContactInfo = () => {
     >
       <Paragraph3>©AccessEd Academic Coaching Services</Paragraph3>
       <Paragraph3>
-        <Phone /> : (503) 381-9040
+        <Phone /> : <StyledLink href="tel:503-381-9040">(503) 381-9040</StyledLink>
       </Paragraph3>
       <Paragraph3>
-        <Mail /> : info@accessednw.com
+        <Mail /> : <StyledLink href="mailto:info@accessednw.com">info@accessednw.com</StyledLink>
       </Paragraph3>
       <Paragraph3>
         <Location /> : Vancouver, Washington

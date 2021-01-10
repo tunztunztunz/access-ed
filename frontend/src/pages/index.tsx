@@ -60,7 +60,13 @@ const IndexPage = () => {
       // marginBottom="scale1600"w
     >
       <FlexGridItem>
-        <Hero header={heroHeader} text={heroText} image={heroImage} />
+        <Hero
+          header={heroHeader}
+          text={heroText}
+          image={heroImage}
+          button={true}
+          buttonLink={'/about'}
+        />
       </FlexGridItem>
       <FlexGridItem>
         <SectionHeader title={'What We Do'} />

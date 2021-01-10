@@ -1,6 +1,6 @@
 import { css } from '@emotion/core';
 import { Block } from 'baseui/block';
-import { Display3, Display4, Paragraph1, Paragraph2 } from 'baseui/typography';
+import { Display3, Display4, Paragraph1, Paragraph2, Paragraph3 } from 'baseui/typography';
 import React from 'react';
 
 const headerStyle = css`
@@ -37,9 +37,9 @@ const SectionHeader = ({ title, description, noRule }: SectionHeaderProps) => {
       <Display3 css={noRule ? '' : headerStyle} display={['none', 'none', 'block']}>
         {title}
       </Display3>
-      <Paragraph2 as={Block} display={['block', 'block', 'none']}>
+      <Paragraph3 as={Block} display={['block', 'block', 'none']}>
         {description}
-      </Paragraph2>
+      </Paragraph3>
       <Paragraph1 as={Block} display={['none', 'none', 'block']}>
         {description}
       </Paragraph1>

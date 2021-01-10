@@ -8,9 +8,11 @@ interface HeroProps {
   header: string;
   image: FluidObject[];
   text?: string;
+  button?: boolean;
+  buttonLink?: string;
 }
 
-const Hero = ({ header, text, image }: HeroProps) => {
+const Hero = ({ header, text, image, button, buttonLink }: HeroProps) => {
   return (
     <FlexGrid
       flexGridColumnCount={[1, 1, 1, 2]}
@@ -18,7 +20,7 @@ const Hero = ({ header, text, image }: HeroProps) => {
       marginTop={['0', '0', 'scale1600']}
     >
       <FlexGridItem>
-        <HeroText header={header} text={text} />
+        <HeroText header={header} text={text} button={button} buttonLink={buttonLink} />
       </FlexGridItem>
       <FlexGridItem
         paddingTop={['0', '0', '1rem', '0']}
