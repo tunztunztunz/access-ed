@@ -124,6 +124,7 @@ const Services = () => {
           }
           image={data.sanityServicesPage.callToAction.sectionImage.asset.fluid}
           button={'Contact Us'}
+          buttonLink={'/contact'}
         />
       </FlexGridItem>
     </FlexGrid>

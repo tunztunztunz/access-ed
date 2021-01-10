@@ -133,6 +133,7 @@ const About = () => {
           }
           image={data.sanityAboutPage.callToAction.sectionImage.asset.fluid}
           button={'Contact Us'}
+          buttonLink={'/contact'}
         />
       </FlexGridItem>
     </FlexGrid>

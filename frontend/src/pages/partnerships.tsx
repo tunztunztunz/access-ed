@@ -109,6 +109,7 @@ const Testimonials = () => {
           }
           image={data.sanityPartnershipsPage.callToAction.sectionImage.asset.fluid}
           button={'Contact Us'}
+          buttonLink={'/contact'}
         />
       </FlexGridItem>
     </FlexGrid>

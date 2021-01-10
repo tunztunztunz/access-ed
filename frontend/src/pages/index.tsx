@@ -102,6 +102,7 @@ const IndexPage = () => {
           }
           image={data.sanityLandingPage.callToAction.sectionImage.asset.fluid}
           button={'Contact Us'}
+          buttonLink={'/contact'}
         />
       </FlexGridItem>
     </FlexGrid>

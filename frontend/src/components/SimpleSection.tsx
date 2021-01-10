@@ -20,6 +20,7 @@ interface SimpleSectionProps {
   header?: string;
   caption?: string;
   button?: string;
+  buttonLink?: string;
   isReversed?: boolean;
   centered?: boolean;
 
@@ -34,6 +35,7 @@ const SimpleSection = ({
   image,
   header,
   button,
+  buttonLink,
   centered,
   background,
   padded,
@@ -78,7 +80,7 @@ const SimpleSection = ({
               href={link ? link : ''}
               className={css({ textDecoration: 'inherit', color: 'inherit' })}
             >
-              <HeroButton buttonText={button} />
+              <HeroButton buttonText={button} link={buttonLink} />
             </a>
           )}
         </SectionText>
