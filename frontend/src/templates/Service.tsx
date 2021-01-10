@@ -52,9 +52,7 @@ interface ServiceProps {
 
 const Service = ({ data }: ServiceProps) => {
   const service = data.service;
-  console.log(service._rawDisclaimerText);
 
-  service.section.forEach(section => console.log(section.priceCards));
   return (
     <FlexGrid
       flexGridColumnCount={[1]}
@@ -70,16 +68,16 @@ const Service = ({ data }: ServiceProps) => {
         />
       </FlexGridItem>
       {service.section.map((section, index) => {
+        const sectionDescription = section._rawText ? (
+          <BlockContent blocks={section._rawText} renderContainerOnSingleChild={true} />
+        ) : (
+          ''
+        );
         const sectionLength = section.priceCards.length;
         return (
           <FlexGridItem key={index}>
             <FlexGridItem>
-              <SectionHeader
-                title={section.header}
-                description={
-                  <BlockContent blocks={section._rawText} renderContainerOnSingleChild={true} />
-                }
-              />
+              <SectionHeader title={section.header} description={sectionDescription} />
             </FlexGridItem>
             <FlexGridItem>
               <FlexGrid

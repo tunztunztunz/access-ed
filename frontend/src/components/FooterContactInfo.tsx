@@ -22,7 +22,6 @@ const FooterContactInfo = () => {
         },
       }}
     >
-      <Paragraph3>©AccessEd Academic Coaching Services</Paragraph3>
       <Paragraph3>
         <Phone /> : <StyledLink href="tel:503-381-9040">(503) 381-9040</StyledLink>
       </Paragraph3>
@@ -32,6 +31,7 @@ const FooterContactInfo = () => {
       <Paragraph3>
         <Location /> : Vancouver, Washington
       </Paragraph3>
+      <Paragraph3>©AccessEd Academic Coaching Services</Paragraph3>
     </Block>
   );
 };

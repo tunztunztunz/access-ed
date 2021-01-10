@@ -44,7 +44,6 @@ const SimpleSection = ({
   const [css, theme] = useStyletron();
   const direction = isReversed ? 'row-reverse' : 'row';
   const isCentered = centered ? 1 : 2;
-  console.log(isReversed);
 
   return (
     <FlexGrid

@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: 'Access Ed',
+    title: 'AccessEd',
     description: 'A website for Access Education Northwest',
     keywords: 'gatsbyjs, gatsby, javascript, sample, something',
     siteUrl: 'https://relaxed-bardeen-92bf66.netlify.app/',

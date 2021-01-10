@@ -14,7 +14,6 @@ interface ServicePriceCardProps {
 
 const ServicePriceCard = ({ title, serviceDetails, price, hours }: ServicePriceCardProps) => {
   const [css, theme] = useStyletron();
-  console.log(hours);
 
   const details = (
     <ul
