@@ -59,7 +59,6 @@ const ServicePriceCard = ({ title, serviceDetails, price, hours }: ServicePriceC
             className={css({
               content: '',
               display: 'block',
-              // margin: '0 auto 2rem auto',
               maxWidth: '80%',
               border: `1px solid ${theme.colors.primary300}`,
             })}
@@ -76,14 +75,8 @@ const ServicePriceCard = ({ title, serviceDetails, price, hours }: ServicePriceC
             {details}
           </Paragraph1>
         </FlexGridItem>
-        <FlexGridItem
-          display="flex"
-          justifyContent="center"
-          className={css({
-            // paddingTop: '20%',
-          })}
-        >
-          <HeroButton buttonText={'Enroll Now'} />
+        <FlexGridItem display="flex" justifyContent="center">
+          <HeroButton buttonText={'Enroll Now'} link={'/contact'} />
         </FlexGridItem>
       </FlexGrid>
     </Block>
