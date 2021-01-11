@@ -11,6 +11,7 @@ interface ButtonProps {
 }
 export const HeroButton = ({ buttonText, noMargin, fullWidth, link }: ButtonProps) => {
   const buttonNavigation = () => {
+    console.log('link hit');
     link ? navigate(`${link}`) : '';
   };
   return (
