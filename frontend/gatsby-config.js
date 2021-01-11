@@ -1,3 +1,7 @@
+require('dotenv').config();
+
+const isProd = process.env.NODE_ENV === 'production';
+
 module.exports = {
   siteMetadata: {
     title: 'AccessEd',
@@ -21,8 +25,11 @@ module.exports = {
     {
       resolve: 'gatsby-source-sanity',
       options: {
-        projectId: '1h2wphxv',
-        dataset: 'production',
+        projectId: process.env.SANITY_ID,
+        dataset: process.env.SANITY_DATASET,
+        token: process.env.SANITY_TOKEN,
+        overlayDrafts: !isProd,
+        watchMode: !isProd,
       },
     },
     'gatsby-transformer-json',
@@ -31,6 +38,10 @@ module.exports = {
       options: {
         siteUrl: 'https://gatsby-starter-typescript-plus.netlify.com',
       },
+    },
+    {
+      resolve: `gatsby-plugin-create-client-paths`,
+      options: { prefixes: [`/preview/*`] },
     },
     'gatsby-plugin-emotion',
     'gatsby-plugin-typescript',
