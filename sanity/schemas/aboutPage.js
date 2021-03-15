@@ -30,6 +30,11 @@ export default {
       type: 'hero',
     },
     {
+      name: 'promotion',
+      title: 'Promotional Content',
+      type: 'promotion',
+    },
+    {
       name: 'sections',
       title: 'About Sections',
       type: 'array',

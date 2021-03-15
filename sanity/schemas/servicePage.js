@@ -67,6 +67,11 @@ export default {
       type: 'hero',
     },
     {
+      name: 'promotion',
+      title: 'Promotional Content',
+      type: 'promotion',
+    },
+    {
       name: 'section',
       title: 'Page Sections',
       type: 'array',

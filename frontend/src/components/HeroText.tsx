@@ -3,7 +3,7 @@ import { Display2, H4, H6, Paragraph3 } from 'baseui/typography';
 import * as React from 'react';
 import { HeroButton } from './HeroButton';
 
-const HeaderText = styled('div', () => ({
+export const HeaderText = styled('div', () => ({
   textAlign: 'center',
   '@media screen and (min-width: 1136px )': {
     textAlign: 'left',
@@ -18,7 +18,13 @@ interface HeroTextProps {
   text?: string;
 }
 
-const HeroText = ({ header, text, buttonText, button, buttonLink }: HeroTextProps) => {
+const HeroText = ({
+  header,
+  text,
+  buttonText,
+  button,
+  buttonLink,
+}: HeroTextProps) => {
   const [css, theme] = useStyletron();
   return (
     <HeaderText>
@@ -43,7 +49,7 @@ const HeroText = ({ header, text, buttonText, button, buttonLink }: HeroTextProp
         {text}
       </Paragraph3>
       {button && (
-        <HeroButton buttonText={buttonText ? buttonText : 'Learn More'} link={buttonLink} />
+        <HeroButton buttonText={buttonText || 'Learn More'} link={buttonLink} />
       )}
     </HeaderText>
   );

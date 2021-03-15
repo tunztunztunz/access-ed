@@ -20,6 +20,19 @@
     "test": "npm run type-check && npm run lint",
     "type-check": "tsc"
   },
+  "eslintConfig": {
+    "extends": [
+      "wesbos",
+      "plugin:import/errors",
+      "plugin:import/warnings",
+      "plugin:import/typescript"
+    ],
+    "rules": {
+      "react/jsx-props-no-spreading": 0,
+      "react/prop-types": 0,
+      "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".ts"] }]
+    }
+  },
   "engines": {
     "node": ">=8.0.0"
   },
@@ -68,13 +81,21 @@
     "@types/react-helmet": "^5.0.8",
     "@typescript-eslint/eslint-plugin": "^2.6.0",
     "@typescript-eslint/parser": "^2.6.0",
-    "eslint": "^6.6.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.22.0",
+    "eslint-config-airbnb": "^18.2.1",
     "eslint-config-blvd": "^1.0.0",
-    "eslint-config-prettier": "^6.5.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-config-wesbos": "^1.0.1",
     "eslint-plugin-baseui": "^9.106.2",
-    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-html": "^6.1.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "gh-pages": "^2.0.1",
-    "prettier": "^1.18.2",
+    "prettier": "^2.2.1",
     "rimraf": "^2.6.3"
   }
 }

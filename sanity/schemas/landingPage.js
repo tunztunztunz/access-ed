@@ -47,6 +47,11 @@ export default {
       title: 'Hero',
       type: 'hero',
     },
+    {
+      name: 'promotion',
+      title: 'Promotional Content',
+      type: 'promotion',
+    },
     //Service Cards
     {
       name: 'serviceCards',
