@@ -13,6 +13,7 @@ interface ServicePriceCardProps {
   hours: string;
   discount?: number;
   message?: string;
+  state?: string;
 }
 
 const ServicePriceCard = ({
@@ -22,6 +23,7 @@ const ServicePriceCard = ({
   hours,
   discount,
   message,
+  state,
 }: ServicePriceCardProps) => {
   const [css, theme] = useStyletron();
 
@@ -130,7 +132,7 @@ const ServicePriceCard = ({
               bottom: '0',
             })}
           >
-            <HeroButton buttonText="Enroll Now" link="/contact" />
+            <HeroButton buttonText="Enroll Now" link="contact" state={state} />
           </Block>
         </FlexGridItem>
       </FlexGrid>

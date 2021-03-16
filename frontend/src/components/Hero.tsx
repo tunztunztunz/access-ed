@@ -15,7 +15,7 @@ interface HeroProps {
 const Hero = ({ header, text, image, button, buttonLink }: HeroProps) => (
   <FlexGrid
     flexGridColumnCount={[1, 1, 1, 2]}
-    minHeight={['95vh', '95vh', '50vh', '20vh']}
+    minHeight={['90vh', '90vh', '50vh', '20vh']}
     marginTop={['0', '0', 'scale1600']}
   >
     <FlexGridItem>
@@ -27,7 +27,7 @@ const Hero = ({ header, text, image, button, buttonLink }: HeroProps) => (
       />
     </FlexGridItem>
     <FlexGridItem
-      paddingTop={['0', '0', '1rem', '0']}
+      paddingTop={['0', 'scale1200', 'scale1200', '0']}
       display="flex"
       flexDirection="column"
       alignItems={['center', 'center', 'center', 'flex-end']}

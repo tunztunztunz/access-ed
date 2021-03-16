@@ -16,10 +16,10 @@ interface ServicesProps {
   id?: string;
 }
 
-const Contact = () => {
+const Contact = ({ location }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [location, setLocation] = useState('');
+  const [formLocation, setFormLocation] = useState('');
   const [email, setEmail] = useState('');
   const [services, setServices] = React.useState<Value>([]);
   const [comments, setComments] = useState('');
@@ -35,14 +35,37 @@ const Contact = () => {
       }
     `
   );
-
   const servicesRaw: ServicesProps[] = data.allSanityServicePage.nodes;
   const servicesArray = servicesRaw.map((service: ServicesProps) => {
-    service = { ...service, label: service.title, id: service.title };
-    delete service.title;
-    return service;
+    const modifiedService = {
+      ...service,
+      label: service.title,
+      id: service.title,
+    };
+    delete modifiedService.title;
+    return modifiedService;
   });
 
+  const string = location?.state?.from
+    ? location?.state?.from
+        .replace('-', ' ')
+        .replace(/(^\w{1})|(\s+\w{1})/g, (letter: string) =>
+          letter.toUpperCase()
+        )
+    : '';
+  console.log(string);
+
+  React.useEffect(() => {
+    if (string !== '') {
+      const linkedService = servicesArray.find(
+        (service) => service.label === string
+      );
+      if (linkedService !== undefined && services !== undefined) {
+        setServices([...services, linkedService]);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <FlexGrid
       flexGridColumnCount={[1]}
@@ -104,8 +127,8 @@ const Contact = () => {
             <FormControl label={() => 'City & State'}>
               <Input
                 name="Location"
-                value={location}
-                onChange={(event) => setLocation(event.currentTarget.value)}
+                value={formLocation}
+                onChange={(event) => setFormLocation(event.currentTarget.value)}
                 // placeholder="Vancouver, Washington"
                 required
               />
@@ -126,7 +149,10 @@ const Contact = () => {
                 maxDropdownHeight="300px"
                 type={TYPE.search}
                 multi
-                onChange={({ value }) => setServices(value)}
+                onChange={({ value }) => {
+                  setServices(value);
+                  console.log(value);
+                }}
                 value={services}
               />
             </FormControl>

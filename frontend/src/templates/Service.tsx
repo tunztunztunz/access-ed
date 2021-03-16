@@ -13,6 +13,9 @@ const BlockContent = require('@sanity/block-content-to-react');
 interface ServiceProps {
   data: {
     service: {
+      slug: {
+        current: string;
+      }
       title: string;
       priceModifier: number;
       message: string;
@@ -55,7 +58,7 @@ interface ServiceProps {
 
 const Service = ({ data }: ServiceProps) => {
   const { service } = data;
-
+  console.log(service)
   return (
     <FlexGrid
       flexGridColumnCount={[1]}
@@ -117,6 +120,7 @@ const Service = ({ data }: ServiceProps) => {
                       discount={service.priceModifier}
                       message={service.message}
                       serviceDetails={card.serviceDetails}
+                      state={service.slug.current}
                     />
                   </FlexGridItem>
                 ))}
@@ -166,6 +170,9 @@ export const query = graphql`
       title
       message
       priceModifier
+      slug {
+        current
+      }
       hero {
         heroHeader
         heroText

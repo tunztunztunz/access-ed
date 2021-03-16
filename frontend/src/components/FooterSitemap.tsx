@@ -6,6 +6,7 @@ import { styled } from 'baseui';
 const StyledLink = styled(Link, ({ $theme }) => ({
   color: $theme.colors.primary,
   textDecoration: 'none',
+  display: 'inline-block',
 }));
 
 const FooterSitemap = () => (
