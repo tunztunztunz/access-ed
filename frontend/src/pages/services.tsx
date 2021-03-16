@@ -143,7 +143,7 @@ const Services = () => {
               header={service.hero.heroHeader}
               price={service.price}
               discount={service.priceModifier}
-              link={`/services/${service.slug.current}`}
+              link={`services/${service.slug.current}`}
               button="See Our Plans"
             />
           </FlexGridItem>
