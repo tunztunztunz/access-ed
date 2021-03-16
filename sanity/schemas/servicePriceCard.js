@@ -30,7 +30,7 @@ export default {
         'List of what is offered in this package. Limited to 5 items. Please keep these concise. There is only so much space on the cards before the design begins to look funky. ',
       type: 'array',
       of: [{ type: 'string' }],
-      validation: Rule => Rule.max(8),
+      validation: Rule => Rule.max(5),
     },
   ],
 };

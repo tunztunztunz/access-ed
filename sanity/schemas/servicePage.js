@@ -11,6 +11,11 @@ export default {
       options: { collapsible: true, collapsed: true, columns: 1 },
     },
     {
+      name: 'promotion',
+      title: 'Promotion',
+      options: { collapsible: true, collapsed: true, columns: 1 },
+    },
+    {
       name: 'services',
       title: 'Services',
       options: { collapsible: true, collapsed: true, columns: 1 },
@@ -67,9 +72,25 @@ export default {
       type: 'hero',
     },
     {
+      name: "priceModifier",
+      title: "Price Modifier",
+      description: "Price modifier for promotion. Just put what pertentage the promotion is",
+      type: "number",
+      fieldset: 'promotion'
+    },
+    {
+      name: 'message',
+      title: 'Promotion Message',
+      description: 'Short message to be displayed in price cards',
+      type: 'string',
+      fieldset: 'promotion'
+    },
+    {
       name: 'promotion',
       title: 'Promotional Content',
+      description: 'Optional content to promote a sale',
       type: 'promotion',
+      fieldset: "promotion"
     },
     {
       name: 'section',
