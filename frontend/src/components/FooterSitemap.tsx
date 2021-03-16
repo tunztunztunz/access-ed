@@ -8,26 +8,27 @@ const StyledLink = styled(Link, ({ $theme }) => ({
   textDecoration: 'none',
 }));
 
-const FooterSitemap = () => {
-  return (
-    <FlexGrid flexGridColumnCount={3} flexGridRowGap={'scale200'} padding="2rem">
-      <FlexGridItem>
-        <StyledLink to={'/about'}>About</StyledLink>
-      </FlexGridItem>
-      <FlexGridItem>
-        <StyledLink to={'/services'}>Services</StyledLink>
-      </FlexGridItem>
-      <FlexGridItem>
-        <StyledLink to={'/testimonials'}>Testimonials</StyledLink>
-      </FlexGridItem>
-      <FlexGridItem>
-        <StyledLink to={'/partnerships'}>Partnerships</StyledLink>
-      </FlexGridItem>
-      <FlexGridItem>
-        <StyledLink to={'/contact'}>Contact</StyledLink>
-      </FlexGridItem>
-    </FlexGrid>
-  );
-};
+const FooterSitemap = () => (
+  <FlexGrid flexGridColumnCount={3} flexGridRowGap="scale200" padding="2rem">
+    <FlexGridItem>
+      <StyledLink to="/about">About</StyledLink>
+    </FlexGridItem>
+    <FlexGridItem>
+      <StyledLink to="/services">Services</StyledLink>
+    </FlexGridItem>
+    <FlexGridItem>
+      <StyledLink to="/testimonials">Testimonials</StyledLink>
+    </FlexGridItem>
+    <FlexGridItem>
+      <StyledLink to="/partnerships">Partnerships</StyledLink>
+    </FlexGridItem>
+    <FlexGridItem>
+      <StyledLink to="/contact">Contact</StyledLink>
+    </FlexGridItem>
+    <FlexGridItem>
+      <StyledLink to="/careers">Careers</StyledLink>
+    </FlexGridItem>
+  </FlexGrid>
+);
 
 export default FooterSitemap;

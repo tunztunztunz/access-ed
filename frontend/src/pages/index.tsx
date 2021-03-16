@@ -54,6 +54,38 @@ const IndexPage = () => {
             }
             promotionHeader
             promotionText
+            link {
+              ... on SanityAboutPage {
+                id
+                slug {
+                  current
+                }
+              }
+              ... on SanityPartnershipsPage {
+                id
+                slug {
+                  current
+                }
+              }
+              ... on SanityServicePage {
+                id
+                slug {
+                  current
+                }
+              }
+              ... on SanityServicesPage {
+                id
+                slug {
+                  current
+                }
+              }
+              ... on SanityTestimonialsPage {
+                id
+                slug {
+                  current
+                }
+              }
+            }
           }
         }
       }
@@ -64,6 +96,7 @@ const IndexPage = () => {
   const heroImage = data.sanityLandingPage.hero.heroImage.asset.fluid;
   console.log(data.sanityLandingPage.promotion);
   const { promotionHeader, promotionText } = data.sanityLandingPage.promotion;
+  const promotionLink = data.sanityLandingPage.promotion.link[0].slug.current;
   const promotionImage = data.sanityLandingPage.promotion.image.asset.fluid;
 
   return (
@@ -72,7 +105,6 @@ const IndexPage = () => {
       maxWidth="1110px"
       margin={['0', '0 1rem', '0 2rem', '0 2rem']}
       flexGridRowGap={['scale800', 'scale800', 'scale1600']}
-      // marginBottom="scale1600"w
     >
       <FlexGridItem>
         <Hero
@@ -80,7 +112,7 @@ const IndexPage = () => {
           text={heroText}
           image={heroImage}
           button
-          buttonLink="/about"
+          buttonLink="about"
         />
       </FlexGridItem>
       {data.sanityLandingPage.promotion && (
@@ -89,8 +121,7 @@ const IndexPage = () => {
             image={promotionImage}
             header={promotionHeader}
             text={promotionText}
-            button
-            buttonLink="/about"
+            link={promotionLink}
           />
         </FlexGridItem>
       )}
@@ -128,7 +159,7 @@ const IndexPage = () => {
           }
           image={data.sanityLandingPage.callToAction.sectionImage.asset.fluid}
           button="Contact Us"
-          buttonLink="/contact"
+          buttonLink="contact"
         />
       </FlexGridItem>
     </FlexGrid>

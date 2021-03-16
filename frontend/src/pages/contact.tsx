@@ -1,5 +1,4 @@
 import * as React from 'react';
-import SectionHeader from '../components/SectionHeader';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import { Input, MaskedInput } from 'baseui/input';
 import { FormControl } from 'baseui/form-control';
@@ -9,6 +8,7 @@ import { useState } from 'react';
 import { Block } from 'baseui/block';
 import { graphql, useStaticQuery } from 'gatsby';
 import { Button } from 'baseui/button';
+import SectionHeader from '../components/SectionHeader';
 
 interface ServicesProps {
   title?: string;
@@ -36,8 +36,6 @@ const Contact = () => {
     `
   );
 
-  console.log(services);
-
   const servicesRaw: ServicesProps[] = data.allSanityServicePage.nodes;
   const servicesArray = servicesRaw.map((service: ServicesProps) => {
     service = { ...service, label: service.title, id: service.title };
@@ -52,13 +50,14 @@ const Contact = () => {
       margin={['0', '0', '0 2rem', '0 2rem']}
       flexGridRowGap={['scale800', 'scale800', 'scale1600']}
     >
-      <FlexGridItem></FlexGridItem>
+      <FlexGridItem />
       <FlexGridItem>
         <SectionHeader
           title={"Let's Get Something Started Today!"}
           description={
             <>
-              Prefer phonecalls? You can reach us at <a href="tel:503-381-9040">(503) 381-9040</a>
+              Prefer phonecalls? You can reach us at{' '}
+              <a href="tel:503-381-9040">(503) 381-9040</a>
             </>
           }
         />
@@ -66,9 +65,9 @@ const Contact = () => {
       <FlexGridItem
         display="flex"
         justifyContent="center"
-        alignItems={'center'}
-        flexWrap={true}
-        flexDirection={'column'}
+        alignItems="center"
+        flexWrap
+        flexDirection="column"
         flexGridColumnCount={1}
       >
         <Block width={['90%', '90%', '90%', '45%']}>
@@ -79,7 +78,7 @@ const Contact = () => {
                 name="First Name"
                 autoFocus
                 value={firstName}
-                onChange={event => setFirstName(event.currentTarget.value)}
+                onChange={(event) => setFirstName(event.currentTarget.value)}
                 // placeholder="First Name"
                 required
               />
@@ -88,7 +87,7 @@ const Contact = () => {
               <Input
                 name="Last Name"
                 value={lastName}
-                onChange={event => setLastName(event.currentTarget.value)}
+                onChange={(event) => setLastName(event.currentTarget.value)}
                 // placeholder="Last Name"
                 required
               />
@@ -97,7 +96,7 @@ const Contact = () => {
               <Input
                 name="_replyto"
                 value={email}
-                onChange={event => setEmail(event.currentTarget.value)}
+                onChange={(event) => setEmail(event.currentTarget.value)}
                 // placeholder="Vancouver, Washington"
                 required
               />
@@ -106,13 +105,17 @@ const Contact = () => {
               <Input
                 name="Location"
                 value={location}
-                onChange={event => setLocation(event.currentTarget.value)}
+                onChange={(event) => setLocation(event.currentTarget.value)}
                 // placeholder="Vancouver, Washington"
                 required
               />
             </FormControl>
             <FormControl label={() => 'Phone Number'}>
-              <MaskedInput name="Phone Number" placeholder="(777)777-7777" mask="(999) 999-9999" />
+              <MaskedInput
+                name="Phone Number"
+                placeholder="(777)777-7777"
+                mask="(999) 999-9999"
+              />
             </FormControl>
             <FormControl label={() => 'What Services Are You Interested In?'}>
               <Select
@@ -132,13 +135,13 @@ const Contact = () => {
               name="Services"
               type="text"
               style={{ display: 'none' }}
-              value={services.map(service => ` ${service.label}`)}
+              value={services.map((service) => ` ${service.label}`)}
             />
             <FormControl label={() => 'Comments'}>
               <Textarea
                 name="Comments"
                 value={comments}
-                onChange={e => setComments(e.currentTarget.value)}
+                onChange={(e) => setComments(e.currentTarget.value)}
                 // placeholder="Feel free to provide any details that you feel we should know."
                 overrides={{
                   Input: {

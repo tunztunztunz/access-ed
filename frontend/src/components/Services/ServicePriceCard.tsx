@@ -1,33 +1,53 @@
 import React from 'react';
-import { H5, Paragraph1, Paragraph2 } from 'baseui/typography';
+import { H5, H6, Paragraph1, Paragraph2 } from 'baseui/typography';
 import { useStyletron } from 'baseui';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import { Block } from 'baseui/block';
 import { HeroButton } from '../HeroButton';
+import salesPrice from '../../utils/salesPrice';
 
 interface ServicePriceCardProps {
   title: string;
   serviceDetails: string[];
   price: string;
   hours: string;
+  discount?: number;
+  message?: string;
 }
 
-const ServicePriceCard = ({ title, serviceDetails, price, hours }: ServicePriceCardProps) => {
+const ServicePriceCard = ({
+  title,
+  serviceDetails,
+  price,
+  hours,
+  discount,
+  message,
+}: ServicePriceCardProps) => {
   const [css, theme] = useStyletron();
+
+  const servicePrice =
+    // eslint-disable-next-line no-nested-ternary
+    parseInt(price) === 0
+      ? '$0'
+      : discount
+      ? Math.ceil((salesPrice(parseInt(price), discount) / 10) * 10)
+      : `$${price}`;
 
   const details = (
     <ul
       className={css({
         listStyleType: 'none',
         paddingLeft: theme.sizing.scale600,
-        minHeight: '280px',
+        height: '100%',
         maxHeight: '280px',
+        marginTop: 0,
         lineHeight: theme.sizing.scale900,
       })}
     >
       {serviceDetails.map((detail, index) => (
         <li key={index}>
           <span className={css({ color: theme.colors.accent })}>✔ </span>
+          {console.log(index <= 5)}
           {detail}
         </li>
       ))}
@@ -37,18 +57,19 @@ const ServicePriceCard = ({ title, serviceDetails, price, hours }: ServicePriceC
   return (
     <Block
       className={css({
+        height: '100%',
         textAlign: 'center',
       })}
     >
       <H5>{title}</H5>
       <FlexGrid
-        paddingBottom={'scale600'}
+        paddingBottom="scale600"
         className={css({
           border: 'none',
           borderRadius: '4px',
           boxShadow: '0 1px 4px rgba(0,0,0,0.5)',
-          minHeight: '520px',
-          maxHeight: '520px',
+          height: '80%',
+          marginBottom: '60px',
           maxWidth: '350px',
         })}
       >
@@ -62,9 +83,31 @@ const ServicePriceCard = ({ title, serviceDetails, price, hours }: ServicePriceC
               border: `1px solid ${theme.colors.primary300}`,
             })}
           />
-          <H5 marginBottom={theme.sizing.scale600} marginTop={theme.sizing.scale600}>
-            ${price}
+          <H5 marginBottom="0" marginTop={theme.sizing.scale600}>
+            {discount && (
+              <>
+                <span
+                  style={{
+                    textDecoration: 'line-through',
+                    color: theme.colors.contentTertiary,
+                    marginRight: '.5rem',
+                  }}
+                >
+                  ${price}
+                </span>
+              </>
+            )}
+            ${servicePrice}
           </H5>
+          <H6
+            className={css({
+              textTransform: 'uppercase',
+              margin: '0',
+              color: theme.colors.contentNegative,
+            })}
+          >
+            {message}
+          </H6>
         </FlexGridItem>
         <FlexGridItem className={css({ textAlign: 'left' })}>
           <Paragraph2 as={Block} display={['block', 'block', 'none']}>
@@ -74,8 +117,21 @@ const ServicePriceCard = ({ title, serviceDetails, price, hours }: ServicePriceC
             {details}
           </Paragraph1>
         </FlexGridItem>
-        <FlexGridItem display="flex" justifyContent="center">
-          <HeroButton buttonText={'Enroll Now'} link={'/contact'} />
+        <FlexGridItem
+          display="flex"
+          position="relative"
+          marginTop="scale800"
+          justifyContent="center"
+        >
+          <Block
+            className={css({
+              margin: '0 auto',
+              position: 'absolute',
+              bottom: '0',
+            })}
+          >
+            <HeroButton buttonText="Enroll Now" link="/contact" />
+          </Block>
         </FlexGridItem>
       </FlexGrid>
     </Block>

@@ -33,9 +33,9 @@ const ServiceCardSection = () => {
     `
   );
 
-  const serviceCards: serviceCardProps[] = data.sanityLandingPage.serviceCards;
+  const { serviceCards } = data.sanityLandingPage;
   return (
-    <FlexGrid flexGridColumnCount={[1, 1, 3]} flexGridColumnGap={'scale2400'}>
+    <FlexGrid flexGridColumnCount={[1, 1, 1, 3]} flexGridColumnGap="scale2400">
       {serviceCards.map((card, index) => (
         <FlexGridItem key={index}>
           <ServiceCard

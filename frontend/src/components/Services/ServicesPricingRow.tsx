@@ -1,9 +1,10 @@
 import React from 'react';
 import { H2, H3, Paragraph1, Paragraph3 } from 'baseui/typography';
-import { HeroButton } from '../HeroButton';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import { useStyletron } from 'baseui';
 import { Block } from 'baseui/block';
+import { HeroButton } from '../HeroButton';
+import salesPrice from '../../utils/salesPrice';
 
 interface SimpleSectionProps {
   features: string[];
@@ -12,10 +13,26 @@ interface SimpleSectionProps {
   header?: string;
   button?: string;
   isReversed?: boolean;
+  discount: number;
 }
 
-const ServicesPricingRow = ({ features, header, button, price, link }: SimpleSectionProps) => {
+const ServicesPricingRow = ({
+  features,
+  header,
+  button,
+  price,
+  link,
+  discount,
+}: SimpleSectionProps) => {
   const [css, theme] = useStyletron();
+
+  const servicePrice =
+    // eslint-disable-next-line no-nested-ternary
+    parseInt(price) === 0
+      ? '$0'
+      : discount
+      ? `$${salesPrice(parseInt(price), discount)}`
+      : `$${price}`;
 
   const serviceFeatureList = (
     <ul
@@ -34,10 +51,10 @@ const ServicesPricingRow = ({ features, header, button, price, link }: SimpleSec
   return (
     <FlexGrid
       flexGridColumnCount={[1, 1, 1, 4]}
-      flexGridColumnGap={'scale800'}
+      flexGridColumnGap="scale800"
       flexGridRowGap="scale200"
       flexDirection={['column', 'column', 'column', 'row']}
-      justifyContent={'center'}
+      justifyContent="center"
     >
       <FlexGridItem>
         <H2
@@ -79,7 +96,20 @@ const ServicesPricingRow = ({ features, header, button, price, link }: SimpleSec
           >
             starting at/
           </Paragraph3>
-          ${price}
+          {discount && (
+            <>
+              <span
+                className={css({
+                  textDecoration: 'line-through',
+                  color: theme.colors.contentTertiary,
+                  marginRight: '.5rem',
+                })}
+              >
+                {price}
+              </span>
+            </>
+          )}
+          {servicePrice}
         </H2>
       </FlexGridItem>
       <FlexGridItem
@@ -87,7 +117,9 @@ const ServicesPricingRow = ({ features, header, button, price, link }: SimpleSec
         justifyContent={['flex-start', 'flex-start', 'flex-start', 'flex-end']}
       >
         {/* Flex was not working without wrapping this conditional */}
-        <Block>{button && <HeroButton buttonText={button} noMargin={true} link={link} />}</Block>
+        <Block>
+          {button && <HeroButton buttonText={button} noMargin link={link} />}
+        </Block>
       </FlexGridItem>
     </FlexGrid>
   );

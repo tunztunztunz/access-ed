@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-const BlockContent = require('@sanity/block-content-to-react');
 
+import { FluidObject } from 'gatsby-image';
+import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import Hero from '../components/Hero';
 import SectionHeader from '../components/SectionHeader';
 import SimpleSection from '../components/SimpleSection';
-import { FluidObject } from 'gatsby-image';
-import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
+
+const BlockContent = require('@sanity/block-content-to-react');
 
 interface SectionProps {
   sectionHeader: string;
@@ -71,8 +72,8 @@ const About = () => {
       }
     `
   );
-  const heroHeader = data.sanityAboutPage.hero.heroHeader;
-  const heroText = data.sanityAboutPage.hero.heroText;
+  const { heroHeader } = data.sanityAboutPage.hero;
+  const { heroText } = data.sanityAboutPage.hero;
   const heroImage = data.sanityAboutPage.hero.heroImage.asset.fluid;
 
   const coachingSections: SectionProps[] = data.sanityAboutPage.sections;
@@ -88,7 +89,7 @@ const About = () => {
         <Hero header={heroHeader} text={heroText} image={heroImage} />
       </FlexGridItem>
       <FlexGridItem>
-        <SectionHeader title={'Academic Coaching'} />
+        <SectionHeader title="Academic Coaching" />
       </FlexGridItem>
       {coachingSections.map((section, index) => (
         <FlexGridItem key={index}>
@@ -96,14 +97,17 @@ const About = () => {
             isReversed={index % 2 === 0}
             header={section.sectionHeader}
             text={
-              <BlockContent blocks={section._rawSectionText} renderContainerOnSingleChild={true} />
+              <BlockContent
+                blocks={section._rawSectionText}
+                renderContainerOnSingleChild
+              />
             }
             image={section.sectionImage.asset.fluid}
           />
         </FlexGridItem>
       ))}
       <FlexGridItem>
-        <SectionHeader title={'About Me'} />
+        <SectionHeader title="About Me" />
       </FlexGridItem>
       <FlexGridItem>
         <SimpleSection
@@ -111,7 +115,7 @@ const About = () => {
           text={
             <BlockContent
               blocks={data.sanityAboutPage._rawAboutText}
-              renderContainerOnSingleChild={true}
+              renderContainerOnSingleChild
             />
           }
           image={data.sanityAboutPage.aboutImage.asset.fluid}
@@ -119,7 +123,7 @@ const About = () => {
         />
       </FlexGridItem>
       <FlexGridItem>
-        <SectionHeader title={'Get In Touch'} />
+        <SectionHeader title="Get In Touch" />
       </FlexGridItem>
       <FlexGridItem>
         <SimpleSection
@@ -128,12 +132,12 @@ const About = () => {
           text={
             <BlockContent
               blocks={data.sanityAboutPage.callToAction._rawSectionText}
-              renderContainerOnSingleChild={true}
+              renderContainerOnSingleChild
             />
           }
           image={data.sanityAboutPage.callToAction.sectionImage.asset.fluid}
-          button={'Contact Us'}
-          buttonLink={'/contact'}
+          button="Contact Us"
+          buttonLink="contact"
         />
       </FlexGridItem>
     </FlexGrid>

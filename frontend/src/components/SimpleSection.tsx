@@ -1,15 +1,15 @@
 import React from 'react';
 import Img, { FluidObject } from 'gatsby-image';
 import { H4, Paragraph2, Paragraph3 } from 'baseui/typography';
-import { HeroButton } from './HeroButton';
-import SvgWrapper from './SvgWrapper';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import { styled, useStyletron } from 'baseui';
 import { Block } from 'baseui/block';
+import SvgWrapper from './SvgWrapper';
+import { HeroButton } from './HeroButton';
 
 const SectionText = styled('div', () => ({
   textAlign: 'center',
-  '@media screen and (min-width: 1136px )': {
+  '@media screen and (min-width: 996px )': {
     textAlign: 'left',
   },
 }));
@@ -27,6 +27,7 @@ interface SimpleSectionProps {
   background?: boolean;
   padded?: boolean;
   link?: string;
+  externalLink?: string;
 }
 
 const SimpleSection = ({
@@ -40,6 +41,7 @@ const SimpleSection = ({
   background,
   padded,
   link,
+  externalLink,
 }: SimpleSectionProps) => {
   const [css, theme] = useStyletron();
   const direction = isReversed ? 'row-reverse' : 'row';
@@ -48,7 +50,7 @@ const SimpleSection = ({
   return (
     <FlexGrid
       flexGridColumnCount={[1, 1, isCentered]}
-      flexGridColumnGap={'scale800'}
+      flexGridColumnGap="scale800"
       flexDirection={['column', 'column', direction]}
       backgroundColor={background ? theme.colors.backgroundTertiary : ''}
       padding={padded ? 'scale600' : ''}
@@ -58,7 +60,11 @@ const SimpleSection = ({
           className={css({ textAlign: 'center' })}
           display="flex"
           flexDirection="column"
-          alignItems={isReversed === true ? 'flex-end' : 'flex-start'}
+          alignItems={[
+            'center',
+            'center',
+            isReversed === true ? 'flex-end' : 'flex-start',
+          ]}
         >
           <SvgWrapper svg={<Img fluid={image} />} />
         </FlexGridItem>
@@ -68,19 +74,26 @@ const SimpleSection = ({
           <H4 marginTop={['2rem', '2rem', '0']} marginBottom={['1rem', '1rem']}>
             {header}
           </H4>
-          <Paragraph3 as={Block} display={['block', 'block', 'none']}>
+          <Paragraph3
+            as={Block}
+            display={['block', 'block', 'block', 'none']}
+            className={css({
+              '@media screen and (min-width: 600px)': {
+                textAlign: 'left',
+              },
+            })}
+          >
             {text}
           </Paragraph3>
-          <Paragraph2 as={Block} display={['none', 'none', 'block']}>
+          <Paragraph2 as={Block} display={['none', 'none', 'none', 'block']}>
             {text}
           </Paragraph2>
           {button && (
-            <a
-              href={link ? link : ''}
-              className={css({ textDecoration: 'inherit', color: 'inherit' })}
-            >
-              <HeroButton buttonText={button} link={buttonLink} />
-            </a>
+            <HeroButton
+              buttonText={button}
+              link={buttonLink}
+              externalLink={externalLink}
+            />
           )}
         </SectionText>
       </FlexGridItem>

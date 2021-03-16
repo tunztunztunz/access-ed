@@ -2,8 +2,8 @@
 import * as React from 'react';
 import { AppNavBar, setItemActive, NavItemT } from 'baseui/app-nav-bar';
 import { ChevronDown, Delete } from 'baseui/icon';
-import { Link, navigate, useStaticQuery } from 'gatsby';
-import { styled, useStyletron, withStyle } from 'baseui';
+import { Link, navigate, useStaticQuery, graphql } from 'gatsby';
+import { styled } from 'baseui';
 import { FaGraduationCap as Cap } from 'react-icons/fa';
 
 const StyledLink = styled(Link, ({ $theme }) => ({
@@ -37,8 +37,6 @@ interface DataProps {
   };
 }
 export default function Header({ title }: HeaderProps) {
-  const [css, theme] = useStyletron();
-
   const data = useStaticQuery(graphql`
     query headerQuery {
       allSanityServicePage {
@@ -60,9 +58,6 @@ export default function Header({ title }: HeaderProps) {
   );
   const servicesLinks: DataProps = data.allSanityServicePage.edges;
 
-  // const links = servicesLinks.slice(0, 6).map((link, index) => ({
-  //   label: <StyledLink to={`/services/${link.node.slug.current}`}>{link.node.title}</StyledLink>,
-  // }));
   const links = servicesLinks.slice(0, 6).map((link, index) => ({
     label: link.node.title,
     slug: `/services/${link.node.slug.current}`,
@@ -80,7 +75,8 @@ export default function Header({ title }: HeaderProps) {
     },
     { label: 'Testimonials', slug: '/testimonials', info: { id: 3 } },
     { label: 'Partnerships', slug: '/partnerships', info: { id: 4 } },
-    { label: 'Book Now!', slug: '/contact', info: { id: 5 } },
+    { label: 'Careers', slug: '/careers', info: { id: 5 } },
+    { label: 'Book Now!', slug: '/contact', info: { id: 6 } },
   ]);
   function getUniqueIdentifier(item: NavItemT) {
     if (item.info) {
@@ -89,7 +85,7 @@ export default function Header({ title }: HeaderProps) {
     return item.label;
   }
   function handleMainItemSelect(item: NavItemT) {
-    setMainItems(prev => setItemActive(prev, item, getUniqueIdentifier));
+    setMainItems((prev) => setItemActive(prev, item, getUniqueIdentifier));
     navigate(item.slug);
   }
   return (
@@ -97,7 +93,7 @@ export default function Header({ title }: HeaderProps) {
       title={siteName}
       mainItems={mainItems}
       onMainItemSelect={handleMainItemSelect}
-      //@ts-ignore
+      // @ts-ignore
       overrides={{
         Root: {
           style: () => ({ boxShadow: 'none' }),

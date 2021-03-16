@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-const BlockContent = require('@sanity/block-content-to-react');
 
+import { FluidObject } from 'gatsby-image';
+import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import Hero from '../components/Hero';
 import SectionHeader from '../components/SectionHeader';
 import SimpleSection from '../components/SimpleSection';
-import { FluidObject } from 'gatsby-image';
-import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
+
+const BlockContent = require('@sanity/block-content-to-react');
 
 interface SectionProps {
   sectionHeader: string;
@@ -62,11 +63,11 @@ const Testimonials = () => {
       }
     `
   );
-  const heroHeader = data.sanityPartnershipsPage.hero.heroHeader;
-  const heroText = data.sanityPartnershipsPage.hero.heroText;
+  const { heroHeader } = data.sanityPartnershipsPage.hero;
+  const { heroText } = data.sanityPartnershipsPage.hero;
   const heroImage = data.sanityPartnershipsPage.hero.heroImage.asset.fluid;
 
-  const partners: SectionProps[] = data.sanityPartnershipsPage.partners;
+  const { partners } = data.sanityPartnershipsPage;
 
   return (
     <FlexGrid
@@ -79,7 +80,7 @@ const Testimonials = () => {
         <Hero header={heroHeader} text={heroText} image={heroImage} />
       </FlexGridItem>
       <FlexGridItem>
-        <SectionHeader title={'Our Partners'} />
+        <SectionHeader title="Our Partners" />
       </FlexGridItem>
       {partners.map((section, index) => (
         <FlexGridItem key={index}>
@@ -87,16 +88,22 @@ const Testimonials = () => {
             isReversed={index % 2 === 0}
             header={section.sectionHeader}
             text={
-              <BlockContent blocks={section._rawSectionText} renderContainerOnSingleChild={true} />
+              <BlockContent
+                blocks={section._rawSectionText}
+                renderContainerOnSingleChild
+              />
             }
             image={section.sectionImage.asset.fluid}
-            button={'Check Them Out!'}
-            link={section.link}
+            button="Check Them Out!"
+            externalLink={section.link}
           />
+          {console.log(section.link)}
         </FlexGridItem>
       ))}
       <FlexGridItem>
-        <SectionHeader title={data.sanityPartnershipsPage.callToAction.sectionHeader} />
+        <SectionHeader
+          title={data.sanityPartnershipsPage.callToAction.sectionHeader}
+        />
       </FlexGridItem>
       <FlexGridItem>
         <SimpleSection
@@ -104,12 +111,14 @@ const Testimonials = () => {
           text={
             <BlockContent
               blocks={data.sanityPartnershipsPage.callToAction._rawSectionText}
-              renderContainerOnSingleChild={true}
+              renderContainerOnSingleChild
             />
           }
-          image={data.sanityPartnershipsPage.callToAction.sectionImage.asset.fluid}
-          button={'Contact Us'}
-          buttonLink={'/contact'}
+          image={
+            data.sanityPartnershipsPage.callToAction.sectionImage.asset.fluid
+          }
+          button="Contact Us"
+          buttonLink="contact"
         />
       </FlexGridItem>
     </FlexGrid>

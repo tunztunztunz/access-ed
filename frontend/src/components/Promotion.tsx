@@ -1,52 +1,58 @@
 import React from 'react';
 import Img, { FluidObject } from 'gatsby-image';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
-import { Block } from 'baseui/block';
-import { Paragraph3 } from 'baseui/typography';
-import { useStyletron } from 'baseui';
+import { H4, Paragraph1, Paragraph3 } from 'baseui/typography';
+import { styled, useStyletron } from 'baseui';
+import { Link } from 'gatsby';
 import { HeaderText } from './HeroText';
 
-interface HeroProps {
+export const PromotionImage = styled('div', () => ({
+  width: '100%',
+  '@media screen and (min-width: 600px )': {
+    width: '75%',
+  },
+}));
+interface PromotionProps {
   header: string;
   image: FluidObject[];
   text?: string;
-  button?: boolean;
-  buttonLink?: string;
+  link?: string;
 }
 
-const Promotion = ({ header, text, image, button, buttonLink }: HeroProps) => {
+const Promotion = ({ header, text, image, link }: PromotionProps) => {
   const [css, theme] = useStyletron();
   return (
     <FlexGrid
       flexGridColumnCount={1}
-      minHeight={['95vh', '95vh', '50vh', '20vh']}
+      // minHeight={['95vh', '95vh', '50vh', '20vh']}
       marginTop={['0', '0', 'scale1600']}
       alignItems="center"
       justifyContent="center"
     >
+      <FlexGridItem
+        maxWidth={['100%', '100%', '75%', '75%']}
+        className={css({
+          textAlign: 'center',
+        })}
+      >
+        <H4 display={['none', 'none', 'block', 'block']}>{header}</H4>
+        <Paragraph1 display={['block', 'block', 'none', 'none']}>
+          {header}
+        </Paragraph1>
+      </FlexGridItem>
       <FlexGridItem
         paddingTop={['0', '0', '1rem', '0']}
         display="flex"
         flexDirection="column"
         alignItems="center"
       >
-        <Block
-          overrides={{
-            Block: {
-              style: {
-                width: '75%',
-              },
-            },
-          }}
-        >
-          <Img fluid={image} />
-        </Block>
+        <PromotionImage>
+          <Link to={`/${link}`}>
+            <Img fluid={image} />
+          </Link>
+        </PromotionImage>
       </FlexGridItem>
-      <FlexGridItem
-        className={css({
-          maxWidth: '50%',
-        })}
-      >
+      <FlexGridItem maxWidth={['100%', '100%', '75%', '75%']}>
         <HeaderText>
           <Paragraph3
             className={css({

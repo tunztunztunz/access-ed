@@ -1,31 +1,13 @@
 import * as React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-const BlockContent = require('@sanity/block-content-to-react');
-
+import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
+import { useStyletron } from 'baseui';
 import Hero from '../components/Hero';
 import SectionHeader from '../components/SectionHeader';
 import SimpleSection from '../components/SimpleSection';
-import { FluidObject } from 'gatsby-image';
-import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
-import { useStyletron } from 'baseui';
 import ServicesPricingRow from '../components/Services/ServicesPricingRow';
 
-interface SectionProps {
-  price: string;
-  features: string[];
-  hero: {
-    heroHeader: string;
-    heroText: string;
-  };
-  sectionImage: {
-    asset: {
-      fluid: FluidObject[];
-    };
-  };
-  slug: {
-    current: string;
-  };
-}
+const BlockContent = require('@sanity/block-content-to-react');
 
 const Services = () => {
   const [css] = useStyletron();
@@ -57,6 +39,7 @@ const Services = () => {
           }
           services {
             price
+            priceModifier
             features
             hero {
               heroText
@@ -66,15 +49,59 @@ const Services = () => {
               current
             }
           }
+          promotion {
+            image {
+              asset {
+                fluid {
+                  ...GatsbySanityImageFluid
+                }
+              }
+            }
+            promotionHeader
+            promotionText
+            link {
+              ... on SanityAboutPage {
+                id
+                slug {
+                  current
+                }
+              }
+              ... on SanityPartnershipsPage {
+                id
+                slug {
+                  current
+                }
+              }
+              ... on SanityServicePage {
+                id
+                slug {
+                  current
+                }
+              }
+              ... on SanityServicesPage {
+                id
+                slug {
+                  current
+                }
+              }
+              ... on SanityTestimonialsPage {
+                id
+                slug {
+                  current
+                }
+              }
+            }
+          }
         }
       }
     `
   );
 
-  const heroHeader = data.sanityServicesPage.hero.heroHeader;
-  const heroText = data.sanityServicesPage.hero.heroText;
+  const { heroHeader } = data.sanityServicesPage.hero;
+  const { heroText } = data.sanityServicesPage.hero;
   const heroImage = data.sanityServicesPage.hero.heroImage.asset.fluid;
-  const services: SectionProps[] = data.sanityServicesPage.services;
+  const { services } = data.sanityServicesPage;
+  console.log(data.sanityServicesPage.services);
 
   return (
     <FlexGrid
@@ -87,31 +114,43 @@ const Services = () => {
         <Hero header={heroHeader} text={heroText} image={heroImage} />
       </FlexGridItem>
       <FlexGridItem>
-        <SectionHeader title={'Think We Can Help?'} noRule={true} />
+        <SectionHeader title="Think We Can Help?" noRule />
       </FlexGridItem>
-      {services.map((service, index) => (
-        <FlexGridItem key={index}>
-          <hr
-            className={css({
-              content: '',
-              display: 'block',
-              margin: '0 auto 2rem auto',
-              maxWidth: '100%',
-              border: '1px solid #000',
-            })}
-          />
+      {services.map(
+        (
+          service: {
+            features: string[];
+            hero: { heroHeader: string | undefined };
+            price: string;
+            priceModifier: number;
+            slug: { current: any };
+          },
+          index: number
+        ) => (
+          <FlexGridItem key={index}>
+            <hr
+              className={css({
+                content: '',
+                display: 'block',
+                margin: '0 auto 2rem auto',
+                maxWidth: '100%',
+                border: '0.5px solid #000',
+              })}
+            />
 
-          <ServicesPricingRow
-            isReversed={index % 2 === 0}
-            features={service.features}
-            header={service.hero.heroHeader}
-            price={service.price}
-            link={`/services/${service.slug.current}`}
-            button={'See Our Plans'}
-          />
-        </FlexGridItem>
-      ))}
-      <FlexGridItem></FlexGridItem>
+            <ServicesPricingRow
+              isReversed={index % 2 === 0}
+              features={service.features}
+              header={service.hero.heroHeader}
+              price={service.price}
+              discount={service.priceModifier}
+              link={`/services/${service.slug.current}`}
+              button="See Our Plans"
+            />
+          </FlexGridItem>
+        )
+      )}
+      <FlexGridItem />
       <FlexGridItem>
         <SimpleSection
           isReversed
@@ -119,12 +158,12 @@ const Services = () => {
           text={
             <BlockContent
               blocks={data.sanityServicesPage.callToAction._rawSectionText}
-              renderContainerOnSingleChild={true}
+              renderContainerOnSingleChild
             />
           }
           image={data.sanityServicesPage.callToAction.sectionImage.asset.fluid}
-          button={'Contact Us'}
-          buttonLink={'/contact'}
+          button="Contact Us"
+          buttonLink="contact"
         />
       </FlexGridItem>
     </FlexGrid>
