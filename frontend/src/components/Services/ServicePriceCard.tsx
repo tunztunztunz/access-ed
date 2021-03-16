@@ -47,7 +47,7 @@ const ServicePriceCard = ({
       {serviceDetails.map((detail, index) => (
         <li key={index}>
           <span className={css({ color: theme.colors.accent })}>✔ </span>
-          {console.log(index <= 5)}
+
           {detail}
         </li>
       ))}

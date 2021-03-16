@@ -101,7 +101,6 @@ const Services = () => {
   const { heroText } = data.sanityServicesPage.hero;
   const heroImage = data.sanityServicesPage.hero.heroImage.asset.fluid;
   const { services } = data.sanityServicesPage;
-  console.log(data.sanityServicesPage.services);
 
   return (
     <FlexGrid

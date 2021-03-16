@@ -55,7 +55,7 @@ interface ServiceProps {
 
 const Service = ({ data }: ServiceProps) => {
   const { service } = data;
-  console.log(data);
+
   return (
     <FlexGrid
       flexGridColumnCount={[1]}

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Button, KIND } from 'baseui/button';
 import { Block } from 'baseui/block';
 import { navigate } from 'gatsby';
+import { navItems } from './Header';
 
 interface ButtonProps {
   buttonText: string;

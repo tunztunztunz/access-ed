@@ -94,7 +94,6 @@ const IndexPage = () => {
   const { heroText } = data.sanityLandingPage.hero;
   const { heroHeader } = data.sanityLandingPage.hero;
   const heroImage = data.sanityLandingPage.hero.heroImage.asset.fluid;
-  console.log(data.sanityLandingPage.promotion);
   const { promotionHeader, promotionText } = data.sanityLandingPage.promotion;
   const promotionLink = data.sanityLandingPage.promotion.link[0].slug.current;
   const promotionImage = data.sanityLandingPage.promotion.image.asset.fluid;

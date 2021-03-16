@@ -97,7 +97,6 @@ const Testimonials = () => {
             button="Check Them Out!"
             externalLink={section.link}
           />
-          {console.log(section.link)}
         </FlexGridItem>
       ))}
       <FlexGridItem>
