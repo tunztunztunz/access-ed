@@ -10,30 +10,35 @@ export const StyledLink = styled('a', ({ $theme }) => ({
   color: $theme.colors.primary,
 }));
 
-const FooterContactInfo = () => {
-  return (
-    <Block
-      overrides={{
-        Block: {
-          style: {
-            padding: '0 2rem',
-            textAlign: 'left',
+const FooterContactInfo = () => (
+  <Block
+    overrides={{
+      Block: {
+        style: {
+          padding: '0 2rem',
+          textAlign: 'left',
+          '@media screen and (max-width: 600px)': {
+            textAlign: 'center',
           },
         },
-      }}
-    >
-      <Paragraph3>
-        <Phone /> : <StyledLink href="tel:503-381-9040">(503) 381-9040</StyledLink>
-      </Paragraph3>
-      <Paragraph3>
-        <Mail /> : <StyledLink href="mailto:info@accessednw.com">info@accessednw.com</StyledLink>
-      </Paragraph3>
-      <Paragraph3>
-        <Location /> : Vancouver, Washington
-      </Paragraph3>
-      <Paragraph3>©AccessEd Academic Coaching Services</Paragraph3>
-    </Block>
-  );
-};
+      },
+    }}
+  >
+    <Paragraph3>
+      <Phone /> :{' '}
+      <StyledLink href="tel:503-381-9040">(503) 381-9040</StyledLink>
+    </Paragraph3>
+    <Paragraph3>
+      <Mail /> :{' '}
+      <StyledLink href="mailto:info@accessednw.com">
+        info@accessednw.com
+      </StyledLink>
+    </Paragraph3>
+    <Paragraph3>
+      <Location /> : Vancouver, Washington
+    </Paragraph3>
+    <Paragraph3>©AccessEd Academic Coaching Services</Paragraph3>
+  </Block>
+);
 
 export default FooterContactInfo;

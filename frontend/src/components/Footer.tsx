@@ -1,8 +1,8 @@
 import React from 'react';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
+import { styled, useStyletron } from 'baseui';
 import FooterSocialMedia from './FooterSocialMedia';
 import FooterSitemap from './FooterSitemap';
-import { styled, useStyletron } from 'baseui';
 import FooterContactInfo from './FooterContactInfo';
 
 const FooterText = styled('div', () => ({
@@ -16,7 +16,10 @@ const Footer = () => {
   const [css] = useStyletron();
   return (
     <FooterText>
-      <FlexGrid flexGridColumnCount={[1, 1, 2]} flexGridRowGap="scale800" className={css({})}>
+      <FlexGrid
+        flexGridColumnCount={[1, 1, 2]}
+        flexGridRowGap={[0, 0, 'scale800', 'scale800']}
+      >
         <FlexGridItem>
           <FooterSitemap />
         </FlexGridItem>
