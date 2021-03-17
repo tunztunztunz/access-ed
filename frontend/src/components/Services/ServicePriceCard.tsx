@@ -6,7 +6,7 @@ import { Block } from 'baseui/block';
 import { HeroButton } from '../HeroButton';
 import salesPrice from '../../utils/salesPrice';
 
-interface ServicePriceCardProps {
+export interface ServicePriceCardProps {
   title: string;
   serviceDetails: string[];
   price: string;
@@ -30,9 +30,9 @@ const ServicePriceCard = ({
   const servicePrice =
     // eslint-disable-next-line no-nested-ternary
     parseInt(price) === 0
-      ? '$0'
+      ? null
       : discount
-      ? Math.ceil((salesPrice(parseInt(price), discount) / 10) * 10)
+      ? `$${Math.ceil((salesPrice(parseInt(price), discount) / 10) * 10)}`
       : `$${price}`;
 
   const details = (
@@ -84,7 +84,11 @@ const ServicePriceCard = ({
               border: `1px solid ${theme.colors.primary300}`,
             })}
           />
-          <H5 marginBottom="0" marginTop={theme.sizing.scale600}>
+          <H5
+            marginBottom="0"
+            marginTop={theme.sizing.scale600}
+            display={servicePrice !== undefined ? 'block' : 'none'}
+          >
             {discount && (
               <>
                 <span
@@ -98,7 +102,7 @@ const ServicePriceCard = ({
                 </span>
               </>
             )}
-            ${servicePrice}
+            {servicePrice}
           </H5>
           <H6
             className={css({

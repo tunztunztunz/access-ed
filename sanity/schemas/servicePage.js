@@ -100,6 +100,9 @@ export default {
         {
           type: 'servicePageSection',
         },
+        {
+          type: 'textAndImageSection'
+        },
       ],
       fieldset: 'pageSections',
     },

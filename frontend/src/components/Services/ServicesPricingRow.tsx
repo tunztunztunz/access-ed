@@ -82,6 +82,7 @@ const ServicesPricingRow = ({
         display="flex"
         justifyContent={['flex-start', 'flex-start', 'flex-start', 'flex-end']}
       >
+        {console.log(typeof price)}
         <H2
           display={['block']}
           marginBottom={['1em', '1rem', '1rem', 0]}

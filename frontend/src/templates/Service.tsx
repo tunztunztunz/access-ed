@@ -7,15 +7,17 @@ import Hero from '../components/Hero';
 import SectionHeader from '../components/SectionHeader';
 import ServicePriceCard from '../components/Services/ServicePriceCard';
 import SimpleSection from '../components/SimpleSection';
+import priceCardSection from '../components/Service/PriceCardSection';
+import PriceCardSection from '../components/Service/PriceCardSection';
 
 const BlockContent = require('@sanity/block-content-to-react');
 
-interface ServiceProps {
+export interface ServiceProps {
   data: {
     service: {
       slug: {
         current: string;
-      }
+      };
       title: string;
       priceModifier: number;
       message: string;
@@ -31,16 +33,26 @@ interface ServiceProps {
       };
       section: [
         {
-          header: string;
-          _rawText: string[];
-          priceCards: [
+          __typename: string;
+          header?: string;
+          _rawText?: string[];
+          priceCards?: [
             {
-              title: string;
-              serviceDetails: string[];
-              price: string;
-              hours: string;
+              title?: string;
+              serviceDetails?: string[];
+              price?: string;
+              hours?: string;
             }
           ];
+        },
+        {
+          sectionHeader?: string;
+          _rawSectionText?: string[];
+          sectionImage?: {
+            asset?: {
+              fluid?: FluidObject[];
+            };
+          };
         }
       ];
       callToAction: {
@@ -58,7 +70,7 @@ interface ServiceProps {
 
 const Service = ({ data }: ServiceProps) => {
   const { service } = data;
-  console.log(service)
+  console.log(service);
   return (
     <FlexGrid
       flexGridColumnCount={[1]}
@@ -74,60 +86,35 @@ const Service = ({ data }: ServiceProps) => {
         />
       </FlexGridItem>
       {service.section.map((section, index) => {
-        const sectionDescription = section._rawText ? (
-          <BlockContent
-            blocks={section._rawText}
-            renderContainerOnSingleChild
-          />
-        ) : (
-          ''
-        );
-        const sectionLength = section.priceCards.length;
-        return (
-          <FlexGridItem key={index} marginBottom="10rem">
-            <FlexGridItem>
-              <SectionHeader
-                title={section.header}
-                description={sectionDescription}
+        if (section?.__typename === 'SanityTextAndImageSection') {
+          return (
+            <FlexGridItem key={index}>
+              <SimpleSection
+                isReversed={index % 2 === 0}
+                header={section.sectionHeader}
+                text={
+                  <BlockContent
+                    blocks={section._rawSectionText}
+                    renderContainerOnSingleChild
+                  />
+                }
+                image={section.sectionImage.asset.fluid}
               />
             </FlexGridItem>
-            <FlexGridItem>
-              <FlexGrid
-                flexGridColumnCount={[1, 1, 2, sectionLength]}
-                flexDirection="row"
-                flexGridColumnGap={['scale1200']}
-                flexGridRowGap={[
-                  'scale1600',
-                  'scale1600',
-                  'scale1600',
-                  'scale800',
-                ]}
-                marginBottom="scale1600"
-              >
-                {/* eslint-disable-next-line no-shadow */}
-                {section.priceCards.map((card, index) => (
-                  <FlexGridItem
-                    key={index}
-                    display="flex"
-                    justifyContent="center"
-                    alignItems="center"
-                  >
-                    <ServicePriceCard
-                      key={index}
-                      hours={card.hours}
-                      title={card.title}
-                      price={card.price}
-                      discount={service.priceModifier}
-                      message={service.message}
-                      serviceDetails={card.serviceDetails}
-                      state={service.slug.current}
-                    />
-                  </FlexGridItem>
-                ))}
-              </FlexGrid>
-            </FlexGridItem>
-          </FlexGridItem>
-        );
+          );
+        }
+        if (section?.__typename !== 'SanityTextAndImageSection') {
+          return (
+            <PriceCardSection
+              slug={service.slug}
+              section={section}
+              priceModifier={service.priceModifier}
+              message={service.message}
+              key={index}
+            />
+          );
+        }
+        return null;
       })}
       {service._rawDisclaimerText ? (
         <FlexGridItem marginTop={['0', '0', '-4rem']}>
@@ -185,13 +172,28 @@ export const query = graphql`
         }
       }
       section {
-        header
-        _rawText(resolveReferences: { maxDepth: 1 })
-        priceCards {
-          hours
-          title
-          serviceDetails
-          price
+        ... on SanityServicePageSection {
+          __typename
+          header
+          _rawText(resolveReferences: { maxDepth: 1 })
+          priceCards {
+            hours
+            title
+            serviceDetails
+            price
+          }
+        }
+        ... on SanityTextAndImageSection {
+          sectionImage {
+            asset {
+              fluid {
+                ...GatsbySanityImageFluid
+              }
+            }
+          }
+          __typename
+          _rawSectionText
+          sectionHeader
         }
       }
       _rawDisclaimerText(resolveReferences: { maxDepth: 1 })

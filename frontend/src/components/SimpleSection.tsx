@@ -77,14 +77,18 @@ const SimpleSection = ({
             as={Block}
             display={['block', 'block', 'block', 'none']}
             className={css({
-              '@media screen and (min-width: 600px)': {
-                textAlign: 'left',
-              },
+              textAlign: 'left',
             })}
           >
             {text}
           </Paragraph3>
-          <Paragraph2 as={Block} display={['none', 'none', 'none', 'block']}>
+          <Paragraph2
+            as={Block}
+            display={['none', 'none', 'none', 'block']}
+            className={css({
+              textAlign: 'left',
+            })}
+          >
             {text}
           </Paragraph2>
           {button && (
