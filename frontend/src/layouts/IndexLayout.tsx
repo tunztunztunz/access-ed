@@ -1,8 +1,7 @@
 import React from 'react';
-import Helmet from 'react-helmet';
 import { graphql, useStaticQuery } from 'gatsby';
 import { LightTheme, BaseProvider, styled } from 'baseui';
-
+import SEO from '../components/Seo';
 import Header from '../components/Header';
 import LayoutMain from '../components/LayoutMain';
 import LayoutRoot from '../components/LayoutRoot';
@@ -29,22 +28,27 @@ const IndexLayout = ({ children }: IndexProps) => {
             description
           }
         }
+        sanityLandingPage {
+          hero {
+            heroImage {
+              asset {
+                fixed(height: 1200, width: 1200) {
+                  ...GatsbySanityImageFixed
+                }
+              }
+            }
+          }
+        }
       }
     `
   );
+  const image = data.sanityLandingPage.hero.heroImage.asset.fixed;
+  console.log(image);
   return (
     <BaseProvider theme={LightTheme}>
       <Centered>
-        <Helmet
-          title={data.site.siteMetadata.title}
-          meta={[
-            {
-              name: 'description',
-              content: data.site.siteMetadata.description,
-            },
-            { name: 'keywords', content: data.site.siteMetadata.keywords },
-          ]}
-        />
+        <SEO />
+
         <LayoutRoot>
           <Header title={data.site.siteMetadata.title} />
           <LayoutMain>{children}</LayoutMain>
