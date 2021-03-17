@@ -37,6 +37,39 @@ const SEO = ({ page }: { page?: any }) => {
   const url = new URL(page?.path || '', defaults.siteUrl);
   const image = page?.image ? new URL(page?.image, defaults?.siteUrl) : false;
 
+  // const schemaOrgWebPage = {
+  //   '@context': 'http://schema.org',
+  //   '@type': 'WebPage',
+  //   url: defaults.siteUrl,
+  //   inLanguage: siteLanguage,
+  //   mainEntityOfPage: siteUrl,
+  //   description: defaultDescription,
+  //   name: defaultTitle,
+  //   author: {
+  //     '@type': 'Person',
+  //     name: author,
+  //   },
+  //   copyrightHolder: {
+  //     '@type': 'Person',
+  //     name: author,
+  //   },
+  //   copyrightYear: '2019',
+  //   creator: {
+  //     '@type': 'Person',
+  //     name: author,
+  //   },
+  //   publisher: {
+  //     '@type': 'Person',
+  //     name: author,
+  //   },
+  //   datePublished: '2019-01-18T10:30:00+01:00',
+  //   dateModified: buildTime,
+  //   image: {
+  //     '@type': 'ImageObject',
+  //     url: `${siteUrl}${defaultBanner}`,
+  //   },
+  // };
+
   return (
     <Helmet>
       <title>{title}</title>
@@ -44,7 +77,6 @@ const SEO = ({ page }: { page?: any }) => {
         name="google-site-verification"
         content="uM3011lS_1g38rj1qElMcYd1RvE5CqB3yik3VknxJsM"
       />
-      <link rel="canonical" href={url} />
       titleTemplate={`%s | ${title}`}
       <meta name="description" content={description} />
       {image && <meta name="image" content={image} />}
