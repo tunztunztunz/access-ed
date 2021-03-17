@@ -4,14 +4,35 @@ import { graphql } from 'gatsby';
 import { FluidObject } from 'gatsby-image';
 
 import Hero from '../components/Hero';
-import SectionHeader from '../components/SectionHeader';
-import ServicePriceCard from '../components/Services/ServicePriceCard';
 import SimpleSection from '../components/SimpleSection';
-import priceCardSection from '../components/Service/PriceCardSection';
 import PriceCardSection from '../components/Service/PriceCardSection';
 
 const BlockContent = require('@sanity/block-content-to-react');
 
+export interface A {
+  __typename: string;
+  header: string;
+  _rawText?: string[];
+  priceCards: [
+    {
+      title: string;
+      serviceDetails: string[];
+      price: string;
+      hours: string;
+    }
+  ];
+}
+
+interface B {
+  __typename: string;
+  sectionHeader?: string;
+  _rawSectionText?: string[];
+  sectionImage?: {
+    asset: {
+      fluid: FluidObject[];
+    };
+  };
+}
 export interface ServiceProps {
   data: {
     service: {
@@ -31,30 +52,7 @@ export interface ServiceProps {
           };
         };
       };
-      section: [
-        {
-          __typename: string;
-          header?: string;
-          _rawText?: string[];
-          priceCards?: [
-            {
-              title?: string;
-              serviceDetails?: string[];
-              price?: string;
-              hours?: string;
-            }
-          ];
-        },
-        {
-          sectionHeader?: string;
-          _rawSectionText?: string[];
-          sectionImage?: {
-            asset?: {
-              fluid?: FluidObject[];
-            };
-          };
-        }
-      ];
+      section: [A | B];
       callToAction: {
         _rawSectionText: string[];
         sectionHeader: string;
@@ -66,6 +64,14 @@ export interface ServiceProps {
       };
     };
   };
+}
+
+// The following functions make sure Typescript knows what type to use
+function isSanityTextAndImageSection(section: any): section is B {
+  return section?.__typename === 'SanityTextAndImageSection'
+}
+function isSanityServicePageSection(section: any): section is A {
+  return section?.__typename === 'SanityServicePageSection'
 }
 
 const Service = ({ data }: ServiceProps) => {
@@ -85,8 +91,10 @@ const Service = ({ data }: ServiceProps) => {
           text={service.hero.heroText}
         />
       </FlexGridItem>
+      {/* Conditionally renders section types */}
       {service.section.map((section, index) => {
-        if (section?.__typename === 'SanityTextAndImageSection') {
+        // Will render image Text Section
+        if (isSanityTextAndImageSection(section)) {
           return (
             <FlexGridItem key={index}>
               <SimpleSection
@@ -98,12 +106,13 @@ const Service = ({ data }: ServiceProps) => {
                     renderContainerOnSingleChild
                   />
                 }
-                image={section.sectionImage.asset.fluid}
+                image={section?.sectionImage?.asset?.fluid}
               />
             </FlexGridItem>
           );
         }
-        if (section?.__typename !== 'SanityTextAndImageSection') {
+        // Will render Service Page Section i.e. price cards
+        if (isSanityServicePageSection(section)) {
           return (
             <PriceCardSection
               slug={service.slug}
@@ -114,8 +123,10 @@ const Service = ({ data }: ServiceProps) => {
             />
           );
         }
+        // If, for some reason, it's neither type it will return nothing
         return null;
       })}
+      {/* If the content author passes in raw text it will render the text */}
       {service._rawDisclaimerText ? (
         <FlexGridItem marginTop={['0', '0', '-4rem']}>
           <SimpleSection
@@ -131,7 +142,8 @@ const Service = ({ data }: ServiceProps) => {
           />
         </FlexGridItem>
       ) : (
-        <FlexGridItem />
+        // Else it renders an string
+        ''
       )}
       <FlexGridItem>
         <SimpleSection
@@ -172,6 +184,7 @@ export const query = graphql`
         }
       }
       section {
+        # We have to use inline fragments because section can be different types
         ... on SanityServicePageSection {
           __typename
           header

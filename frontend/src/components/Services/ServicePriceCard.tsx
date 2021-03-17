@@ -89,8 +89,8 @@ const ServicePriceCard = ({
             marginTop={theme.sizing.scale600}
             display={servicePrice !== undefined ? 'block' : 'none'}
           >
+            {/* conditionally render a crossed-out price if there's a sale */}
             {discount && (
-              <>
                 <span
                   style={{
                     textDecoration: 'line-through',
@@ -100,7 +100,6 @@ const ServicePriceCard = ({
                 >
                   ${price}
                 </span>
-              </>
             )}
             {servicePrice}
           </H5>

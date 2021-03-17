@@ -1,9 +1,8 @@
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import React from 'react';
+import { A } from '../../templates/Service';
 import SectionHeader from '../SectionHeader';
-import ServicePriceCard, {
-  ServicePriceCardProps,
-} from '../Services/ServicePriceCard';
+import ServicePriceCard from '../Services/ServicePriceCard';
 
 const BlockContent = require('@sanity/block-content-to-react');
 
@@ -13,18 +12,7 @@ interface ServiceSectionProps {
   slug: {
     current: string;
   };
-  section: {
-    header: string;
-    _rawText: string[];
-    priceCards: [
-      {
-        title: string;
-        serviceDetails: string[];
-        price: string;
-        hours: string;
-      }
-    ];
-  };
+  section: A
 }
 
 const PriceCardSection = ({
@@ -33,12 +21,17 @@ const PriceCardSection = ({
   message,
   slug,
 }: ServiceSectionProps) => {
+
+  // Setting up block content
   const sectionDescription = section._rawText ? (
     <BlockContent blocks={section._rawText} renderContainerOnSingleChild />
   ) : (
     ''
   );
-  const sectionLength = section?.priceCards.length;
+  // This length is passed into the column count so we don't render one row
+  // pushed the the left if we only have one card
+  const sectionLength = section?.priceCards ? section?.priceCards.length : 0;
+
   return (
     <FlexGridItem>
       <FlexGridItem>
@@ -60,10 +53,9 @@ const PriceCardSection = ({
           flexGridRowGap={['scale1600', 'scale1600', 'scale1600', 'scale800']}
           marginBottom="scale3200"
         >
-          {console.log(section)}
-          {/* eslint-disable-next-line no-shadow */}
-          {section.priceCards.map(
-            (card: ServicePriceCardProps, index: number) => (
+          {/* Mapping all of the price cards within the section */}
+          {section.priceCards && section?.priceCards.map(
+            (card, index: number) => (
               <FlexGridItem
                 key={index}
                 display="flex"
