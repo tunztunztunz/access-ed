@@ -57,11 +57,13 @@ module.exports = {
       options: {
         name: `AccessEd`,
         short_name: `AccessEd`,
+        description:
+          'Tutoring and Private Instruction. Designed with your student at the center to assist them with accessing and navigating their education all while developing the skills they will carry far beyond the walls of a classroom.',
         start_url: `/`,
         background_color: `#fff`,
         theme_color: `#276EF1`,
         display: `standalone`,
-        icon: `src/images/icon.png`,
+        icon: `src/images/favicon.ico`,
       },
     },
     'gatsby-plugin-offline',

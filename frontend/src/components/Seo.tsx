@@ -6,6 +6,7 @@ const SEO = ({ page }: { page?: any }) => {
   const data = useStaticQuery(graphql`
     query {
       site {
+        buildTime
         siteMetadata {
           title
           description
@@ -37,38 +38,52 @@ const SEO = ({ page }: { page?: any }) => {
   const url = new URL(page?.path || '', defaults.siteUrl);
   const image = page?.image ? new URL(page?.image, defaults?.siteUrl) : false;
 
-  // const schemaOrgWebPage = {
-  //   '@context': 'http://schema.org',
-  //   '@type': 'WebPage',
-  //   url: defaults.siteUrl,
-  //   inLanguage: siteLanguage,
-  //   mainEntityOfPage: siteUrl,
-  //   description: defaultDescription,
-  //   name: defaultTitle,
-  //   author: {
-  //     '@type': 'Person',
-  //     name: author,
-  //   },
-  //   copyrightHolder: {
-  //     '@type': 'Person',
-  //     name: author,
-  //   },
-  //   copyrightYear: '2019',
-  //   creator: {
-  //     '@type': 'Person',
-  //     name: author,
-  //   },
-  //   publisher: {
-  //     '@type': 'Person',
-  //     name: author,
-  //   },
-  //   datePublished: '2019-01-18T10:30:00+01:00',
-  //   dateModified: buildTime,
-  //   image: {
-  //     '@type': 'ImageObject',
-  //     url: `${siteUrl}${defaultBanner}`,
-  //   },
-  // };
+  const schemaOrgWebPage = {
+    '@context': 'http://schema.org',
+    '@type': 'WebPage',
+    url,
+    mainEntityOfPage: url,
+    description,
+    name: title,
+    author: {
+      '@type': 'Person',
+      name: defaults.author.name,
+    },
+    copyrightHolder: {
+      '@type': 'Person',
+      name: defaults.author.name,
+    },
+    copyrightYear: '2019',
+    creator: {
+      '@type': 'Person',
+      name: defaults.author.name,
+    },
+    publisher: {
+      '@type': 'Person',
+      name: defaults.author.name,
+    },
+    datePublished: '2019-01-18T10:30:00+01:00',
+    dateModified: data.site.buildTime,
+  };
+
+  const itemListElement = [
+    {
+      '@type': 'ListItem',
+      item: {
+        '@id': url,
+        name: 'Homepage',
+      },
+      position: 1,
+    },
+  ];
+
+  const breadcrumb = {
+    '@context': 'http://schema.org',
+    '@type': 'BreadcrumbList',
+    description: 'Breadcrumbs list',
+    name: 'Breadcrumbs',
+    itemListElement,
+  };
 
   return (
     <Helmet>
@@ -85,6 +100,10 @@ const SEO = ({ page }: { page?: any }) => {
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       {image && <meta property="og:image" content={image} />}
+      <script type="application/ld+json">
+        {JSON.stringify(schemaOrgWebPage)}
+      </script>
+      <script type="application/ld+json">{JSON.stringify(breadcrumb)}</script>
     </Helmet>
   );
 };
