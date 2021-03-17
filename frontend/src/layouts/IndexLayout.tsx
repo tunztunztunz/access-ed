@@ -31,7 +31,6 @@ const IndexLayout = ({ children }: IndexProps) => {
       }
     `
   );
-  const image = data.sanityLandingPage.hero.heroImage.asset.fixed;
 
   return (
     <BaseProvider theme={LightTheme}>
