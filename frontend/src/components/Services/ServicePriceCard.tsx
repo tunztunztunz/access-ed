@@ -47,7 +47,7 @@ const ServicePriceCard = ({
       })}
     >
       {serviceDetails.map((detail, index) => (
-        <li key={index}>
+        <li key={index} className={css({ lineHeight: '1.8rem' })}>
           <span className={css({ color: theme.colors.accent })}>✔ </span>
           {detail}
         </li>
@@ -71,6 +71,7 @@ const ServicePriceCard = ({
           boxShadow: '0 1px 4px rgba(0,0,0,0.5)',
           height: '80%',
           marginBottom: '60px',
+          maxWidth: '314px',
         })}
       >
         <FlexGridItem>

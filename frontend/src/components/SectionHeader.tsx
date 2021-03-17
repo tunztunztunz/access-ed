@@ -52,7 +52,11 @@ const SectionHeader = ({ title, description, noRule }: SectionHeaderProps) => {
       >
         {description}
       </Paragraph3>
-      <Paragraph1 as={Block} display={['none', 'none', 'block']}>
+      <Paragraph1
+        as={Block}
+        display={['none', 'none', 'block']}
+        className={css({ textAlign: 'left' })}
+      >
         {description}
       </Paragraph1>
     </Block>
