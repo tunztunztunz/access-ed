@@ -40,6 +40,10 @@ const SEO = ({ page }: { page?: any }) => {
   return (
     <Helmet>
       <title>{title}</title>
+      <meta
+        name="google-site-verification"
+        content="uM3011lS_1g38rj1qElMcYd1RvE5CqB3yik3VknxJsM"
+      />
       <link rel="canonical" href={url} />
       titleTemplate={`%s | ${title}`}
       <meta name="description" content={description} />
