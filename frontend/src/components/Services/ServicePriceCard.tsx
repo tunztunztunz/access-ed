@@ -39,7 +39,7 @@ const ServicePriceCard = ({
     <ul
       className={css({
         listStyleType: 'none',
-        paddingLeft: theme.sizing.scale600,
+        padding: `0 ${theme.sizing.scale300} 0 ${theme.sizing.scale600}`,
         height: '100%',
         maxHeight: '280px',
         marginTop: 0,
@@ -49,7 +49,6 @@ const ServicePriceCard = ({
       {serviceDetails.map((detail, index) => (
         <li key={index}>
           <span className={css({ color: theme.colors.accent })}>✔ </span>
-
           {detail}
         </li>
       ))}
@@ -63,7 +62,7 @@ const ServicePriceCard = ({
         textAlign: 'center',
       })}
     >
-      <H5>{title}</H5>
+      <H6>{title}</H6>
       <FlexGrid
         paddingBottom="scale600"
         className={css({
@@ -72,7 +71,6 @@ const ServicePriceCard = ({
           boxShadow: '0 1px 4px rgba(0,0,0,0.5)',
           height: '80%',
           marginBottom: '60px',
-          maxWidth: '350px',
         })}
       >
         <FlexGridItem>

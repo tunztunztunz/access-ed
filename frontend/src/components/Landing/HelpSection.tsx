@@ -34,7 +34,7 @@ const HelpSection = () => {
     <FlexGrid
       flexGridColumnCount={[1, 1, 1, 2]}
       className={css({
-        textAlign: 'center',
+        textAlign: 'left',
       })}
     >
       <FlexGridItem display="flex" justifyContent="center">
@@ -50,10 +50,6 @@ const HelpSection = () => {
         <FlexGrid
           display={['none', 'none', 'flex']}
           flexGridColumnCount={[2, 3, 3, 3]}
-          className={css({
-            textAlign: 'left',
-            paddingLeft: 'clamp(1rem, 4vw, 3.5rem)',
-          })}
         >
           {skills.map((skill, index) => (
             <FlexGridItem key={index}>

@@ -6,7 +6,7 @@ import { useStyletron } from 'baseui';
 import SvgWrapper from '../SvgWrapper';
 
 const styledTextArea = css`
-  text-align: center;
+  text-align: left;
 `;
 
 interface ServiceCardProps {

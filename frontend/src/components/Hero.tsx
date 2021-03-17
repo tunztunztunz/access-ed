@@ -15,8 +15,8 @@ interface HeroProps {
 const Hero = ({ header, text, image, button, buttonLink }: HeroProps) => (
   <FlexGrid
     flexGridColumnCount={[1, 1, 1, 2]}
-    minHeight={['90vh', '90vh', '50vh', '20vh']}
     marginTop={['0', '0', 'scale1600']}
+    marginBottom="scale1600"
   >
     <FlexGridItem>
       <HeroText

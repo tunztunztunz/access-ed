@@ -72,6 +72,7 @@ const Testimonials = () => {
       flexGridColumnCount={[1]}
       maxWidth="1110px"
       margin={['0', '0 1rem', '0 2rem', '0 2rem']}
+      flexGridColumnGap="scale1200"
       flexGridRowGap={['scale800', 'scale800', 'scale1600']}
     >
       <FlexGridItem>
@@ -102,7 +103,6 @@ const Testimonials = () => {
       </FlexGridItem>
       <FlexGridItem>
         <SimpleSection
-          isReversed
           text={
             <BlockContent
               blocks={data.sanityTestimonialsPage.callToAction._rawSectionText}

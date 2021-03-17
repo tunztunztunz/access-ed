@@ -26,7 +26,6 @@ interface SimpleSectionProps {
 
   background?: boolean;
   padded?: boolean;
-  link?: string;
   externalLink?: string;
 }
 
@@ -40,7 +39,6 @@ const SimpleSection = ({
   centered,
   background,
   padded,
-  link,
   externalLink,
 }: SimpleSectionProps) => {
   const [css, theme] = useStyletron();
@@ -50,14 +48,15 @@ const SimpleSection = ({
   return (
     <FlexGrid
       flexGridColumnCount={[1, 1, isCentered]}
-      flexGridColumnGap="scale800"
+      flexGridColumnGap={isReversed ? '' : 'scale800'}
       flexDirection={['column', 'column', direction]}
       backgroundColor={background ? theme.colors.backgroundTertiary : ''}
       padding={padded ? 'scale600' : ''}
     >
+      {console.log(isReversed)}
+      console.log(padded);
       {image && (
         <FlexGridItem
-          className={css({ textAlign: 'center' })}
           display="flex"
           flexDirection="column"
           alignItems={[
@@ -66,7 +65,9 @@ const SimpleSection = ({
             isReversed === true ? 'flex-end' : 'flex-start',
           ]}
         >
-          <SvgWrapper svg={<Img fluid={image} />} />
+          <Block width="90%">
+            <Img fluid={image} />
+          </Block>
         </FlexGridItem>
       )}
       <FlexGridItem>
