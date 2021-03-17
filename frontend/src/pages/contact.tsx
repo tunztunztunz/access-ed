@@ -53,7 +53,6 @@ const Contact = ({ location }) => {
           letter.toUpperCase()
         )
     : '';
-  console.log(string);
 
   React.useEffect(() => {
     if (string !== '') {
@@ -151,7 +150,6 @@ const Contact = ({ location }) => {
                 multi
                 onChange={({ value }) => {
                   setServices(value);
-                  console.log(value);
                 }}
                 value={services}
               />

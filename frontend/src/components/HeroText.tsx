@@ -58,7 +58,10 @@ const HeroText = ({
         {text}
       </Paragraph3>
       {button && (
-        <HeroButton buttonText={buttonText || 'Learn More'} link={buttonLink} />
+        <HeroButton
+          buttonText={buttonText || 'Learn More Today!'}
+          link={buttonLink}
+        />
       )}
     </HeaderText>
   );

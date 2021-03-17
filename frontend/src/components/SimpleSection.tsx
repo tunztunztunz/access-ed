@@ -53,8 +53,6 @@ const SimpleSection = ({
       backgroundColor={background ? theme.colors.backgroundTertiary : ''}
       padding={padded ? 'scale600' : ''}
     >
-      {console.log(isReversed)}
-      console.log(padded);
       {image && (
         <FlexGridItem
           display="flex"

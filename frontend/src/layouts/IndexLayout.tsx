@@ -28,27 +28,15 @@ const IndexLayout = ({ children }: IndexProps) => {
             description
           }
         }
-        sanityLandingPage {
-          hero {
-            heroImage {
-              asset {
-                fixed(height: 1200, width: 1200) {
-                  ...GatsbySanityImageFixed
-                }
-              }
-            }
-          }
-        }
       }
     `
   );
   const image = data.sanityLandingPage.hero.heroImage.asset.fixed;
-  console.log(image);
+
   return (
     <BaseProvider theme={LightTheme}>
       <Centered>
         <SEO />
-
         <LayoutRoot>
           <Header title={data.site.siteMetadata.title} />
           <LayoutMain>{children}</LayoutMain>

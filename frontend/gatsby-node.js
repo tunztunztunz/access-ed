@@ -15,7 +15,7 @@ exports.createPages = async ({ graphql, actions }) => {
   if (data.errors) {
     throw data.errors;
   }
-  console.log(data.services);
+
   data.services.nodes.forEach((service, index) => {
     const path = `/services/${service.slug.current}`;
     createPage({

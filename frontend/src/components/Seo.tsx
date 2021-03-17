@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
 
-const SEO = ({ page }) => {
+const SEO = ({ page }: { page?: any }) => {
   const data = useStaticQuery(graphql`
     query {
       site {
@@ -37,7 +37,6 @@ const SEO = ({ page }) => {
   const url = new URL(page?.path || '', defaults.siteUrl);
   const image = page?.image ? new URL(page?.image, defaults?.siteUrl) : false;
 
-  console.log({ title, description, url, image });
   return (
     <Helmet>
       <title>{title}</title>
