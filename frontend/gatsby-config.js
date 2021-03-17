@@ -46,6 +46,12 @@ module.exports = {
       options: { prefixes: [`/preview/*`] },
     },
     {
+      resolve: `gatsby-plugin-canonical-urls`,
+      options: {
+        siteUrl: `https://relaxed-bardeen-92bf66.netlify.app`,
+      },
+    },
+    {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `AccessEd`,
