@@ -1,6 +1,13 @@
 require('dotenv').config();
 
-const isProd = process.env.NODE_ENV === 'production';
+const {
+  NODE_ENV,
+  URL: NETLIFY_SITE_URL = 'https://relaxed-bardeen-92bf66.netlify.app/',
+  DEPLOY_PRIME_URL: NETLIFY_DEPLOY_URL = NETLIFY_SITE_URL,
+  CONTEXT: NETLIFY_ENV = NODE_ENV,
+} = process.env;
+const isNetlifyProduction = NETLIFY_ENV === 'production';
+const siteUrl = isNetlifyProduction ? NETLIFY_SITE_URL : NETLIFY_DEPLOY_URL;
 
 module.exports = {
   siteMetadata: {
@@ -9,7 +16,7 @@ module.exports = {
       'Tutoring and Private Instruction. Designed with your student at the center to assist them with accessing and navigating their education all while developing the skills they will carry far beyond the walls of a classroom.',
     keywords:
       'education, tutoring, academic coaching, academic tutoring Portland, Tutoring Washington, online tutoring, in-person tutoring, accessEd, access education, tutoring northwest, tutoring portland',
-    siteUrl: 'https://relaxed-bardeen-92bf66.netlify.app/',
+    siteUrl,
     author: {
       name: 'Dustin Simensen',
       url: 'https://www.dustinsimensen.com',
