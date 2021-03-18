@@ -29,7 +29,7 @@ const ServicesPricingRow = ({
   const servicePrice =
     // eslint-disable-next-line no-nested-ternary
     parseInt(price) === 0
-      ? '$0'
+      ? ''
       : discount
       ? `$${salesPrice(parseInt(price), discount)}`
       : `$${price}`;
@@ -89,13 +89,15 @@ const ServicesPricingRow = ({
           marginTop={['1rem', '1rem', '1rem', 0]}
         >
           <Paragraph3
-            display="inline"
+
             marginTop={[0]}
             className={css({
               color: theme.colors.contentTertiary,
             })}
+            display='inline'
           >
-            starting at/
+            {servicePrice !== '' ? 'starting at/' : 'Pricing Upon Request'}
+
           </Paragraph3>
           {discount && (
             <>

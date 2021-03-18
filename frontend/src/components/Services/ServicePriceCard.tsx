@@ -28,7 +28,7 @@ const ServicePriceCard = ({
   const [css, theme] = useStyletron();
 
   const servicePrice =
-    // eslint-disable-next-line no-nested-ternary
+    // Figure out if there is a sale. If there is we round to nearest 10
     parseInt(price) === 0
       ? null
       : discount

@@ -1,4 +1,4 @@
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 import { useStyletron } from 'baseui';
 import { Block } from 'baseui/block';
 import { Display3, Display4, Paragraph1, Paragraph3 } from 'baseui/typography';
