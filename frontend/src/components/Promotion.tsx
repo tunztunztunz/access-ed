@@ -1,10 +1,11 @@
 import React from 'react';
-import Img, { FluidObject } from 'gatsby-image';
+// import Img, { FluidObject } from 'gatsby-image';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import { H4, Paragraph1, Paragraph3 } from 'baseui/typography';
 import { styled, useStyletron } from 'baseui';
 import { Link } from 'gatsby';
 import { HeaderText } from './HeroText';
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
 export const PromotionImage = styled('div', () => ({
   width: '100%',
@@ -14,17 +15,17 @@ export const PromotionImage = styled('div', () => ({
 }));
 interface PromotionProps {
   header: string;
-  image: FluidObject[];
+  image: any;
   text?: string;
   link?: string;
 }
 
 const Promotion = ({ header, text, image, link }: PromotionProps) => {
   const [css, theme] = useStyletron();
+  const promotionImage = image.url.slice(-3) === 'svg' ? image.url : getImage(image);
   return (
     <FlexGrid
       flexGridColumnCount={1}
-      // minHeight={['95vh', '95vh', '50vh', '20vh']}
       marginTop={['0', '0', 'scale1600']}
       alignItems="center"
       justifyContent="center"
@@ -36,9 +37,7 @@ const Promotion = ({ header, text, image, link }: PromotionProps) => {
         })}
       >
         <H4 display={['none', 'none', 'block', 'block']}>{header}</H4>
-        <Paragraph1 display={['block', 'block', 'none', 'none']}>
-          {header}
-        </Paragraph1>
+        <Paragraph1 display={['block', 'block', 'none', 'none']}>{header}</Paragraph1>
       </FlexGridItem>
       <FlexGridItem
         paddingTop={['0', '0', '1rem', '0']}
@@ -48,7 +47,11 @@ const Promotion = ({ header, text, image, link }: PromotionProps) => {
       >
         <PromotionImage>
           <Link to={`/${link}`}>
-            <Img fluid={image} />
+            {promotionImage !== image.url ? (
+              <GatsbyImage image={promotionImage} alt={'section image'} />
+            ) : (
+              <img src={image.url} alt={'section image'} style={{ width: '100%' }} />
+            )}
           </Link>
         </PromotionImage>
       </FlexGridItem>

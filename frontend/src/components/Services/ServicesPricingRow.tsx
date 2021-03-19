@@ -50,10 +50,10 @@ const ServicesPricingRow = ({
 
   return (
     <FlexGrid
-      flexGridColumnCount={[1, 1, 1, 4]}
+      flexGridColumnCount={[1, 1, 4, 4]}
       flexGridColumnGap="scale800"
       flexGridRowGap="scale200"
-      flexDirection={['column', 'column', 'column', 'row']}
+      flexDirection={['column', 'column', 'row', 'row']}
       justifyContent="center"
     >
       <FlexGridItem>
@@ -72,32 +72,50 @@ const ServicesPricingRow = ({
           {header}
         </H3>
       </FlexGridItem>
-      <FlexGridItem
-        display="flex"
-        justifyContent={['flex-start', 'flex-start', 'flex-start', 'flex-end']}
-      >
+      <FlexGridItem display="flex" justifyContent="flex-start">
         <Paragraph1 as={Block}>{serviceFeatureList}</Paragraph1>
       </FlexGridItem>
       <FlexGridItem
         display="flex"
         justifyContent={['flex-start', 'flex-start', 'flex-start', 'flex-end']}
       >
-        {console.log(typeof price)}
         <H2
           display={['block']}
           marginBottom={['1em', '1rem', '1rem', 0]}
           marginTop={['1rem', '1rem', '1rem', 0]}
+          className={css({
+            '@media screen and (max-width: 1132px)': {
+              marginTop: '0',
+              fontSize: '1.9rem',
+            },
+            '@media screen and (max-width: 1010px)': {
+              marginTop: '0',
+              fontSize: '1.6rem',
+            },
+            '@media screen and (max-width: 935px)': {
+              marginTop: '0',
+              fontSize: '1.25rem',
+            },
+          })}
         >
+          <Block
+            className={css({
+              display: 'none',
+              '@media screen and (min-width: 600px) and (max-width: 825px)': {
+                display: 'block',
+              },
+            })}
+          >
+            {button && <HeroButton buttonText={button} noMargin link={link} />}
+          </Block>
           <Paragraph3
-
             marginTop={[0]}
             className={css({
               color: theme.colors.contentTertiary,
             })}
-            display='inline'
+            display="inline"
           >
             {servicePrice !== '' ? 'starting at/' : 'Pricing Upon Request'}
-
           </Paragraph3>
           {discount && (
             <>
@@ -118,11 +136,14 @@ const ServicesPricingRow = ({
       <FlexGridItem
         display="flex"
         justifyContent={['flex-start', 'flex-start', 'flex-start', 'flex-end']}
+        className={css({
+          '@media screen and (min-width: 600px) and (max-width: 825px)': {
+            display: 'none',
+          },
+        })}
       >
         {/* Flex was not working without wrapping this conditional */}
-        <Block>
-          {button && <HeroButton buttonText={button} noMargin link={link} />}
-        </Block>
+        <Block>{button && <HeroButton buttonText={button} noMargin link={link} />}</Block>
       </FlexGridItem>
     </FlexGrid>
   );

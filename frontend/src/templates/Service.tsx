@@ -1,11 +1,12 @@
 import React from 'react';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import { graphql } from 'gatsby';
-import { FluidObject } from 'gatsby-image';
+// import { FluidObject } from 'gatsby-image';
 
 import Hero from '../components/Hero';
 import SimpleSection from '../components/SimpleSection';
 import PriceCardSection from '../components/Service/PriceCardSection';
+import ImageObjectInterface from '../components/types/imageObject';
 
 const BlockContent = require('@sanity/block-content-to-react');
 
@@ -27,11 +28,7 @@ interface B {
   __typename: string;
   sectionHeader?: string;
   _rawSectionText?: string[];
-  sectionImage?: {
-    asset: {
-      fluid: FluidObject[];
-    };
-  };
+  sectionImage?: ImageObjectInterface;
 }
 export interface ServiceProps {
   data: {
@@ -46,21 +43,13 @@ export interface ServiceProps {
       hero: {
         heroHeader: string;
         heroText: string;
-        heroImage: {
-          asset: {
-            fluid: FluidObject[];
-          };
-        };
+        heroImage: ImageObjectInterface;
       };
       section: [A | B];
       callToAction: {
         _rawSectionText: string[];
         sectionHeader: string;
-        sectionImage: {
-          asset: {
-            fluid: FluidObject[];
-          };
-        };
+        sectionImage: ImageObjectInterface;
       };
     };
   };
@@ -68,10 +57,10 @@ export interface ServiceProps {
 
 // The following functions make sure Typescript knows what type to use
 function isSanityTextAndImageSection(section: any): section is B {
-  return section?.__typename === 'SanityTextAndImageSection'
+  return section?.__typename === 'SanityTextAndImageSection';
 }
 function isSanityServicePageSection(section: any): section is A {
-  return section?.__typename === 'SanityServicePageSection'
+  return section?.__typename === 'SanityServicePageSection';
 }
 
 const Service = ({ data }: ServiceProps) => {
@@ -87,7 +76,7 @@ const Service = ({ data }: ServiceProps) => {
       <FlexGridItem>
         <Hero
           header={service.hero.heroHeader}
-          image={service.hero.heroImage.asset.fluid}
+          image={service.hero.heroImage.asset}
           text={service.hero.heroText}
         />
       </FlexGridItem>
@@ -101,12 +90,9 @@ const Service = ({ data }: ServiceProps) => {
                 isReversed={index % 2 === 0}
                 header={section.sectionHeader}
                 text={
-                  <BlockContent
-                    blocks={section._rawSectionText}
-                    renderContainerOnSingleChild
-                  />
+                  <BlockContent blocks={section._rawSectionText} renderContainerOnSingleChild />
                 }
-                image={section?.sectionImage?.asset?.fluid}
+                image={section?.sectionImage?.asset}
               />
             </FlexGridItem>
           );
@@ -133,12 +119,7 @@ const Service = ({ data }: ServiceProps) => {
             background
             centered
             padded
-            text={
-              <BlockContent
-                blocks={service._rawDisclaimerText}
-                renderContainerOnSingleChild
-              />
-            }
+            text={<BlockContent blocks={service._rawDisclaimerText} renderContainerOnSingleChild />}
           />
         </FlexGridItem>
       ) : (
@@ -154,7 +135,7 @@ const Service = ({ data }: ServiceProps) => {
               renderContainerOnSingleChild
             />
           }
-          image={service.callToAction.sectionImage.asset.fluid}
+          image={service.callToAction.sectionImage.asset}
           button="Contact Us"
           buttonLink="contact"
         />
@@ -177,9 +158,8 @@ export const query = graphql`
         heroText
         heroImage {
           asset {
-            fluid {
-              ...GatsbySanityImageFluid
-            }
+            url
+            gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 600)
           }
         }
       }
@@ -199,9 +179,8 @@ export const query = graphql`
         ... on SanityTextAndImageSection {
           sectionImage {
             asset {
-              fluid {
-                ...GatsbySanityImageFluid
-              }
+              url
+              gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 500)
             }
           }
           __typename
@@ -215,9 +194,8 @@ export const query = graphql`
         sectionHeader
         sectionImage {
           asset {
-            fluid {
-              ...GatsbySanityImageFluid
-            }
+            url
+            gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 400)
           }
         }
       }

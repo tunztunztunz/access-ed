@@ -24,11 +24,15 @@ module.exports = {
     },
   },
   plugins: [
+    'gatsby-plugin-image',
+    'gatsby-plugin-sharp',
+    'gatsby-transformer-sharp',
     {
       resolve: `gatsby-plugin-styletron`,
       options: {
         // You can pass options to Styletron.
         prefix: '_',
+        debug: false
       },
     },
     {
@@ -66,7 +70,6 @@ module.exports = {
         icon: `src/images/icon.png`,
       },
     },
-    'gatsby-plugin-offline',
     {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
@@ -91,8 +94,6 @@ module.exports = {
     },
     'gatsby-plugin-emotion',
     'gatsby-plugin-typescript',
-    'gatsby-plugin-sharp',
-    'gatsby-transformer-sharp',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-advanced-sitemap',
   ],

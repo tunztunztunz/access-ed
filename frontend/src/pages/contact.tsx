@@ -16,7 +16,7 @@ interface ServicesProps {
   id?: string;
 }
 
-const Contact = ({ location }) => {
+const Contact = ({ location }: { location: any }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [formLocation, setFormLocation] = useState('');
@@ -49,16 +49,12 @@ const Contact = ({ location }) => {
   const string = location?.state?.from
     ? location?.state?.from
         .replace('-', ' ')
-        .replace(/(^\w{1})|(\s+\w{1})/g, (letter: string) =>
-          letter.toUpperCase()
-        )
+        .replace(/(^\w{1})|(\s+\w{1})/g, (letter: string) => letter.toUpperCase())
     : '';
 
   React.useEffect(() => {
     if (string !== '') {
-      const linkedService = servicesArray.find(
-        (service) => service.label === string
-      );
+      const linkedService = servicesArray.find((service) => service.label === string);
       if (linkedService !== undefined && services !== undefined) {
         setServices([...services, linkedService]);
       }
@@ -78,10 +74,10 @@ const Contact = ({ location }) => {
           title={"Let's Get Something Started Today!"}
           description={
             <>
-              Prefer phonecalls? You can reach us at{' '}
-              <a href="tel:503-381-9040">(503) 381-9040</a>
+              Prefer phonecalls? You can reach us at <a href="tel:503-381-9040">(503) 381-9040</a>
             </>
           }
+          centerDescription
         />
       </FlexGridItem>
       <FlexGridItem
@@ -133,11 +129,7 @@ const Contact = ({ location }) => {
               />
             </FormControl>
             <FormControl label={() => 'Phone Number'}>
-              <MaskedInput
-                name="Phone Number"
-                placeholder="(777)777-7777"
-                mask="(999) 999-9999"
-              />
+              <MaskedInput name="Phone Number" placeholder="(777)777-7777" mask="(999) 999-9999" />
             </FormControl>
             <FormControl label={() => 'What Services Are You Interested In?'}>
               <Select

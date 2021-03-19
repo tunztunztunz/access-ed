@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import { useStyletron } from 'baseui';
-import Img from 'gatsby-image';
+// import Img from 'gatsby-image';
 import { Block } from 'baseui/block';
 import SectionHeader from '../components/SectionHeader';
 import { HeroButton } from '../components/HeroButton';
@@ -38,10 +38,9 @@ const Careers = () => {
                 margin: '0 auto',
               })}
             >
-              AccessEd is always looking for caring, enthusiastic, and engaging
-              tutors to join our team! If you are interested in becoming a tutor
-              with AccessEd, LLC please complete the form below and we will
-              reach out to you as soon as possible!
+              AccessEd is always looking for caring, enthusiastic, and engaging tutors to join our
+              team! If you are interested in becoming a tutor with AccessEd, LLC please complete the
+              form below and we will reach out to you as soon as possible!
             </div>
           }
         />

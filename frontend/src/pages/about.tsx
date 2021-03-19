@@ -1,22 +1,17 @@
 import * as React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-
-import { FluidObject } from 'gatsby-image';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import Hero from '../components/Hero';
 import SectionHeader from '../components/SectionHeader';
 import SimpleSection from '../components/SimpleSection';
+import ImageObjectInterface from '../components/types/imageObject';
 
 const BlockContent = require('@sanity/block-content-to-react');
 
 interface SectionProps {
   sectionHeader: string;
   _rawSectionText: string[];
-  sectionImage: {
-    asset: {
-      fluid: FluidObject[];
-    };
-  };
+  sectionImage: ImageObjectInterface;
 }
 
 const About = () => {
@@ -29,9 +24,8 @@ const About = () => {
             heroHeader
             heroImage {
               asset {
-                fluid {
-                  ...GatsbySanityImageFluid
-                }
+                url
+                gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 600)
               }
             }
           }
@@ -39,9 +33,8 @@ const About = () => {
           sections {
             sectionImage {
               asset {
-                fluid {
-                  ...GatsbySanityImageFluid
-                }
+                url
+                gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 500)
               }
             }
             _rawSectionText
@@ -52,18 +45,16 @@ const About = () => {
           _rawAboutText(resolveReferences: { maxDepth: 1 })
           aboutImage {
             asset {
-              fluid(maxWidth: 400, maxHeight: 500) {
-                ...GatsbySanityImageFluid
-              }
+              url
+              gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 500)
             }
           }
           callToAction {
             sectionHeader
             sectionImage {
               asset {
-                fluid {
-                  ...GatsbySanityImageFluid
-                }
+                url
+                gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 400)
               }
             }
             _rawSectionText
@@ -74,7 +65,7 @@ const About = () => {
   );
   const { heroHeader } = data.sanityAboutPage.hero;
   const { heroText } = data.sanityAboutPage.hero;
-  const heroImage = data.sanityAboutPage.hero.heroImage.asset.fluid;
+  const heroImage = data.sanityAboutPage.hero.heroImage.asset;
 
   const coachingSections: SectionProps[] = data.sanityAboutPage.sections;
 
@@ -96,13 +87,8 @@ const About = () => {
           <SimpleSection
             isReversed={index % 2 === 0}
             header={section.sectionHeader}
-            text={
-              <BlockContent
-                blocks={section._rawSectionText}
-                renderContainerOnSingleChild
-              />
-            }
-            image={section.sectionImage.asset.fluid}
+            text={<BlockContent blocks={section._rawSectionText} renderContainerOnSingleChild />}
+            image={section.sectionImage.asset}
           />
         </FlexGridItem>
       ))}
@@ -118,7 +104,7 @@ const About = () => {
               renderContainerOnSingleChild
             />
           }
-          image={data.sanityAboutPage.aboutImage.asset.fluid}
+          image={data.sanityAboutPage.aboutImage.asset}
           caption={data.sanityAboutPage.aboutImageCaption}
         />
       </FlexGridItem>
@@ -135,7 +121,7 @@ const About = () => {
               renderContainerOnSingleChild
             />
           }
-          image={data.sanityAboutPage.callToAction.sectionImage.asset.fluid}
+          image={data.sanityAboutPage.callToAction.sectionImage.asset}
           button="Contact Us"
           buttonLink="contact"
         />

@@ -20,9 +20,10 @@ interface SectionHeaderProps {
   title: string;
   description?: string | React.ReactNode;
   noRule?: boolean;
+  centerDescription?: boolean;
 }
 
-const SectionHeader = ({ title, description, noRule }: SectionHeaderProps) => {
+const SectionHeader = ({ title, description, noRule, centerDescription }: SectionHeaderProps) => {
   const [css] = useStyletron();
   return (
     <Block
@@ -33,29 +34,23 @@ const SectionHeader = ({ title, description, noRule }: SectionHeaderProps) => {
         },
       }}
     >
-      <Display4
-        css={noRule ? '' : headerStyle}
-        display={['block', 'block', 'none']}
-      >
+      <Display4 css={noRule ? '' : headerStyle} display={['block', 'block', 'none']}>
         {title}
       </Display4>
-      <Display3
-        css={noRule ? '' : headerStyle}
-        display={['none', 'none', 'block']}
-      >
+      <Display3 css={noRule ? '' : headerStyle} display={['none', 'none', 'block']}>
         {title}
       </Display3>
       <Paragraph3
         as={Block}
         display={['block', 'block', 'none']}
-        className={css({ textAlign: 'left' })}
+        className={css({ textAlign: centerDescription ? 'center' : 'left' })}
       >
         {description}
       </Paragraph3>
       <Paragraph1
         as={Block}
         display={['none', 'none', 'block']}
-        className={css({ textAlign: 'left' })}
+        className={css({ textAlign: centerDescription ? 'center' : 'left' })}
       >
         {description}
       </Paragraph1>

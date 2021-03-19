@@ -49,11 +49,7 @@ export const HeroButton = ({
   }
   return (
     <Block marginTop={noMargin ? '' : '2rem'}>
-      <Link
-        to={`/${link}`}
-        state={{ from: state }}
-        style={{ textDecoration: 'none' }}
-      >
+      <Link to={`/${link}`} state={{ from: state }} style={{ textDecoration: 'none' }}>
         {button}
       </Link>
     </Block>

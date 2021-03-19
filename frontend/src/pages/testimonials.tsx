@@ -1,22 +1,19 @@
 import * as React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 
-import { FluidObject } from 'gatsby-image';
+// import { FluidObject } from 'gatsby-image';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import Hero from '../components/Hero';
 import SectionHeader from '../components/SectionHeader';
 import SimpleSection from '../components/SimpleSection';
+import ImageObjectInterface from '../components/types/imageObject';
 
 const BlockContent = require('@sanity/block-content-to-react');
 
 interface SectionProps {
   sectionHeader: string;
   _rawSectionText: string[];
-  sectionImage: {
-    asset: {
-      fluid: FluidObject[];
-    };
-  };
+  sectionImage: ImageObjectInterface;
 }
 
 const Testimonials = () => {
@@ -29,9 +26,8 @@ const Testimonials = () => {
             heroText
             heroImage {
               asset {
-                fluid {
-                  ...GatsbySanityImageFluid
-                }
+                url
+                gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 600)
               }
             }
           }
@@ -40,9 +36,8 @@ const Testimonials = () => {
             _rawSectionText
             sectionImage {
               asset {
-                fluid {
-                  ...GatsbySanityImageFluid
-                }
+                url
+                gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 500)
               }
             }
           }
@@ -51,9 +46,8 @@ const Testimonials = () => {
             sectionHeader
             sectionImage {
               asset {
-                fluid {
-                  ...GatsbySanityImageFluid
-                }
+                url
+                gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 400)
               }
             }
           }
@@ -63,7 +57,7 @@ const Testimonials = () => {
   );
   const { heroHeader } = data.sanityTestimonialsPage.hero;
   const { heroText } = data.sanityTestimonialsPage.hero;
-  const heroImage = data.sanityTestimonialsPage.hero.heroImage.asset.fluid;
+  const heroImage = data.sanityTestimonialsPage.hero.heroImage.asset;
 
   const testimonials: SectionProps[] = data.sanityTestimonialsPage.sections;
 
@@ -86,20 +80,14 @@ const Testimonials = () => {
           <SimpleSection
             isReversed={index % 2 === 0}
             header={section.sectionHeader}
-            text={
-              <BlockContent
-                blocks={section._rawSectionText}
-                renderContainerOnSingleChild
-              />
-            }
-            image={section.sectionImage.asset.fluid}
+            text={<BlockContent blocks={section._rawSectionText} renderContainerOnSingleChild />}
+            image={section.sectionImage.asset}
+            breakAtTablets
           />
         </FlexGridItem>
       ))}
       <FlexGridItem>
-        <SectionHeader
-          title={data.sanityTestimonialsPage.callToAction.sectionHeader}
-        />
+        <SectionHeader title={data.sanityTestimonialsPage.callToAction.sectionHeader} />
       </FlexGridItem>
       <FlexGridItem>
         <SimpleSection
@@ -109,9 +97,7 @@ const Testimonials = () => {
               renderContainerOnSingleChild
             />
           }
-          image={
-            data.sanityTestimonialsPage.callToAction.sectionImage.asset.fluid
-          }
+          image={data.sanityTestimonialsPage.callToAction.sectionImage.asset}
           button="Contact Us"
           buttonLink="contact"
         />

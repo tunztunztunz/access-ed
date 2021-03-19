@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 
-import { FluidObject } from 'gatsby-image';
+// import { FluidObject } from 'gatsby-image';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import Hero from '../components/Hero';
 import SectionHeader from '../components/SectionHeader';
@@ -30,9 +30,8 @@ const Testimonials = () => {
             heroText
             heroImage {
               asset {
-                fluid {
-                  ...GatsbySanityImageFluid
-                }
+                url
+                gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 600)
               }
             }
           }
@@ -42,9 +41,8 @@ const Testimonials = () => {
             link
             sectionImage {
               asset {
-                fluid(maxHeight: 500) {
-                  ...GatsbySanityImageFluid
-                }
+                url
+                gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 500)
               }
             }
           }
@@ -53,9 +51,8 @@ const Testimonials = () => {
             sectionHeader
             sectionImage {
               asset {
-                fluid {
-                  ...GatsbySanityImageFluid
-                }
+                url
+                gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 400)
               }
             }
           }
@@ -65,7 +62,7 @@ const Testimonials = () => {
   );
   const { heroHeader } = data.sanityPartnershipsPage.hero;
   const { heroText } = data.sanityPartnershipsPage.hero;
-  const heroImage = data.sanityPartnershipsPage.hero.heroImage.asset.fluid;
+  const heroImage = data.sanityPartnershipsPage.hero.heroImage.asset;
 
   const { partners } = data.sanityPartnershipsPage;
 
@@ -87,22 +84,15 @@ const Testimonials = () => {
           <SimpleSection
             isReversed={index % 2 === 0}
             header={section.sectionHeader}
-            text={
-              <BlockContent
-                blocks={section._rawSectionText}
-                renderContainerOnSingleChild
-              />
-            }
-            image={section.sectionImage.asset.fluid}
+            text={<BlockContent blocks={section._rawSectionText} renderContainerOnSingleChild />}
+            image={section.sectionImage.asset}
             button="Check Them Out!"
             externalLink={section.link}
           />
         </FlexGridItem>
       ))}
       <FlexGridItem>
-        <SectionHeader
-          title={data.sanityPartnershipsPage.callToAction.sectionHeader}
-        />
+        <SectionHeader title={data.sanityPartnershipsPage.callToAction.sectionHeader} />
       </FlexGridItem>
       <FlexGridItem>
         <SimpleSection
@@ -113,9 +103,7 @@ const Testimonials = () => {
               renderContainerOnSingleChild
             />
           }
-          image={
-            data.sanityPartnershipsPage.callToAction.sectionImage.asset.fluid
-          }
+          image={data.sanityPartnershipsPage.callToAction.sectionImage.asset}
           button="Contact Us"
           buttonLink="contact"
         />

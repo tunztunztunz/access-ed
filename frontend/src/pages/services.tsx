@@ -20,9 +20,8 @@ const Services = () => {
             heroHeader
             heroImage {
               asset {
-                fluid {
-                  ...GatsbySanityImageFluid
-                }
+                url
+                gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 600)
               }
             }
           }
@@ -31,9 +30,8 @@ const Services = () => {
             _rawSectionText(resolveReferences: { maxDepth: 1 })
             sectionImage {
               asset {
-                fluid {
-                  ...GatsbySanityImageFluid
-                }
+                url
+                gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 400)
               }
             }
           }
@@ -52,9 +50,8 @@ const Services = () => {
           promotion {
             image {
               asset {
-                fluid {
-                  ...GatsbySanityImageFluid
-                }
+                url
+                gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 600)
               }
             }
             promotionHeader
@@ -99,7 +96,7 @@ const Services = () => {
 
   const { heroHeader } = data.sanityServicesPage.hero;
   const { heroText } = data.sanityServicesPage.hero;
-  const heroImage = data.sanityServicesPage.hero.heroImage.asset.fluid;
+  const heroImage = data.sanityServicesPage.hero.heroImage.asset;
   const { services } = data.sanityServicesPage;
 
   return (
@@ -160,7 +157,7 @@ const Services = () => {
               renderContainerOnSingleChild
             />
           }
-          image={data.sanityServicesPage.callToAction.sectionImage.asset.fluid}
+          image={data.sanityServicesPage.callToAction.sectionImage.asset}
           button="Contact Us"
           buttonLink="contact"
         />

@@ -1,11 +1,10 @@
 import React from 'react';
-import Img, { FluidObject } from 'gatsby-image';
 import { H4, Paragraph2, Paragraph3 } from 'baseui/typography';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import { styled, useStyletron } from 'baseui';
 import { Block } from 'baseui/block';
-import SvgWrapper from './SvgWrapper';
 import { HeroButton } from './HeroButton';
+import { Image } from './Image';
 
 const SectionText = styled('div', () => ({
   textAlign: 'center',
@@ -16,14 +15,14 @@ const SectionText = styled('div', () => ({
 
 interface SimpleSectionProps {
   text: string | React.ReactNode;
-  image?: FluidObject[];
+  image?: any;
   header?: string;
   caption?: string;
   button?: string;
   buttonLink?: string;
   isReversed?: boolean;
   centered?: boolean;
-
+  breakAtTablets?: boolean;
   background?: boolean;
   padded?: boolean;
   externalLink?: string;
@@ -31,6 +30,7 @@ interface SimpleSectionProps {
 
 const SimpleSection = ({
   isReversed,
+  breakAtTablets,
   text,
   image,
   header,
@@ -44,10 +44,11 @@ const SimpleSection = ({
   const [css, theme] = useStyletron();
   const direction = isReversed ? 'row-reverse' : 'row';
   const isCentered = centered ? 1 : 2;
+  const shouldBreak = breakAtTablets ? 1 : 2;
 
   return (
     <FlexGrid
-      flexGridColumnCount={[1, 1, isCentered]}
+      flexGridColumnCount={[1, 1, shouldBreak, isCentered]}
       flexGridColumnGap={isReversed ? '' : 'scale800'}
       flexDirection={['column', 'column', direction]}
       backgroundColor={background ? theme.colors.backgroundTertiary : ''}
@@ -60,17 +61,30 @@ const SimpleSection = ({
           alignItems={[
             'center',
             'center',
-            isReversed === true ? 'flex-end' : 'flex-start',
+            breakAtTablets ? 'center' : isReversed ? 'flex-end' : 'flex-start',
+            isReversed ? 'flex-end' : 'flex-start',
           ]}
         >
-          <Block width="90%">
-            <Img fluid={image} />
+          <Block width="90%" alignItems="center" justifyContent="center" display="flex">
+            <Image imageObject={image} />
           </Block>
         </FlexGridItem>
       )}
       <FlexGridItem>
         <SectionText>
-          <H4 marginTop={['2rem', '2rem', '0']} marginBottom={['1rem', '1rem']}>
+          <H4
+            marginTop={['2rem', '2rem', breakAtTablets ? '2rem' : '0', '0']}
+            marginBottom={['1rem', '1rem']}
+            className={css({
+              textAlign: 'center',
+              '@media screen and (min-width: 600px)': {
+                textAlign: breakAtTablets ? 'center' : 'left',
+              },
+              '@media screen and (min-width: 1136px)': {
+                textAlign: 'left',
+              },
+            })}
+          >
             {header}
           </H4>
           <Paragraph3
@@ -92,11 +106,7 @@ const SimpleSection = ({
             {text}
           </Paragraph2>
           {button && (
-            <HeroButton
-              buttonText={button}
-              link={buttonLink}
-              externalLink={externalLink}
-            />
+            <HeroButton buttonText={button} link={buttonLink} externalLink={externalLink} />
           )}
         </SectionText>
       </FlexGridItem>

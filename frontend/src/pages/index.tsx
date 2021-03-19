@@ -22,9 +22,8 @@ const IndexPage = () => {
             heroText
             heroImage {
               asset {
-                fluid {
-                  ...GatsbySanityImageFluid
-                }
+                url
+                gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 600)
               }
             }
           }
@@ -33,9 +32,8 @@ const IndexPage = () => {
             _rawSectionText(resolveReferences: { maxDepth: 1 })
             sectionImage {
               asset {
-                fluid {
-                  ...GatsbySanityImageFluid
-                }
+                url
+                gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 400)
               }
             }
           }
@@ -47,9 +45,8 @@ const IndexPage = () => {
           promotion {
             image {
               asset {
-                fluid {
-                  ...GatsbySanityImageFluid
-                }
+                url
+                gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED, width: 1100)
               }
             }
             promotionHeader
@@ -93,10 +90,10 @@ const IndexPage = () => {
   );
   const { heroText } = data.sanityLandingPage.hero;
   const { heroHeader } = data.sanityLandingPage.hero;
-  const heroImage = data.sanityLandingPage.hero.heroImage.asset.fluid;
+  const heroImage = data.sanityLandingPage.hero.heroImage.asset;
   const { promotionHeader, promotionText } = data.sanityLandingPage.promotion;
   const promotionLink = data.sanityLandingPage.promotion.link[0].slug.current;
-  const promotionImage = data.sanityLandingPage.promotion.image.asset.fluid;
+  const promotionImage = data.sanityLandingPage.promotion.image.asset;
 
   return (
     <FlexGrid
@@ -106,13 +103,7 @@ const IndexPage = () => {
       flexGridRowGap={['scale800', 'scale800', 'scale1600']}
     >
       <FlexGridItem>
-        <Hero
-          header={heroHeader}
-          text={heroText}
-          image={heroImage}
-          button
-          buttonLink="about"
-        />
+        <Hero header={heroHeader} text={heroText} image={heroImage} button buttonLink="about" />
       </FlexGridItem>
       {data.sanityLandingPage.promotion && (
         <FlexGridItem>
@@ -156,7 +147,7 @@ const IndexPage = () => {
               renderContainerOnSingleChild
             />
           }
-          image={data.sanityLandingPage.callToAction.sectionImage.asset.fluid}
+          image={data.sanityLandingPage.callToAction.sectionImage.asset}
           button="Contact Us"
           buttonLink="contact"
         />
