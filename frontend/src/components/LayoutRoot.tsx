@@ -6,7 +6,9 @@ interface LayoutRootProps {
   className?: string;
 }
 
-const LayoutRootStyle = styled('div', {});
+const LayoutRootStyle = styled('div', {
+  maxwidth: '1200px',
+});
 
 const LayoutRoot = ({ children, className }: LayoutRootProps) => (
   <>

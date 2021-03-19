@@ -64,7 +64,6 @@ const Contact = ({ location }: { location: any }) => {
   return (
     <FlexGrid
       flexGridColumnCount={[1]}
-      maxWidth="1110px"
       margin={['0', '0', '0 2rem', '0 2rem']}
       flexGridRowGap={['scale800', 'scale800', 'scale1600']}
     >

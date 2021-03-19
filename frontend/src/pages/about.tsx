@@ -72,7 +72,6 @@ const About = () => {
   return (
     <FlexGrid
       flexGridColumnCount={[1]}
-      maxWidth="1110px"
       margin={['0', '0 1rem', '0 2rem', '0 2rem']}
       flexGridRowGap={['scale800', 'scale800', 'scale1600']}
     >

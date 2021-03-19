@@ -4,6 +4,7 @@ import React from 'react';
 const StyledLayoutMain = styled('div', ({ $theme }) => ({
   paddingBottom: $theme.sizing.scale1600,
   borderBottom: `2px solid ${$theme.colors.backgroundTertiary}`,
+  maxWidth: '1300px',
 }));
 interface LayoutMainProps {
   children: React.ReactNode;
