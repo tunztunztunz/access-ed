@@ -1,87 +1,29 @@
-// @ts-nocheck
 import * as React from 'react';
 import { AppNavBar, setItemActive, NavItemT } from 'baseui/app-nav-bar';
-import { ChevronDown, Delete } from 'baseui/icon';
-import { Link, navigate, useStaticQuery, graphql } from 'gatsby';
-import { styled, useStyletron } from 'baseui';
+import { navigate } from 'gatsby';
 import { FaGraduationCap as Cap } from 'react-icons/fa';
+import NavContext from './NavContext';
 
-interface HeaderProps {
-  title: string;
+// This will be used outside of header to set the correct nav item as active
+export function getUniqueIdentifier(item: NavItemT) {
+  if (item?.info) {
+    return item?.info?.id;
+  }
+  return item.label;
 }
 
-interface DataProps {
-  data: {
-    allSanityServicePage: {
-      edges: [
-        {
-          node: [
-            {
-              title: string;
-              slug: {
-                current: string;
-              };
-            }
-          ];
-        }
-      ];
-    };
-  };
-}
-export default function Header({ title }: HeaderProps) {
-  const [css, theme] = useStyletron();
-
-  const data = useStaticQuery(graphql`
-    query HeaderQuery {
-      allSanityServicePage {
-        edges {
-          node {
-            title
-            slug {
-              current
-            }
-          }
-        }
-      }
-    }
-  `);
+export default function Header({ title }: { title: string }) {
+  // @ts-ignore
+  const { mainItems, setMainItems } = React.useContext(NavContext);
   const siteName = (
     <>
       {title} <Cap />
     </>
   );
-  const servicesLinks: DataProps = data.allSanityServicePage.edges;
 
-  // const links = servicesLinks.slice(0, 6).map((link, index) => ({
-  //   label: <StyledLink to={`/services/${link.node.slug.current}`}>{link.node.title}</StyledLink>,
-  // }));
-  const links = servicesLinks.slice(0, 6).map((link, index) => ({
-    label: link.node.title,
-    slug: `/services/${link.node.slug.current}`,
-  }));
-
-  const [mainItems, setMainItems] = React.useState<NavItemT[]>([
-    { label: 'Home', slug: '/', info: { id: 1 } },
-    { label: 'About', info: { id: 2 }, slug: '/about' },
-    {
-      icon: ChevronDown,
-      label: 'Services',
-      slug: '/services',
-      navExitIcon: Delete,
-      children: [...links],
-    },
-    { label: 'Testimonials', slug: '/testimonials', info: { id: 3 } },
-    { label: 'Partnerships', slug: '/partnerships', info: { id: 4 } },
-    { label: 'Book Now!', slug: '/contact', info: { id: 5 } },
-  ]);
-  function getUniqueIdentifier(item: NavItemT) {
-    if (item.info) {
-      return item.info.id;
-    }
-    return item.label;
-  }
   function handleMainItemSelect(item: NavItemT) {
-    setMainItems((prev) => setItemActive(prev, item, getUniqueIdentifier));
+    setMainItems((prev: any) => setItemActive(prev, item, getUniqueIdentifier));
+    // @ts-ignore
     navigate(item.slug);
   }
   return (

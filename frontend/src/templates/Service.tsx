@@ -65,7 +65,7 @@ function isSanityServicePageSection(section: any): section is A {
 
 const Service = ({ data }: ServiceProps) => {
   const { service } = data;
-  console.log(service);
+
   return (
     <FlexGrid
       flexGridColumnCount={[1]}

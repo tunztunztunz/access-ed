@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { Button, KIND } from 'baseui/button';
 import { Block } from 'baseui/block';
-import { Link, navigate } from 'gatsby';
-import { navItems } from './Header';
+import { Link } from 'gatsby';
+import { getUniqueIdentifier } from './Header';
+import NavContext from './NavContext';
+import { setItemActive } from 'baseui/app-nav-bar';
 
 interface ButtonProps {
   buttonText: string;
@@ -12,6 +14,7 @@ interface ButtonProps {
   externalLink?: string;
   state?: string;
 }
+
 export const HeroButton = ({
   buttonText,
   noMargin,
@@ -20,6 +23,22 @@ export const HeroButton = ({
   externalLink,
   state,
 }: ButtonProps) => {
+  // @ts-ignore
+  const { mainItems, setMainItems } = React.useContext(NavContext);
+
+  const move = () => {
+    let item = mainItems.find((i) => i.slug === `/${link}`);
+    if (item === undefined) {
+      const services = mainItems.find((i) => i.slug === `/services`);
+      // @ts-ignore
+      item = services?.children.find((i) => i.slug === `/${link}`);
+    }
+    if (item !== undefined) {
+      // @ts-ignore
+      setMainItems((prev: any) => setItemActive(prev, item, getUniqueIdentifier));
+    }
+  };
+
   const button = (
     <Button
       kind={KIND.primary}
@@ -49,7 +68,14 @@ export const HeroButton = ({
   }
   return (
     <Block marginTop={noMargin ? '' : '2rem'}>
-      <Link to={`/${link}`} state={{ from: state }} style={{ textDecoration: 'none' }}>
+      <Link
+        to={`/${link}`}
+        state={{ from: state }}
+        style={{ textDecoration: 'none' }}
+        onClick={() => {
+          move();
+        }}
+      >
         {button}
       </Link>
     </Block>
