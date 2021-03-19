@@ -1,11 +1,9 @@
 import * as React from 'react';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import { useStyletron } from 'baseui';
-// import Img from 'gatsby-image';
 import { Block } from 'baseui/block';
 import SectionHeader from '../components/SectionHeader';
 import { HeroButton } from '../components/HeroButton';
-import SvgWrapper from '../components/SvgWrapper';
 import ContactUs from '../components/svg/ContactUs';
 
 const Careers = () => {

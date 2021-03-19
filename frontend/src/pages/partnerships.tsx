@@ -6,6 +6,7 @@ import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import Hero from '../components/Hero';
 import SectionHeader from '../components/SectionHeader';
 import SimpleSection from '../components/SimpleSection';
+import ImageObjectInterface from '../components/types/imageObject';
 
 const BlockContent = require('@sanity/block-content-to-react');
 
@@ -14,9 +15,7 @@ interface SectionProps {
   link: string;
   _rawSectionText: string[];
   sectionImage: {
-    asset: {
-      fluid: FluidObject[];
-    };
+    asset: ImageObjectInterface;
   };
 }
 
@@ -78,7 +77,7 @@ const Testimonials = () => {
       <FlexGridItem>
         <SectionHeader title="Our Partners" />
       </FlexGridItem>
-      {partners.map((section, index) => (
+      {partners.map((section: SectionProps, index: number) => (
         <FlexGridItem key={index}>
           <SimpleSection
             isReversed={index % 2 === 0}

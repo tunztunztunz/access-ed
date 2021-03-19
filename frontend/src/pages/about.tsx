@@ -11,7 +11,9 @@ const BlockContent = require('@sanity/block-content-to-react');
 interface SectionProps {
   sectionHeader: string;
   _rawSectionText: string[];
-  sectionImage: ImageObjectInterface;
+  sectionImage: {
+    asset: ImageObjectInterface;
+  };
 }
 
 const About = () => {
