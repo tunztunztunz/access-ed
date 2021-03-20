@@ -20,29 +20,29 @@ export default function Header({ title, active }: { title: string; active: strin
   // @ts-ignore
   const { mainItems, setMainItems } = React.useContext(NavContext);
   // This entire useEffect is to prevent crashing when page is refreshed or user enters the site at a page other than /. The problem is, the state of active nav item is in context and we need to find which item should be active upon page load, but production passes slightly different urls than dev.
-  // React.useEffect(() => {
-  //   const location = active.slice(-1) === '/' && active.length > 1 ? active.slice(0, -1) : active;
-  //   console.log(active);
-  //   console.log(mainItems);
-  //   console.log(location);
+  React.useEffect(() => {
+    const location = active.slice(-1) === '/' && active.length > 1 ? active.slice(0, -1) : active;
+    console.log(active);
+    console.log(mainItems);
+    console.log(location);
 
-  //   let item = mainItems.find((i) => i.slug === location);
-  //   console.log(item);
+    let item = mainItems.find((i) => i.slug === location);
+    console.log(item);
 
-  //   if (item !== undefined) {
-  //     console.log(item);
+    if (item !== undefined) {
+      console.log(item);
 
-  //     handleMainItemSelect(item);
-  //   }
-  //   if (item === undefined) {
-  //     const services = mainItems.find((i) => i.slug === `/services`);
-  //     item = services?.children?.find((i: { slug: string }) => i.slug === location);
-  //     console.log(item);
+      handleMainItemSelect(item);
+    }
+    if (item === undefined) {
+      const services = mainItems.find((i) => i.slug === `/services`);
+      item = services?.children?.find((i: { slug: string }) => i.slug === location);
+      console.log(item);
 
-  //     // @ts-ignore
-  //     setMainItems((prev: any) => setItemActive(prev, item, getUniqueIdentifier));
-  //   }
-  // }, []);
+      // @ts-ignore
+      setMainItems((prev: any) => setItemActive(prev, item, getUniqueIdentifier));
+    }
+  }, []);
 
   const siteName = (
     <>
