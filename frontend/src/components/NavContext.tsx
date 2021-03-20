@@ -2,7 +2,7 @@ import React from 'react';
 import { ChevronDown, Delete } from 'baseui/icon';
 
 export const navItems = [
-  { label: 'Home', slug: '/', info: { id: 1 } },
+  { label: 'Home', slug: '/', info: { id: 1 }, active: true },
   { label: 'About', info: { id: 2 }, slug: '/about' },
   {
     icon: ChevronDown,
@@ -16,6 +16,6 @@ export const navItems = [
   { label: 'Book Now!', slug: '/contact', info: { id: 5 } },
 ];
 
-const NavContext = React.createContext({ mainItems: navItems });
+const NavContext = React.createContext({ mainItems: navItems, setMainItems: () => {} });
 
 export default NavContext;

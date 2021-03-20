@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { LightTheme, BaseProvider, styled } from 'baseui';
 import SEO from '../components/Seo';
@@ -17,10 +17,13 @@ const Centered = styled('div', {
 });
 
 interface IndexProps {
-  children: React.ReactNode;
+  children: ReactElement;
 }
 
 const IndexLayout = ({ children }: IndexProps) => {
+  const currentLocation: string = children?.props?.location.pathname;
+  console.log(currentLocation);
+
   const data = useStaticQuery(
     graphql`
       query {
@@ -78,7 +81,7 @@ const IndexLayout = ({ children }: IndexProps) => {
         <LayoutRoot>
           {/* @ts-ignore */}
           <NavContext.Provider value={value}>
-            <Header title={data.site.siteMetadata.title} />
+            <Header title={data.site.siteMetadata.title} active={currentLocation} />
             <LayoutMain>{children}</LayoutMain>
             <Footer />
           </NavContext.Provider>

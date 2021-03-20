@@ -23,20 +23,16 @@ export const HeroButton = ({
   externalLink,
   state,
 }: ButtonProps) => {
-  // @ts-ignore
   const { mainItems, setMainItems } = React.useContext(NavContext);
 
   const move = () => {
     let item = mainItems.find((i) => i.slug === `/${link}`);
     if (item === undefined) {
       const services = mainItems.find((i) => i.slug === `/services`);
-      // @ts-ignore
-      item = services?.children.find((i) => i.slug === `/${link}`);
+      item = services?.children?.find((i: { slug: string }) => i.slug === `/${link}`);
     }
-    if (item !== undefined) {
-      // @ts-ignore
-      setMainItems((prev: any) => setItemActive(prev, item, getUniqueIdentifier));
-    }
+    // @ts-ignore
+    setMainItems((prev: any) => setItemActive(prev, item, getUniqueIdentifier));
   };
 
   const button = (
