@@ -4,6 +4,10 @@ import { navigate } from 'gatsby';
 import { FaGraduationCap as Cap } from 'react-icons/fa';
 import NavContext from './NavContext';
 
+interface ItemInterface extends NavItemT {
+  slug: string;
+}
+
 // This will be used outside of header to set the correct nav item as active
 export function getUniqueIdentifier(item: NavItemT) {
   if (item?.info) {
@@ -22,8 +26,8 @@ export default function Header({ title, active }: { title: string; active: strin
     }
     if (item === undefined) {
       const services = mainItems.find((i) => i.slug === `/services`);
-      // @ts-ignore
-      item = services?.children.find((i) => i.slug === `${active}`);
+
+      item = services?.children?.find((i: { slug: string }) => i.slug === `${active}`);
       // @ts-ignore
       setMainItems((prev: any) => setItemActive(prev, item, getUniqueIdentifier));
     }
@@ -34,17 +38,16 @@ export default function Header({ title, active }: { title: string; active: strin
     </>
   );
 
-  function handleMainItemSelect(item: NavItemT) {
+  function handleMainItemSelect(item: ItemInterface) {
     setMainItems((prev: any) => setItemActive(prev, item, getUniqueIdentifier));
-    // @ts-ignore
     navigate(item.slug);
   }
   return (
     <AppNavBar
       title={siteName}
       mainItems={mainItems}
-      onMainItemSelect={handleMainItemSelect}
       // @ts-ignore
+      onMainItemSelect={handleMainItemSelect}
       overrides={{
         Root: {
           style: () => ({ boxShadow: 'none' }),

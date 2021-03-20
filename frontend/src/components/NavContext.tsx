@@ -16,6 +16,11 @@ export const navItems = [
   { label: 'Book Now!', slug: '/contact', info: { id: 5 } },
 ];
 
-const NavContext = React.createContext({ mainItems: navItems, setMainItems: () => {} });
+const NavContext = React.createContext({
+  mainItems: navItems,
+  setMainItems: (arg: any) => {
+    return arg;
+  },
+});
 
 export default NavContext;
