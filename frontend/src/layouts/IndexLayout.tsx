@@ -22,6 +22,8 @@ interface IndexProps {
 
 const IndexLayout = ({ children }: IndexProps) => {
   const currentLocation: string = children?.props?.location.pathname;
+  console.log(children);
+
   const data = useStaticQuery(
     graphql`
       query {
