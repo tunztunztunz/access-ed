@@ -20,14 +20,13 @@ export default function Header({ title, active }: { title: string; active: strin
   // @ts-ignore
   const { mainItems, setMainItems } = React.useContext(NavContext);
   React.useEffect(() => {
-    let item = mainItems.find((i) => i.slug === active);
+    let item = mainItems.find((i) => `${i.slug}/` === active);
     if (item !== undefined) {
       handleMainItemSelect(item);
     }
     if (item === undefined) {
       const services = mainItems.find((i) => i.slug === `/services`);
-
-      item = services?.children?.find((i: { slug: string }) => i.slug === `${active}`);
+      item = services?.children?.find((i: { slug: string }) => `${i.slug}` === `${active}`);
       // @ts-ignore
       setMainItems((prev: any) => setItemActive(prev, item, getUniqueIdentifier));
     }
