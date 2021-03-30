@@ -3,7 +3,7 @@ import React from 'react';
 import { FlexGrid, FlexGridItem } from 'baseui/flex-grid';
 import { H4, Paragraph1, Paragraph3 } from 'baseui/typography';
 import { styled, useStyletron } from 'baseui';
-import { Link } from 'gatsby';
+import { graphql, Link, useStaticQuery } from 'gatsby';
 import { HeaderText } from './HeroText';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
@@ -17,10 +17,28 @@ interface PromotionProps {
   header: string;
   image: any;
   text?: string;
-  link?: string;
+  link?: string | undefined;
 }
 
 const Promotion = ({ header, text, image, link }: PromotionProps) => {
+  const data = useStaticQuery(graphql`
+    query PromotionQuery {
+      allSanityServicePage {
+        nodes {
+          slug {
+            current
+          }
+        }
+      }
+    }
+  `);
+  const services = data.allSanityServicePage.nodes;
+  const promotionLink = services.find((service: { slug: { current: string } }) =>
+    service.slug.current.includes(link!)
+  )
+    ? `/services/${link}`
+    : `/${link}`;
+
   const [css, theme] = useStyletron();
   const promotionImage = image.url.slice(-3) === 'svg' ? image.url : getImage(image);
   return (
@@ -46,7 +64,7 @@ const Promotion = ({ header, text, image, link }: PromotionProps) => {
         alignItems="center"
       >
         <PromotionImage>
-          <Link to={`/${link}`}>
+          <Link to={promotionLink}>
             {promotionImage !== image.url ? (
               <GatsbyImage image={promotionImage} alt={'section image'} />
             ) : (

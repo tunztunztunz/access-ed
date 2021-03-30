@@ -22,7 +22,6 @@ interface IndexProps {
 
 const IndexLayout = ({ children }: IndexProps) => {
   const currentLocation: string = children?.props?.location.pathname;
-  console.log(children);
 
   const data = useStaticQuery(
     graphql`
@@ -72,7 +71,6 @@ const IndexLayout = ({ children }: IndexProps) => {
 
   const [mainItems, setMainItems] = useState(navItems);
   const value = { mainItems, setMainItems };
-  console.log(mainItems[2].children);
 
   return (
     <BaseProvider theme={LightTheme}>
