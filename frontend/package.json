@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-typescript-plus",
-  "description": "A starter kit for TypeScript-based Gatsby projects with sensible defaults.",
+  "name": "AccessEd",
+  "description": "Tutoring and Private Instruction. Designed with your student at the center to assist them with accessing and navigating their education all while developing the skills they will carry far beyond the walls of a classroom.",
   "version": "1.0.0",
   "private": true,
-  "author": "Resi Respati <resir014@gmail.com>",
+  "author": "Dustin Simensen <dustinsimensen@gmail.com>",
   "keywords": [
     "gatsby"
   ],
