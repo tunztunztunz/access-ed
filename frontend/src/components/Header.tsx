@@ -13,7 +13,9 @@ export function getUniqueIdentifier(item: NavItemT) {
   if (item?.info) {
     return item?.info?.id;
   }
-  return item.label;
+  // if (item.label === undefined) return;
+
+  return item?.label;
 }
 
 export default function Header({ title, active }: { title: string; active: string }) {
@@ -23,7 +25,9 @@ export default function Header({ title, active }: { title: string; active: strin
   React.useEffect(() => {
     const location = active.slice(-1) === '/' && active.length > 1 ? active.slice(0, -1) : active;
     let item = mainItems.find((i) => i.slug === location);
-
+    if (getUniqueIdentifier === undefined) {
+      return;
+    }
     if (item !== undefined) {
       handleMainItemSelect(item);
     }
@@ -31,6 +35,7 @@ export default function Header({ title, active }: { title: string; active: strin
       const services = mainItems.find((i) => i.slug === `/services`);
       item = services?.children?.find((i: { slug: string }) => i.slug === location);
       // @ts-ignore
+
       setMainItems((prev: any) => setItemActive(prev, item, getUniqueIdentifier));
     }
   }, []);
