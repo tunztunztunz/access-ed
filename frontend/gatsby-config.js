@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const {
   NODE_ENV,
-  URL: NETLIFY_SITE_URL = 'https://accessednw.com',
+  URL: NETLIFY_SITE_URL = 'https://www.accessednw.com',
   DEPLOY_PRIME_URL: NETLIFY_DEPLOY_URL = NETLIFY_SITE_URL,
   CONTEXT: NETLIFY_ENV = NODE_ENV,
 } = process.env;
@@ -53,7 +53,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-canonical-urls`,
       options: {
-        siteUrl: `https://accessednw.com`,
+        siteUrl: `https://www.accessednw.com`,
       },
     },
     {
