@@ -9,6 +9,7 @@ import HelpSection from '../components/Landing/HelpSection';
 import ServiceCardSection from '../components/Landing/ServiceCardSection';
 import SimpleSection from '../components/SimpleSection';
 import Promotion from '../components/Promotion';
+import { createPartiallyEmittedExpression } from 'typescript';
 
 const BlockContent = require('@sanity/block-content-to-react');
 
@@ -91,9 +92,9 @@ const IndexPage = () => {
   const { heroText } = data.sanityLandingPage.hero;
   const { heroHeader } = data.sanityLandingPage.hero;
   const heroImage = data.sanityLandingPage.hero.heroImage.asset;
-  const { promotionHeader, promotionText } = data.sanityLandingPage.promotion;
-  const promotionLink = data.sanityLandingPage.promotion.link[0].slug.current;
-  const promotionImage = data.sanityLandingPage.promotion.image.asset;
+  const { promotionHeader, promotionText } = data.sanityLandingPage?.promotion;
+  const promotionLink = data?.sanityLandingPage?.promotion?.link[0]?.slug.current;
+  const promotionImage = data.sanityLandingPage?.promotion?.image?.asset;
 
   return (
     <FlexGrid
@@ -104,7 +105,8 @@ const IndexPage = () => {
       <FlexGridItem>
         <Hero header={heroHeader} text={heroText} image={heroImage} button buttonLink="about" />
       </FlexGridItem>
-      {data.sanityLandingPage.promotion && (
+      {console.log(data.sanityLandingPage.promotion.image)}
+      {data.sanityLandingPage.promotion.image !== null ? (
         <FlexGridItem>
           <Promotion
             image={promotionImage}
@@ -113,6 +115,8 @@ const IndexPage = () => {
             link={promotionLink}
           />
         </FlexGridItem>
+      ) : (
+        ''
       )}
       <FlexGridItem>
         <SectionHeader title="What We Do" />

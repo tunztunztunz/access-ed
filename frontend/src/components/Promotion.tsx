@@ -40,7 +40,7 @@ const Promotion = ({ header, text, image, link }: PromotionProps) => {
     : `/${link}`;
 
   const [css, theme] = useStyletron();
-  const promotionImage = image.url.slice(-3) === 'svg' ? image.url : getImage(image);
+  const promotionImage = image?.url?.slice(-3) === 'svg' ? image.url : getImage(image);
   return (
     <FlexGrid
       flexGridColumnCount={1}
@@ -65,10 +65,10 @@ const Promotion = ({ header, text, image, link }: PromotionProps) => {
       >
         <PromotionImage>
           <Link to={promotionLink}>
-            {promotionImage !== image.url ? (
+            {promotionImage !== image?.url ? (
               <GatsbyImage image={promotionImage} alt={'section image'} />
             ) : (
-              <img src={image.url} alt={'section image'} style={{ width: '100%' }} />
+              <img src={image?.url} alt={'section image'} style={{ width: '100%' }} />
             )}
           </Link>
         </PromotionImage>
